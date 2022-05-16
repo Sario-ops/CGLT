@@ -2,52 +2,54 @@
 
 /** @var yii\web\View $this */
 
-$this->title = 'My Yii Application';
+use yii\bootstrap4\Html;
+use yii\bootstrap4\ActiveForm;
+
+
+$this->title = 'LOGIN';
 ?>
 <div class="site-index">
 
     <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        <h1 class="display-4">BENVENUTO!</h1>
+        <p class="lead"></p>
     </div>
 
     <div class="body-content">
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+        <h1><?= Html::encode($this->title) ?></h1>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+        <p>Please fill out the following fields to login:</p>
 
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+        <?php $form = ActiveForm::begin([
+            'id' => 'login-form',
+            'layout' => 'horizontal',
+            'fieldConfig' => [
+                'template' => "{label}\n{input}\n{error}",
+                'labelOptions' => ['class' => 'col-lg-1 col-form-label mr-lg-3'],
+                'inputOptions' => ['class' => 'col-lg-3 form-control'],
+                'errorOptions' => ['class' => 'col-lg-7 invalid-feedback'],
+            ],
+        ]); ?>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+        <!-- <//?= $form->radioButtonList($model, 'actor', array(0 => 'Logopedista', 1 => 'Caregiver', 2 => 'Utente'),  array('separator' => " | ")) ?> -->
 
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+        <?= $form->field($model, 'actor')->radioList(array('L' => 'Logopedista', 'C' => 'Caregiver', 'U' => 'Utente')) ?>
+        
+        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+        <?= $form->field($model, 'password')->passwordInput() ?>
 
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+        <?= $form->field($model, 'rememberMe')->checkbox([
+            'template' => "<div class=\"offset-lg-1 col-lg-3 custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
+        ]) ?>
+
+        <div class="form-group">
+            <div class="offset-lg-1 col-lg-11">
+                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
         </div>
 
+        <?php ActiveForm::end(); ?>
     </div>
 </div>

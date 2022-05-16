@@ -82,3 +82,11 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+#loginform-actor {
+    display: inline-flex;
+}
+
+#loginform-actor > div {
+    margin-right: 5%;
+}

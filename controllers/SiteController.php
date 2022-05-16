@@ -62,6 +62,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
+        $model = new LoginForm();
+        $model->password = '';
+        return $this->render('index', [
+            'model' => $model,
+        ]);
         return $this->render('index');
     }
 
@@ -133,16 +139,4 @@ class SiteController extends Controller
         return $this->render('say', ['message' => $message]);
     }
 
-    public function actionEntry()
-    {
-        $model = new EntryForm();
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-
-
-            return $this->render('entryConfirm', ['model' => $model]);
-        }
-
-        return $this->render('entry', ['model' => $model]);
-    }
 }
