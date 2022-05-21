@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Logopedista;
+use app\models\Caregiver;
 
 /**
- * LogopedistaSearch represents the model behind the search form of `app\models\Logopedista`.
+ * CaregiverSearch represents the model behind the search form of `app\models\Caregiver`.
  */
-class LogopedistaSearch extends Logopedista
+class CaregiverSearch extends Caregiver
 {
     /**
      * {@inheritdoc}
@@ -39,7 +39,7 @@ class LogopedistaSearch extends Logopedista
      */
     public function search($params)
     {
-        $query = Logopedista::find();
+        $query = Caregiver::find();
 
         // add conditions that should always apply here
 

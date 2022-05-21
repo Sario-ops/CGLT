@@ -21,7 +21,8 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'enableSession' => true,
+            'enableAutoLogin' => false,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -48,6 +49,7 @@ $config = [
             //'showScriptName' => false,
             'rules' => [
                 '/logopedista' => '/logopedista/index',
+                '/ospite' => '/ospite/index',
             ],
         ],
     ],

@@ -2,18 +2,16 @@
 
 namespace app\controllers;
 
-use Yii;
+use app\models\Utente;
+use app\models\UtenteSearch;
 use yii\web\Controller;
-use app\models\LoginForm;
-use app\models\Logopedista;
-use yii\filters\VerbFilter;
-use app\models\LogopedistaSearch;
 use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
 /**
- * LogopedistaController implements the CRUD actions for Logopedista model.
+ * UtenteController implements the CRUD actions for Utente model.
  */
-class LogopedistaController extends Controller
+class UtenteController extends Controller
 {
     /**
      * @inheritDoc
@@ -34,31 +32,23 @@ class LogopedistaController extends Controller
     }
 
     /**
-     * Lists all Logopedista models.
+     * Lists all Utente models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new LogopedistaSearch();
+        $searchModel = new UtenteSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-        $model = new LoginForm();
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            $logopedista = $this->findModel($model->username);
-            return $this->render('homePage', ['model'=> $logopedista]);
-        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'model'=> $model,
         ]);
     }
 
     /**
-     * Displays a single Logopedista model.
+     * Displays a single Utente model.
      * @param string $username Username
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -71,13 +61,13 @@ class LogopedistaController extends Controller
     }
 
     /**
-     * Creates a new Logopedista model.
+     * Creates a new Utente model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Logopedista();
+        $model = new Utente();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -93,7 +83,7 @@ class LogopedistaController extends Controller
     }
 
     /**
-     * Updates an existing Logopedista model.
+     * Updates an existing Utente model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $username Username
      * @return string|\yii\web\Response
@@ -113,7 +103,7 @@ class LogopedistaController extends Controller
     }
 
     /**
-     * Deletes an existing Logopedista model.
+     * Deletes an existing Utente model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $username Username
      * @return \yii\web\Response
@@ -127,15 +117,15 @@ class LogopedistaController extends Controller
     }
 
     /**
-     * Finds the Logopedista model based on its primary key value.
+     * Finds the Utente model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $username Username
-     * @return Logopedista the loaded model
+     * @return Utente the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($username)
     {
-        if (($model = Logopedista::findOne(['username' => $username])) !== null) {
+        if (($model = Utente::findOne(['username' => $username])) !== null) {
             return $model;
         }
 

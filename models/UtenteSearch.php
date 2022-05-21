@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Logopedista;
+use app\models\Utente;
 
 /**
- * LogopedistaSearch represents the model behind the search form of `app\models\Logopedista`.
+ * UtenteSearch represents the model behind the search form of `app\models\Utente`.
  */
-class LogopedistaSearch extends Logopedista
+class UtenteSearch extends Utente
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,7 @@ class LogopedistaSearch extends Logopedista
     public function rules()
     {
         return [
-            [['nome', 'cognome', 'cf', 'username', 'password'], 'safe'],
+            [['nome', 'cognome', 'cf', 'username', 'dataNascita', 'password', 'idCaregiver', 'idLogopedista'], 'safe'],
         ];
     }
 
@@ -39,7 +39,7 @@ class LogopedistaSearch extends Logopedista
      */
     public function search($params)
     {
-        $query = Logopedista::find();
+        $query = Utente::find();
 
         // add conditions that should always apply here
 
@@ -56,11 +56,17 @@ class LogopedistaSearch extends Logopedista
         }
 
         // grid filtering conditions
+        $query->andFilterWhere([
+            'dataNascita' => $this->dataNascita,
+        ]);
+
         $query->andFilterWhere(['like', 'nome', $this->nome])
             ->andFilterWhere(['like', 'cognome', $this->cognome])
             ->andFilterWhere(['like', 'cf', $this->cf])
             ->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'password', $this->password]);
+            ->andFilterWhere(['like', 'password', $this->password])
+            ->andFilterWhere(['like', 'idCaregiver', $this->idCaregiver])
+            ->andFilterWhere(['like', 'idLogopedista', $this->idLogopedista]);
 
         return $dataProvider;
     }

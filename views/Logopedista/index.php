@@ -50,7 +50,6 @@ $this->params['breadcrumbs'][] = $this->title;
             Non sei ancora registrato? <?= Html::a('Registrati', ['create']) ?>
         </p>
 
-
         <div class="form-group">
             <div class="offset-lg-1 col-lg-11">
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>

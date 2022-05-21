@@ -11,6 +11,6 @@ $this->title = 'PRONUNTIA';
     </p>
     <p class='home_page'>
         <a id="btn_utente_home" class="btn btn-primary home_page">UTENTE</a>
-        <a id="btn_ospite_home" class="btn btn-primary home_page">OSPITE</a>
+        <a id="btn_ospite_home" class="btn btn-primary home_page" href="/ospite">OSPITE</a>
     </p>
 </div>
