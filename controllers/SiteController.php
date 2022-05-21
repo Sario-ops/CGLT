@@ -3,13 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
-use yii\web\Controller;
+use yii\helpers\Url;
 use yii\web\Response;
-use yii\filters\VerbFilter;
+use yii\web\Controller;
+use app\models\EntryForm;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\EntryForm;
+use app\models\Logopedista;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use app\controllers\LogopedistaController;
 
 class SiteController extends Controller
 {
@@ -63,11 +66,6 @@ class SiteController extends Controller
     public function actionIndex()
     {
 
-        $model = new LoginForm();
-        $model->password = '';
-        return $this->render('index', [
-            'model' => $model,
-        ]);
         return $this->render('index');
     }
 
@@ -130,7 +128,11 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        $model = new LoginForm();
+        if($model->load(Yii::$app->request->post())) {
+            echo $model -> user;
+        }
+        return $this->render('about', ['model' => $model]);
     }
 
     public function actionSay($message = 'Hello')

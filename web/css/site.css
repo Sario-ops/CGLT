@@ -83,10 +83,16 @@ a.desc:after {
     outline: none;
 }
 
-#loginform-actor {
-    display: inline-flex;
+a.home_page {
+    width: 25%;
+    padding: 7%;
+    margin-right: 2%;
 }
 
-#loginform-actor > div {
-    margin-right: 5%;
+p.home_page {
+    text-align: center;
+}
+
+.site-index > #first {
+    margin-top: 10%;
 }
