@@ -12,23 +12,15 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'surname')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'cognome')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'giorno_nascita')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'cf')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'mese_di_nascita')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'anno_di_nascita')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'Codice_catastale_comune')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'CODICE_FISCALE')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'EMAIL')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'PASSWORD')->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

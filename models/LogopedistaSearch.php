@@ -17,9 +17,7 @@ class LogopedistaSearch extends Logopedista
     public function rules()
     {
         return [
-            [['code'], 'integer'],
-            [['name', 'surname', 'Codice_catastale_comune', 'CODICE_FISCALE', 'EMAIL', 'PASSWORD'], 'safe'],
-            [['giorno_nascita', 'mese_di_nascita', 'anno_di_nascita'], 'number'],
+            [['nome', 'cognome', 'cf', 'email', 'password'], 'safe'],
         ];
     }
 
@@ -58,19 +56,11 @@ class LogopedistaSearch extends Logopedista
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'code' => $this->code,
-            'giorno_nascita' => $this->giorno_nascita,
-            'mese_di_nascita' => $this->mese_di_nascita,
-            'anno_di_nascita' => $this->anno_di_nascita,
-        ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'surname', $this->surname])
-            ->andFilterWhere(['like', 'Codice_catastale_comune', $this->Codice_catastale_comune])
-            ->andFilterWhere(['like', 'CODICE_FISCALE', $this->CODICE_FISCALE])
-            ->andFilterWhere(['like', 'EMAIL', $this->EMAIL])
-            ->andFilterWhere(['like', 'PASSWORD', $this->PASSWORD]);
+        $query->andFilterWhere(['like', 'nome', $this->nome])
+            ->andFilterWhere(['like', 'cognome', $this->cognome])
+            ->andFilterWhere(['like', 'cf', $this->cf])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'password', $this->password]);
 
         return $dataProvider;
     }

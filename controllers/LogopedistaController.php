@@ -2,20 +2,18 @@
 
 namespace app\controllers;
 
-use app\models\LoginForm;
-use yii\web\Controller;
 use app\models\Logopedista;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use app\models\LogopedistaSearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+use app\models\LoginForm;
 
 /**
  * LogopedistaController implements the CRUD actions for Logopedista model.
  */
 class LogopedistaController extends Controller
 {
-
     /**
      * @inheritDoc
      */
@@ -24,17 +22,6 @@ class LogopedistaController extends Controller
         return array_merge(
             parent::behaviors(),
             [
-                'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['home'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -65,14 +52,14 @@ class LogopedistaController extends Controller
 
     /**
      * Displays a single Logopedista model.
-     * @param string $EMAIL Email
+     * @param string $email Email
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($EMAIL)
+    public function actionView($email)
     {
         return $this->render('view', [
-            'model' => $this->findModel($EMAIL),
+            'model' => $this->findModel($email),
         ]);
     }
 
@@ -87,7 +74,7 @@ class LogopedistaController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'EMAIL' => $model->EMAIL]);
+                return $this->redirect(['view', 'email' => $model->email]);
             }
         } else {
             $model->loadDefaultValues();
@@ -101,16 +88,16 @@ class LogopedistaController extends Controller
     /**
      * Updates an existing Logopedista model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $EMAIL Email
+     * @param string $email Email
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($EMAIL)
+    public function actionUpdate($email)
     {
-        $model = $this->findModel($EMAIL);
+        $model = $this->findModel($email);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'EMAIL' => $model->EMAIL]);
+            return $this->redirect(['view', 'email' => $model->email]);
         }
 
         return $this->render('update', [
@@ -121,13 +108,13 @@ class LogopedistaController extends Controller
     /**
      * Deletes an existing Logopedista model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $EMAIL Email
+     * @param string $email Email
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($EMAIL)
+    public function actionDelete($email)
     {
-        $this->findModel($EMAIL)->delete();
+        $this->findModel($email)->delete();
 
         return $this->redirect(['index']);
     }
@@ -135,13 +122,13 @@ class LogopedistaController extends Controller
     /**
      * Finds the Logopedista model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $EMAIL Email
+     * @param string $email Email
      * @return Logopedista the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($EMAIL)
+    protected function findModel($email)
     {
-        if (($model = Logopedista::findOne(['EMAIL' => $EMAIL])) !== null) {
+        if (($model = Logopedista::findOne(['email' => $email])) !== null) {
             return $model;
         }
 

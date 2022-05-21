@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Logopedista */
 
-$this->title = $model->name;
+$this->title = $model->email;
 $this->params['breadcrumbs'][] = ['label' => 'Logopedistas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'EMAIL' => $model->EMAIL], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'EMAIL' => $model->EMAIL], [
+        <?= Html::a('Update', ['update', 'email' => $model->email], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'email' => $model->email], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -29,16 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'code',
-            'name',
-            'surname',
-            'giorno_nascita',
-            'mese_di_nascita',
-            'anno_di_nascita',
-            'Codice_catastale_comune',
-            'CODICE_FISCALE',
-            'EMAIL:email',
-            'PASSWORD',
+            'nome',
+            'cognome',
+            'cf',
+            'email:email',
+            'password',
         ],
     ]) ?>
 

@@ -7,20 +7,16 @@ use Yii;
 /**
  * This is the model class for table "logopedisti".
  *
- * @property int $code
- * @property string $name
- * @property string $surname
- * @property float $giorno_nascita
- * @property float $mese_di_nascita
- * @property float $anno_di_nascita
- * @property string $Codice_catastale_comune
- * @property string $CODICE_FISCALE
- * @property string $EMAIL
- * @property string $PASSWORD
+ * @property string|null $nome
+ * @property string|null $cognome
+ * @property string|null $cf
+ * @property string $email
+ * @property string|null $password
+ *
+ * @property Utenti[] $utentis
  */
 class Logopedista extends \yii\db\ActiveRecord
 {
-
     /**
      * {@inheritdoc}
      */
@@ -35,12 +31,11 @@ class Logopedista extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'surname', 'giorno_nascita', 'mese_di_nascita', 'anno_di_nascita', 'Codice_catastale_comune', 'CODICE_FISCALE', 'EMAIL', 'PASSWORD'], 'required'],
-            [['giorno_nascita', 'mese_di_nascita', 'anno_di_nascita'], 'number'],
-            [['name', 'surname', 'PASSWORD'], 'string', 'max' => 50],
-            [['Codice_catastale_comune'], 'string', 'max' => 5],
-            [['CODICE_FISCALE'], 'string', 'max' => 16],
-            [['EMAIL'], 'string', 'max' => 100],
+            [['email'], 'required'],
+            [['nome', 'cognome'], 'string', 'max' => 15],
+            [['cf'], 'string', 'max' => 16],
+            [['email', 'password'], 'string', 'max' => 30],
+            [['email'], 'unique'],
         ];
     }
 
@@ -50,16 +45,21 @@ class Logopedista extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'code' => 'Code',
-            'name' => 'Name',
-            'surname' => 'Surname',
-            'giorno_nascita' => 'Giorno Nascita',
-            'mese_di_nascita' => 'Mese Di Nascita',
-            'anno_di_nascita' => 'Anno Di Nascita',
-            'Codice_catastale_comune' => 'Codice Catastale Comune',
-            'CODICE_FISCALE' => 'Codice Fiscale',
-            'EMAIL' => 'Email',
-            'PASSWORD' => 'Password',
+            'nome' => 'Nome',
+            'cognome' => 'Cognome',
+            'cf' => 'Cf',
+            'email' => 'Email',
+            'password' => 'Password',
         ];
+    }
+
+    /**
+     * Gets query for [[Utentis]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUtentis()
+    {
+        return $this->hasMany(Utenti::className(), ['idLogopedista' => 'email']);
     }
 }
