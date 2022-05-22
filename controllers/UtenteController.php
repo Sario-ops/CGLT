@@ -2,12 +2,13 @@
 
 namespace app\controllers;
 
-use app\models\Utente;
-use app\models\UtenteSearch;
+use Yii;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use app\models\LoginForm;
+use app\models\Utente;
 use yii\filters\VerbFilter;
-
+use app\models\UtenteSearch;
+use yii\web\NotFoundHttpException;
 /**
  * UtenteController implements the CRUD actions for Utente model.
  */
@@ -40,10 +41,19 @@ class UtenteController extends Controller
     {
         $searchModel = new UtenteSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $model = new LoginForm();
+
+        $model->setCustomer("U");
+
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            $utente = $this->findModel($model->username);
+            return $this->render('homePage', ['model'=> $utente]);
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=> $model,
         ]);
     }
 

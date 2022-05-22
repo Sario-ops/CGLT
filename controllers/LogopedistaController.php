@@ -44,7 +44,8 @@ class LogopedistaController extends Controller
         $dataProvider = $searchModel->search($this->request->queryParams);
         $model = new LoginForm();
 
-        $model = new LoginForm();
+        $model->setCustomer("L");
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             $logopedista = $this->findModel($model->username);
             return $this->render('homePage', ['model'=> $logopedista]);

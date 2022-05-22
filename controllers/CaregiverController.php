@@ -2,11 +2,13 @@
 
 namespace app\controllers;
 
-use app\models\Caregiver;
-use app\models\CaregiverSearch;
+use Yii;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use app\models\LoginForm;
+use app\models\Caregiver;
 use yii\filters\VerbFilter;
+use app\models\CaregiverSearch;
+use yii\web\NotFoundHttpException;
 
 /**
  * CaregiverController implements the CRUD actions for Caregiver model.
@@ -40,10 +42,19 @@ class CaregiverController extends Controller
     {
         $searchModel = new CaregiverSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $model = new LoginForm();
+
+        $model->setCustomer("C");
+        
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            $caregiver = $this->findModel($model->username);
+            return $this->render('homePage', ['model'=> $caregiver]);
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=> $model,
         ]);
     }
 

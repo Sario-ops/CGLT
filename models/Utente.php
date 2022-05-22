@@ -19,7 +19,7 @@ use Yii;
  * @property Caregiver $idCaregiver0
  * @property Logopedista $idLogopedista0
  */
-class Utente extends \yii\db\ActiveRecord
+class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -83,4 +83,45 @@ class Utente extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Logopedista::className(), ['username' => 'idLogopedista']);
     }
+
+
+    public static function findIdentity($id) {
+        return self::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null) {
+        throw new NotSupportedException();
+    }
+
+    public function getId() {
+        return $this->username;
+    }
+
+    public function getAuthKey()
+    {
+        return $this->password;
+    }
+
+    public function validateAuthKey($authKey) {
+        return $this->password === $authKey;
+    }
+
+
+    public function validatePassword($password)
+    {
+        return $this->password === $password;
+    }
+
+    /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */
+
+    public static function findByUsername($username)
+    {
+        return self::findOne(['username' => $username]);
+    }
+
 }

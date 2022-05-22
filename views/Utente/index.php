@@ -1,49 +1,61 @@
 <?php
 
-use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\grid\ActionColumn;
+use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\grid\ActionColumn;
+use app\models\Utente;
+use yii\bootstrap4\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UtenteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Utentes';
+$this->title = 'Utente Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="utente-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="jumbotron text-center bg-transparent">
+        <h1 class="display-4">BENVENUTO!</h1>
+        <p class="lead"></p>
+    </div>
 
-    <p>
-        <?= Html::a('Create Utente', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="body-content">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+        <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+        <p>Please fill out the following fields to login:</p>
 
-            'nome',
-            'cognome',
-            'cf',
-            'username',
-            'dataNascita',
-            //'password',
-            //'idCaregiver',
-            //'idLogopedista',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Utente $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'username' => $model->username]);
-                 }
+        <?php $form = ActiveForm::begin([
+            'id' => 'login-form',
+            'layout' => 'horizontal',
+            'fieldConfig' => [
+                'template' => "{label}\n{input}\n{error}",
+                'labelOptions' => ['class' => 'col-lg-1 col-form-label mr-lg-3'],
+                'inputOptions' => ['class' => 'col-lg-3 form-control'],
+                'errorOptions' => ['class' => 'col-lg-7 invalid-feedback'],
             ],
-        ],
-    ]); ?>
+        ]); ?>
 
+        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
+        <?= $form->field($model, 'password')->passwordInput() ?>
+
+        <?= $form->field($model, 'rememberMe')->checkbox([
+            'template' => "<div class=\"offset-lg-1 col-lg-3 custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
+        ]) ?>
+
+        <p>
+            Non sei ancora registrato? <?= Html::a('Registrati', ['create']) ?>
+        </p>
+
+        <div class="form-group">
+            <div class="offset-lg-1 col-lg-11">
+                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+            </div>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+        </div> 
 </div>
