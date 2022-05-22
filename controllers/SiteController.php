@@ -3,16 +3,11 @@
 namespace app\controllers;
 
 use Yii;
-use yii\helpers\Url;
 use yii\web\Response;
 use yii\web\Controller;
-use app\models\EntryForm;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\Logopedista;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use app\controllers\LogopedistaController;
 
 class SiteController extends Controller
 {
@@ -22,17 +17,6 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -100,7 +84,7 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return $this->render('index');
     }
 
     /**

@@ -2,12 +2,13 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\Esercizio;
 use yii\web\NotFoundHttpException;
 
 class OspiteController extends \yii\web\Controller
 {
-    public $index = -1;
+    public $index = 0;
 
     public function actionIndex()
     {
@@ -15,10 +16,15 @@ class OspiteController extends \yii\web\Controller
 
         $domande = $model->getArrayQuestion();
 
+        $risposte = $model -> getArrayResponse();
 
-        return $this->render('index', ['model' => $model, 'question' => $domande[$this->index]]);
+            if ($model->load(Yii::$app->request->get()) && $model->save() ) {
+                $risultato = $model->evaluateEsercizio();
 
+                return $this->render('finishTest',['result' => $risultato, 'numeroDomande' => count($domande)]);
+            }
 
+        return $this->render('index', ['model' => $model, 'domande' => $domande, 'risposte' => $risposte]);
     }
 
     protected function findModel()

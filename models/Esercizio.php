@@ -17,8 +17,8 @@ use Yii;
 class Esercizio extends \yii\db\ActiveRecord
 {
 
-    public $lastResponse;
-    public $risposteDate = [];
+    public $risposteUser;
+    public $rispostaCorrente;
     /**
      * {@inheritdoc}
      */
@@ -34,9 +34,10 @@ class Esercizio extends \yii\db\ActiveRecord
     {
         return [
             [['feedback'], 'number'],
-            [['nome', 'risposte_corretta', 'lastResponse'], 'string', 'max' => 20],
+            [['nome'], 'string', 'max' => 20],
             [['descrizione'], 'string', 'max' => 300],
             [['risposte'], 'string', 'max' => 100],
+            [['risposteUser'], 'each', 'rule' => ['integer']],
         ];
     }
 
@@ -56,16 +57,27 @@ class Esercizio extends \yii\db\ActiveRecord
     }
 
 
-    public function getArrayQuestion() {
-        return explode('&',$this->descrizione);
+    public function getArrayQuestion()
+    {
+        return explode('&', $this->descrizione);
     }
 
-    public function getArrayResponse() {
-        return explode('&',$this->risposte);
+    public function getArrayResponse()
+    {
+        return explode('&', $this->risposte);
     }
 
-    public function addResponse($risposta) {
-        array_push($this->risposteDate, $risposta);
-    }
+    public function evaluateEsercizio()
+    {
+        $risposte_cor = explode('&', $this->risposte_corretta);
+        $voto = 0;
 
+        foreach ($this->getArrayQuestion() as $i => $domanda) {
+            if ($this->risposteUser[$i] === $risposte_cor[$i]) {
+                $voto++;
+            }
+        }
+
+        return $voto;
+    }
 }

@@ -16,10 +16,16 @@ use yii\bootstrap4\ActiveForm;
 
 
 <div class="form-group">
-    <p><?= Html::encode($question) ?></p>
-    <?= $form->field($model, 'lastResponse')->radioList($model->getArrayResponse()) ?>
+    <?php foreach ($domande as $i => $domanda): ?>
 
-    <?= Html::submitButton('Go', ['class' => 'btn btn-primary']) ?>
+
+        <p><?=Html::encode($domanda)?></p>
+
+        <?= $form->field($model, "risposteUser[$i]")->radioList($risposte) ?>
+
+    <?php endforeach; ?>
+
+    <?= Html::submitButton('Finish', ['class' => 'btn btn-primary']) ?>
     <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
 </div>
 
