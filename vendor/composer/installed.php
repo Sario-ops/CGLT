@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '394eda275fb111459c7454d7d63fa2cd5a4f02a3',
+        'reference' => 'e5ab301ce10f8663f2e3540a83c04ef20a4939dc',
         'name' => 'yiisoft/yii2-app-basic',
         'dev' => true,
     ),
@@ -119,12 +119,12 @@
             'dev_requirement' => true,
         ),
         'codeception/phpunit-wrapper' => array(
-            'pretty_version' => '8.1.4',
-            'version' => '8.1.4.0',
+            'pretty_version' => '8.1.6',
+            'version' => '8.1.6.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../codeception/phpunit-wrapper',
             'aliases' => array(),
-            'reference' => 'f41335f0b4dd17cf7bbc63e87943b3ae72a8bbc3',
+            'reference' => '7d3479bab7e2b6349044db8af11cd05d57809f9c',
             'dev_requirement' => true,
         ),
         'codeception/specify' => array(
@@ -766,7 +766,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '394eda275fb111459c7454d7d63fa2cd5a4f02a3',
+            'reference' => 'e5ab301ce10f8663f2e3540a83c04ef20a4939dc',
             'dev_requirement' => false,
         ),
         'yiisoft/yii2-bootstrap4' => array(
