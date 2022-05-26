@@ -82,3 +82,17 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+a.home_page {
+    width: 25%;
+    padding: 7%;
+    margin-right: 2%;
+}
+
+p.home_page {
+    text-align: center;
+}
+
+.site-index > #first {
+    margin-top: 10%;
+}

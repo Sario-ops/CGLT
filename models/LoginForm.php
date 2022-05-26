@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+use app\models\Logopedista;
 
 /**
  * LoginForm is the model behind the login form.
@@ -18,7 +19,7 @@ class LoginForm extends Model
     public $rememberMe = true;
 
     private $_user = false;
-
+    private $customer;
 
     /**
      * @return array the validation rules.
@@ -60,7 +61,7 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
         return false;
     }
@@ -73,9 +74,22 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+            switch ($this->customer) {
+                case "L":
+                    $this->_user = Logopedista::findByUsername($this->username);
+                    break;
+                case "C":
+                    $this->_user = Caregiver::findByUsername($this->username);
+                    break;
+                case "U":
+                    $this->_user = Utente::findByUsername($this->username);
+            }
         }
-
         return $this->_user;
+    }
+
+    public function setCustomer($customer)
+    {
+        $this->customer = $customer;
     }
 }

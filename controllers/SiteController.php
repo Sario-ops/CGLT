@@ -3,13 +3,11 @@
 namespace app\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\web\Response;
-use yii\filters\VerbFilter;
+use yii\web\Controller;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\EntryForm;
+use yii\filters\VerbFilter;
 
 class SiteController extends Controller
 {
@@ -19,17 +17,6 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -62,6 +49,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
         return $this->render('index');
     }
 
@@ -96,7 +84,7 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return $this->render('index');
     }
 
     /**
@@ -124,7 +112,11 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        $model = new LoginForm();
+        if($model->load(Yii::$app->request->post())) {
+            echo $model -> user;
+        }
+        return $this->render('about', ['model' => $model]);
     }
 
     public function actionSay($message = 'Hello')
@@ -133,16 +125,4 @@ class SiteController extends Controller
         return $this->render('say', ['message' => $message]);
     }
 
-    public function actionEntry()
-    {
-        $model = new EntryForm();
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-
-
-            return $this->render('entryConfirm', ['model' => $model]);
-        }
-
-        return $this->render('entry', ['model' => $model]);
-    }
 }
