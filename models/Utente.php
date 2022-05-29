@@ -41,7 +41,7 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['nome', 'cognome'], 'string', 'max' => 15],
             [['cf'], 'string', 'max' => 16],
             [['username'], 'string', 'max' => 20],
-            [['password', 'idCaregiver', 'idLogopedista'], 'string', 'max' => 30],
+            [['password', 'idCaregiver', 'idLogopedista','authkey'], 'string', 'max' => 30],
             [['username'], 'unique'],
             [['idCaregiver'], 'exist', 'skipOnError' => true, 'targetClass' => Caregiver::className(), 'targetAttribute' => ['idCaregiver' => 'username']],
             [['idLogopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::className(), 'targetAttribute' => ['idLogopedista' => 'username']],
@@ -62,6 +62,7 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'password' => 'Password',
             'idCaregiver' => 'Id Caregiver',
             'idLogopedista' => 'Id Logopedista',
+            'authkey' => 'AuthKey',
         ];
     }
 
@@ -100,11 +101,11 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public function getAuthKey()
     {
-        return $this->password;
+        return $this->authkey;
     }
 
     public function validateAuthKey($authKey) {
-        return $this->password === $authKey;
+        return $this->authkey === $authKey;
     }
 
 

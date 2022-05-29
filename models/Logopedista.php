@@ -35,8 +35,8 @@ class Logopedista extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
             [['username'], 'required'],
             [['nome', 'cognome'], 'string', 'max' => 15],
             [['cf'], 'string', 'max' => 16],
-            [['username', 'password'], 'string', 'max' => 30],
-            [['username'], 'unique'],
+            [['username', 'password','authkey'], 'string', 'max' => 30],
+            [['username', 'authkey'], 'unique'],
         ];
     }
 
@@ -49,8 +49,9 @@ class Logopedista extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
             'nome' => 'Nome',
             'cognome' => 'Cognome',
             'cf' => 'Cf',
-            'username' => 'Username',
+            'username' => 'Email',
             'password' => 'Password',
+            'authkey' => 'Authkey,'
         ];
     }
 
@@ -78,11 +79,11 @@ class Logopedista extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
 
     public function getAuthKey()
     {
-        return $this->password;
+        return $this->authkey;
     }
 
     public function validateAuthKey($authKey) {
-        return $this->password === $authKey;
+        return $this->authkey === $authKey;
     }
 
 

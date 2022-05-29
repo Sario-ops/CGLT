@@ -4,9 +4,10 @@ namespace app\controllers;
 
 use Yii;
 use yii\web\Controller;
-use app\models\LoginForm;
 use app\models\Caregiver;
+use app\models\LoginForm;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use app\models\CaregiverSearch;
 use yii\web\NotFoundHttpException;
 
@@ -23,6 +24,22 @@ class CaregiverController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'user' => 'caregiver', // this user object defined in web.php
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['login','create'],
+                            'roles' => ['?'],
+    
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -40,21 +57,31 @@ class CaregiverController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CaregiverSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        // $searchModel = new CaregiverSearch();
+        // $dataProvider = $searchModel->search($this->request->queryParams);
+        $model = $this->findModel(Yii::$app->caregiver->identity->username);
+
+        return $this->render('index', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionLogin()
+    {
+        if (!Yii::$app->caregiver->isGuest) {
+            return $this->goHome();
+        }
+
         $model = new LoginForm();
 
         $model->setCustomer("C");
-        
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            $caregiver = $this->findModel($model->username);
-            return $this->render('homePage', ['model'=> $caregiver]);
+            return $this->goBack();
         }
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'model'=> $model,
+        return $this->render('login', [
+            'model' => $model,
         ]);
     }
 
@@ -141,5 +168,17 @@ class CaregiverController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Logout action.
+     *
+     * @return Response
+     */
+    public function actionLogout()
+    {
+        Yii::$app->caregiver->logout();
+
+        return $this->redirect(['site/index']);
     }
 }

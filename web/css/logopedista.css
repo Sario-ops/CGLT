@@ -1,9 +1,12 @@
 
 #btn_logopedista_home {
     background-color:rgba(18, 189, 207, 1);
-    background-image: url(../../views/res/logopedista/doc_button.png);
 }
 
 #btn_logopedista_home:hover {
     background-color:cornflowerblue;
+}
+
+iframe {
+    pointer-events: none;
 }

@@ -3,11 +3,12 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Utente;
 use yii\web\Controller;
 use app\models\LoginForm;
-use app\models\Utente;
 use yii\filters\VerbFilter;
 use app\models\UtenteSearch;
+use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 /**
  * UtenteController implements the CRUD actions for Utente model.
@@ -22,6 +23,22 @@ class UtenteController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'user' => 'utente', // this user object defined in web.php
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['login','create'],
+                            'roles' => ['?'],
+    
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -39,21 +56,32 @@ class UtenteController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new UtenteSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        // $searchModel = new UtenteSearch();
+        // $dataProvider = $searchModel->search($this->request->queryParams);
+
+        $model = $this->findModel(Yii::$app->utente->identity->username);
+
+        return $this->render('index', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionLogin()
+    {
+        if (!Yii::$app->utente->isGuest) {
+            return $this->goHome();
+        }
+
         $model = new LoginForm();
 
         $model->setCustomer("U");
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            $utente = $this->findModel($model->username);
-            return $this->render('homePage', ['model'=> $utente]);
+            return $this->goBack();
         }
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'model'=> $model,
+        return $this->render('login', [
+            'model' => $model,
         ]);
     }
 
@@ -140,5 +168,17 @@ class UtenteController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Logout action.
+     *
+     * @return Response
+     */
+    public function actionLogout()
+    {
+        Yii::$app->utente->logout();
+
+        return $this->redirect(['site/index']);
     }
 }

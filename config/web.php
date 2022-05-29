@@ -21,8 +21,34 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableSession' => true,
-            'enableAutoLogin' => false,
+            'enableAutoLogin' => true,
+        ],
+        'logopedista' => [
+            'class' => 'yii\web\User',
+            'identityClass' => 'app\models\Logopedista',
+            'enableAutoLogin' => true,
+            'loginUrl' => ['logopedista/login'],
+            'identityCookie' => [
+                'name' => '_panelLogopedista',
+            ]
+        ],
+        'caregiver' => [
+            'class' => 'yii\web\User',
+            'identityClass' => 'app\models\Caregiver',
+            'enableAutoLogin' => true,
+            'loginUrl' => ['caregiver/login'],
+            'identityCookie' => [
+                'name' => '_panelCaregiver',
+            ]
+        ],
+        'utente' => [
+            'class' => 'yii\web\User',
+            'identityClass' => 'app\models\Utente',
+            'enableAutoLogin' => true,
+            'loginUrl' => ['utente/login'],
+            'identityCookie' => [
+                'name' => '_panelUtente',
+            ]
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -47,10 +73,7 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             //'showScriptName' => false,
-            'rules' => [
-                '/logopedista' => '/logopedista/index',
-                '/ospite' => '/ospite/index',
-            ],
+            'rules' => [],
         ],
     ],
     'params' => $params,

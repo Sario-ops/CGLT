@@ -61,7 +61,14 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+            switch ($this->customer) {
+                case 'L':
+                    return Yii::$app->logopedista->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+                case 'C':
+                    return Yii::$app->caregiver->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+                case 'U':
+                    return Yii::$app->utente->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0); 
+            }
         }
         return false;
     }
@@ -83,6 +90,8 @@ class LoginForm extends Model
                     break;
                 case "U":
                     $this->_user = Utente::findByUsername($this->username);
+                    break;
+                default:
             }
         }
         return $this->_user;

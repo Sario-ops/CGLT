@@ -26,10 +26,11 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <header>
-    <?php
+    <?php if (isset(Yii::$app->logopedista->identity->username)):?>
+        <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandUrl' => ['/logopedista/index'],
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
         ],
@@ -37,13 +38,12 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Guest']
-            ) : (
+           ['label' => 'Profilo', 'url' => ['/logopedista/view', 'username' => Yii::$app->logopedista->identity->username]],
+           (
                 '<li>'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
+                . Html::beginForm(['/logopedista/logout'], 'post', ['class' => 'form-inline'])
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Logout (' . Yii::$app->logopedista->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -53,6 +53,80 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
+    <?php endif;?>
+    <?php if (isset(Yii::$app->caregiver->identity->username)):?>
+        <?php
+    NavBar::begin([
+        'brandLabel' => Yii::$app->name,
+        'brandUrl' => ['/caregiver/index'],
+        'options' => [
+            'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
+        ],
+    ]);
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav'],
+        'items' => [
+           ['label' => 'Profilo', 'url' => ['/caregiver/view', 'username' => Yii::$app->caregiver->identity->username]],
+           (
+                '<li>'
+                . Html::beginForm(['/caregiver/logout'], 'post', ['class' => 'form-inline'])
+                . Html::submitButton(
+                    'Logout (' . Yii::$app->caregiver->identity->username . ')',
+                    ['class' => 'btn btn-link logout']
+                )
+                . Html::endForm()
+                . '</li>'
+            )
+        ],
+    ]);
+    NavBar::end();
+    ?>
+    <?php endif;?>
+    <?php if (isset(Yii::$app->utente->identity->username)):?>
+        <?php
+    NavBar::begin([
+        'brandLabel' => Yii::$app->name,
+        'brandUrl' => ['/utente/index'],
+        'options' => [
+            'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
+        ],
+    ]);
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav'],
+        'items' => [
+           ['label' => 'Profilo', 'url' => ['/utente/view', 'username' => Yii::$app->utente->identity->username]],
+           (
+                '<li>'
+                . Html::beginForm(['/utente/logout'], 'post', ['class' => 'form-inline'])
+                . Html::submitButton(
+                    'Logout (' . Yii::$app->utente->identity->username . ')',
+                    ['class' => 'btn btn-link logout']
+                )
+                . Html::endForm()
+                . '</li>'
+            )
+        ],
+    ]);
+    NavBar::end();
+    ?>
+    <?php endif;?>
+    <?php if (isset(Yii::$app->caregiver->identity->username) == null && isset(Yii::$app->utente->identity->username) == null && isset(Yii::$app->logopedista->identity->username) == null):?>
+        <?php
+        NavBar::begin([
+            'brandLabel' => Yii::$app->name,
+            'options' => [
+                'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
+            ],
+        ]);
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav'],
+            'items' => [
+                ['label' => 'Guest'],
+            ],
+        ]);
+        NavBar::end();
+        ?>
+    <?php endif;?>
 </header>
 
 <main role="main" class="flex-shrink-0">
