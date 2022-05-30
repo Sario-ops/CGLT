@@ -12,11 +12,29 @@ use yii\bootstrap4\ActiveForm;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Logopedista';
-//$this->title = sprintf($this->title, $model->nome);
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-index">
-    <p>Nome: <?= Html::encode($model->nome) ?></p>
+    <h1><?=Html::encode($model->nome), ' ', Html::encode($model->cognome) ?></h1>
+
+
+    <table id="logopedista-activity">
+        <tr>
+            <td>
+                <?= Html::a('CREA TERAPIA', ['update', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+            </td>
+            <td>
+                <?= Html::a('CREA ESERCIZIO', ['update', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+            </td>
+            <td>
+                <?= Html::a('MEMORIZZA DIAGNOSI', ['update', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <?= Html::a('VISUALIZZA UTENTI', ['visualizza', 'utenti' => $model->getUtentes()], ['class' => 'btn btn-primary']) ?> 
+            </td>
+        </tr>
+    </table>
 </div>
 
 <!-- <iframe width="725" height="544" src="https://www.youtube.com/embed/sDvXhZtcp0w?autoplay=1" title="YouTube video player" frameborder="0" allow="autoplay;" allowfullscreen></iframe> -->

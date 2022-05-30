@@ -132,7 +132,7 @@ class UtenteController extends Controller
         $model = $this->findModel($username);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'username' => $model->username]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

@@ -48,7 +48,7 @@ class Logopedista extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
         return [
             'nome' => 'Nome',
             'cognome' => 'Cognome',
-            'cf' => 'Cf',
+            'cf' => 'Codice fiscale',
             'username' => 'Email',
             'password' => 'Password',
             'authkey' => 'Authkey,'

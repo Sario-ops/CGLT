@@ -11,7 +11,7 @@ use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 
 AppAsset::register($this);
-$homeUrl = [''];
+$homeUrl = null;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -29,7 +29,7 @@ $homeUrl = [''];
 <header>
     <?php if (isset(Yii::$app->logopedista->identity->username)):?>
         <?php
-        $homeUrl = ['/logopedista/index'];
+        $homeUrl = '/logopedista/index';
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => [''. $homeUrl . ''],
@@ -58,7 +58,7 @@ $homeUrl = [''];
     <?php endif;?>
     <?php if (isset(Yii::$app->caregiver->identity->username)):?>
         <?php
-        $homeUrl = ['/caregiver/index'];
+        $homeUrl = '/caregiver/index';
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => ['/caregiver/index'],
@@ -90,7 +90,7 @@ $homeUrl = [''];
         $homeUrl = ['/utente/index'];
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
-        'brandUrl' => ['/utente/index'],
+        'brandUrl' => '/utente/index',
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
         ],
@@ -137,7 +137,7 @@ $homeUrl = [''];
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            'homeLink' => ['label' => 'home', 'url' => (isset($homeUrl) ? $homeUrl : '/')],
+            'homeLink' => ['label' => 'home', 'url' => (isset($homeUrl) ? $homeUrl : '/site/index')],
         ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>

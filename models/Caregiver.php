@@ -48,8 +48,8 @@ class Caregiver extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfa
         return [
             'nome' => 'Nome',
             'cognome' => 'Cognome',
-            'cf' => 'Cf',
-            'username' => 'username',
+            'cf' => 'Codice fiscale',
+            'username' => 'Email',
             'password' => 'Password',
             'authkey' => 'AuthKey',
         ];

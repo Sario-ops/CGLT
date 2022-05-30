@@ -10,3 +10,27 @@
 iframe {
     pointer-events: none;
 }
+
+#logopedista-activity {
+    margin-top: 5%;
+}
+
+#logopedista-activity tr {
+    width: 100%;
+}
+
+#logopedista-activity td {
+    margin: 3%;
+    width: 20%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+}
+
+#logopedista-activity td a {
+    width: 100%;
+    padding: 30%;
+}
+
+a:not([href]):not([class]) {
+    display: none;
+}

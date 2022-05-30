@@ -12,9 +12,7 @@ use yii\bootstrap4\ActiveForm;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Utente';
-//$this->title = sprintf($this->title, $model->nome);
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-index">
-    <p>Nome: <?= Html::encode($model->nome) ?></p>
+    <h1><?= Html::encode($model->nome),' ', Html::encode($model->cognome)?></h1>
 </div>
