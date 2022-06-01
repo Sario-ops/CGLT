@@ -26,7 +26,7 @@ $this->title = 'Logopedista';
                 <?= Html::a('CREA ESERCIZIO', ['update', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
-                <?= Html::a('MEMORIZZA DIAGNOSI', ['update', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('MEMORIZZA DIAGNOSI', ['/diagnosi', 'model' => $model], ['class' => 'btn btn-primary']) ?>
             </td>
         </tr>
         <tr>
