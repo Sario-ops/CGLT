@@ -36,8 +36,8 @@ class Terapia extends \yii\db\ActiveRecord
             [['ID'], 'string', 'max' => 5],
             [['idUtente', 'idLogopedista'], 'string', 'max' => 30],
             [['ID'], 'unique'],
-            [['idLogopedista'], 'exist', 'skipOnError' => true, 'targetAttribute' => ['idLogopedista' => 'idLogopedista']],
-            [['idUtente'], 'exist', 'skipOnError' => true, 'targetAttribute' => ['idUtente' => 'idUtente']],
+            [['idLogopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::class, 'targetAttribute' => ['idLogopedista' => 'username']],
+            [['idUtente'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::class, 'targetAttribute' => ['idUtente' => 'username']],
         ];
     }
 
@@ -70,11 +70,11 @@ class Terapia extends \yii\db\ActiveRecord
      */
     public function getIdUtente()
     {
-        return $this->idUtente;
+        return $this->hasOne(Utente::class, ['username' => 'idUtente']);
     }
 
     public function setIdLogopedista()
     {
-         $this->idLogopedista='logopedista';
+        return $this->hasOne(Logopedista::class, ['username' => 'idLogopedista']);
     }
 }

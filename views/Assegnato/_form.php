@@ -4,15 +4,15 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\EsercizioAssegnato */
+/* @var $model app\models\Assegnato */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="esercizio-assegnato-form">
+<div class="assegnato-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'idTerapia')->textInput() ?>
+    <?= $form->field($model, 'idTerapia')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'idEsercizio')->textInput() ?>
 

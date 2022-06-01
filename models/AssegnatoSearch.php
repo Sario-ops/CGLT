@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\EsercizioAssegnato;
+use app\models\Assegnato;
 
 /**
- * EsercizioAssegnatoSearch represents the model behind the search form of `app\models\EsercizioAssegnato`.
+ * AssegnatoSearch represents the model behind the search form of `app\models\Assegnato`.
  */
-class EsercizioAssegnatoSearch extends EsercizioAssegnato
+class AssegnatoSearch extends Assegnato
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class EsercizioAssegnatoSearch extends EsercizioAssegnato
     public function rules()
     {
         return [
-            [['idTerapia', 'idEsercizio'], 'integer'],
-            [['risposta'], 'safe'],
+            [['idTerapia', 'risposta'], 'safe'],
+            [['idEsercizio'], 'integer'],
         ];
     }
 
@@ -40,7 +40,7 @@ class EsercizioAssegnatoSearch extends EsercizioAssegnato
      */
     public function search($params)
     {
-        $query = EsercizioAssegnato::find();
+        $query = Assegnato::find();
 
         // add conditions that should always apply here
 
@@ -58,11 +58,11 @@ class EsercizioAssegnatoSearch extends EsercizioAssegnato
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'idTerapia' => $this->idTerapia,
             'idEsercizio' => $this->idEsercizio,
         ]);
 
-        $query->andFilterWhere(['like', 'risposta', $this->risposta]);
+        $query->andFilterWhere(['like', 'idTerapia', $this->idTerapia])
+            ->andFilterWhere(['like', 'risposta', $this->risposta]);
 
         return $dataProvider;
     }

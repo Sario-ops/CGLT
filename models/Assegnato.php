@@ -5,23 +5,23 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "esercizio_assegnato".
+ * This is the model class for table "assegnato".
  *
- * @property int $idTerapia
+ * @property string $idTerapia
  * @property int $idEsercizio
  * @property string|null $risposta
  *
  * @property Esercizio $idEsercizio0
  * @property Terapia $idTerapia0
  */
-class EsercizioAssegnato extends \yii\db\ActiveRecord
+class Assegnato extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'esercizio_assegnato';
+        return 'assegnato';
     }
 
     /**
@@ -35,6 +35,8 @@ class EsercizioAssegnato extends \yii\db\ActiveRecord
             [['idTerapia'], 'string', 'max' => 5],
             [['risposta'], 'string', 'max' => 20],
             [['idTerapia', 'idEsercizio'], 'unique', 'targetAttribute' => ['idTerapia', 'idEsercizio']],
+            [['idTerapia'], 'exist', 'skipOnError' => true, 'targetClass' => Terapia::className(), 'targetAttribute' => ['idTerapia' => 'ID']],
+            [['idEsercizio'], 'exist', 'skipOnError' => true, 'targetClass' => Esercizio::className(), 'targetAttribute' => ['idEsercizio' => 'ID']],
         ];
     }
 
@@ -57,7 +59,7 @@ class EsercizioAssegnato extends \yii\db\ActiveRecord
      */
     public function getIdEsercizio0()
     {
-        return $this->idEsercizio;
+        return $this->hasOne(Esercizio::className(), ['ID' => 'idEsercizio']);
     }
 
     /**
@@ -67,6 +69,6 @@ class EsercizioAssegnato extends \yii\db\ActiveRecord
      */
     public function getIdTerapia0()
     {
-        return $this->idTerapia;
+        return $this->hasOne(Terapia::className(), ['ID' => 'idTerapia']);
     }
 }

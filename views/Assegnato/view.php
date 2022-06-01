@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\EsercizioAssegnato */
+/* @var $model app\models\Assegnato */
 
 $this->title = $model->idTerapia;
-$this->params['breadcrumbs'][] = ['label' => 'Esercizio Assegnatos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Assegnatos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="esercizio-assegnato-view">
+<div class="assegnato-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

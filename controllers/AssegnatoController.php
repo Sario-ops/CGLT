@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\EsercizioAssegnato;
-use app\models\EsercizioAssegnatoSearch;
+use app\models\Assegnato;
+use app\models\AssegnatoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * EsercizioAssegnatoController implements the CRUD actions for EsercizioAssegnato model.
+ * AssegnatoController implements the CRUD actions for Assegnato model.
  */
-class EsercizioAssegnatoController extends Controller
+class AssegnatoController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class EsercizioAssegnatoController extends Controller
     }
 
     /**
-     * Lists all EsercizioAssegnato models.
+     * Lists all Assegnato models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new EsercizioAssegnatoSearch();
+        $searchModel = new AssegnatoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,8 +48,8 @@ class EsercizioAssegnatoController extends Controller
     }
 
     /**
-     * Displays a single EsercizioAssegnato model.
-     * @param int $idTerapia Id Terapia
+     * Displays a single Assegnato model.
+     * @param string $idTerapia Id Terapia
      * @param int $idEsercizio Id Esercizio
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -62,13 +62,13 @@ class EsercizioAssegnatoController extends Controller
     }
 
     /**
-     * Creates a new EsercizioAssegnato model.
+     * Creates a new Assegnato model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new EsercizioAssegnato();
+        $model = new Assegnato();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -84,9 +84,9 @@ class EsercizioAssegnatoController extends Controller
     }
 
     /**
-     * Updates an existing EsercizioAssegnato model.
+     * Updates an existing Assegnato model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $idTerapia Id Terapia
+     * @param string $idTerapia Id Terapia
      * @param int $idEsercizio Id Esercizio
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
@@ -105,9 +105,9 @@ class EsercizioAssegnatoController extends Controller
     }
 
     /**
-     * Deletes an existing EsercizioAssegnato model.
+     * Deletes an existing Assegnato model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $idTerapia Id Terapia
+     * @param string $idTerapia Id Terapia
      * @param int $idEsercizio Id Esercizio
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
@@ -120,16 +120,16 @@ class EsercizioAssegnatoController extends Controller
     }
 
     /**
-     * Finds the EsercizioAssegnato model based on its primary key value.
+     * Finds the Assegnato model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $idTerapia Id Terapia
+     * @param string $idTerapia Id Terapia
      * @param int $idEsercizio Id Esercizio
-     * @return EsercizioAssegnato the loaded model
+     * @return Assegnato the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($idTerapia, $idEsercizio)
     {
-        if (($model = EsercizioAssegnato::findOne(['idTerapia' => $idTerapia, 'idEsercizio' => $idEsercizio])) !== null) {
+        if (($model = Assegnato::findOne(['idTerapia' => $idTerapia, 'idEsercizio' => $idEsercizio])) !== null) {
             return $model;
         }
 
