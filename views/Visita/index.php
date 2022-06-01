@@ -1,47 +1,56 @@
 <?php
 
-use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\grid\ActionColumn;
+use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\bootstrap4\ActiveForm;
+use app\models\Visita;
+use yii\grid\ActionColumn;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\VisitaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pianificazione Visita';
+$this->title = 'Creazione Visita';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="visita-index">
+<div class="diagnosi-index">
 
-<h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-<?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'layout' => 'horizontal',
-        'fieldConfig' => [
-            'template' => "{label}\n{input}\n{error}",
-            'labelOptions' => ['class' => 'col-lg-1 col-form-label mr-lg-3'],
-            'inputOptions' => ['class' => 'col-lg-3 form-control'],
-            'errorOptions' => ['class' => 'col-lg-7 invalid-feedback'],
+    <p>
+        <?= Html::a('Create Visita', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'idUtente',
+            'idLogopedista',
+            'idCaregiver',
+            'nomeUtente',
+            'cognomeUtente',
+            'dataPrenotazione',
+            'dataVisita',
+            'oraVisita',
+            [
+                'class' => ActionColumn::className(),
+                'urlCreator' => function ($action, Visita $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'idUtente' => $model->idUtente, 
+                    'idLogopedista' => $model->idLogopedista, 
+                    'idCaregiver' => $model->idCaregiver, 
+                    'nomeUtente' => $model->nomeUtente,
+                    'cognomeUtente' => $model->cognomeUtente,
+                    'dataPrenotazione' => $model->dataPrenotazione, 
+                    'dataVisita' => $model->dataVisita,
+                    'oraVisita' => $model->oraVisita]);
+                 }
+            ],
         ],
     ]); ?>
 
-<?= $form->field($model, 'idUtente') ?>
-<?= $form->field($model, 'idLogopedista') ?>
-<?= $form->field($model, 'idCaregiver') ?>
-<?= $form->field($model, 'nomeUtente') ?>
-<?= $form->field($model, 'cognomeUtente') ?>
-<?= $form->field($model, 'dataPrenotazione') ?>
-<?= $form->field($model, 'dataVisita') ?>
-<?= $form->field($model, 'oraVisita') ?>
-
-
-<div class="form-group">
-    <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
-</div>
-
-<?php ActiveForm::end(); ?>
 
 </div>

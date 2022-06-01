@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
     
-    <?= $form->field($model, 'dataNascita')->textInput() ?> 
+    <?= $form->field($model, 'dataNascita')->textInput(['placeholder' => 'YYYY-MM-DD']) ?> 
 
     <?= $form->field($model, 'idCaregiver')->textInput(['maxlength' => true]) ?>
 
