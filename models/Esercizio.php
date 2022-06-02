@@ -34,9 +34,10 @@ class Esercizio extends \yii\db\ActiveRecord
     {
         return [
             [['feedback'], 'number'],
+            [['conCaregiver'], 'integer'],
             [['nome'], 'string', 'max' => 20],
             [['descrizione'], 'string', 'max' => 300],
-            [['risposte'], 'string', 'max' => 100],
+            [['risposte', 'esercizio_image'], 'string', 'max' => 100],
             [['risposteUser'], 'each', 'rule' => ['integer']],
         ];
     }
@@ -51,8 +52,10 @@ class Esercizio extends \yii\db\ActiveRecord
             'descrizione' => 'Descrizione',
             'ID' => 'ID',
             'feedback' => 'Feedback',
+            'conCaregiver' => 'Assistenza Caregiver',
             'risposte' => 'Risposte',
-            'risposte_corretta' => 'Risposte Corretta',
+            'risposta_corretta' => 'Risposte Corretta',
+            'esercizio_image' => 'Esercizio Image',
         ];
     }
 
@@ -69,7 +72,7 @@ class Esercizio extends \yii\db\ActiveRecord
 
     public function evaluateEsercizio()
     {
-        $risposte_cor = explode('&', $this->risposte_corretta);
+        $risposte_cor = explode('&', $this->risposta_corretta);
         $voto = 0;
 
         foreach ($this->getArrayQuestion() as $i => $domanda) {
@@ -80,4 +83,5 @@ class Esercizio extends \yii\db\ActiveRecord
 
         return $voto;
     }
+
 }
