@@ -6,7 +6,6 @@ use yii\helpers\Html;
 /* @var $model app\models\Diagnosi */
 
 $this->title = 'Nuova Diagnosi';
-$this->params['breadcrumbs'][] = ['label' => 'Diagnosis', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="diagnosi-create">

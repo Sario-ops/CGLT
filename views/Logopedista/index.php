@@ -26,15 +26,21 @@ $this->title = 'Logopedista';
                 <?= Html::a('CREA ESERCIZIO', ['update', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
-                <?= Html::a('MEMORIZZA DIAGNOSI', ['/diagnosi\create', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('CREA DIAGNOSI', ['/diagnosi\create', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+            </td>
+            <td>
+                <?= Html::a('PIANIFICA VISITA', ['/visita\create', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?> 
             </td>
         </tr>
         <tr>
             <td>
+                <?= Html::a('VISUALIZZA DIAGNOSI', ['/diagnosi\index', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+            </td>
+            <td>
                 <?= Html::a('VISUALIZZA UTENTI', ['visualizza', 'utenti' => $model->getUtentes()], ['class' => 'btn btn-primary']) ?> 
             </td>
             <td>
-                <?= Html::a('PIANIFICA VISITA', ['/visita\create', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?> 
+                <?= Html::a('VISUALIZZA VISITE', ['/visita\index', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?> 
             </td>
         </tr>
     </table>

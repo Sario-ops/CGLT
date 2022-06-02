@@ -12,7 +12,9 @@ use yii\grid\ActionColumn;
 
 $this->title = 'Utenti';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
+
 <div class="utente-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -30,11 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'cf',
             'username',
             'dataNascita',
-            'idCaregiver',
             //'password',
             //'authkey',
-            //'idCaregiver',
-            //'idLogopedista',
+            'idCaregiver',
+            'idLogopedista',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Utente $model, $key, $index, $column) {
@@ -45,6 +46,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-
 
 </div>
