@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Assegnato */
 
 $this->title = $model->idTerapia;
-$this->params['breadcrumbs'][] = ['label' => 'Assegnatos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Assegnato', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -16,7 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'idTerapia' => $model->idTerapia, 'idEsercizio' => $model->idEsercizio], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'idTerapia' => $model->idTerapia, 'idEsercizio' => $model->idEsercizio], [
             'class' => 'btn btn-danger',
             'data' => [

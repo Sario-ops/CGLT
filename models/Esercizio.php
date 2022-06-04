@@ -19,6 +19,7 @@ class Esercizio extends \yii\db\ActiveRecord
 
     public $risposteUser;
     public $rispostaCorrente;
+    public $esercizi;
     /**
      * {@inheritdoc}
      */
@@ -65,6 +66,11 @@ class Esercizio extends \yii\db\ActiveRecord
     public function getArrayResponse()
     {
         return explode('&', $this->risposte);
+    }
+
+    public function getAllExercise()
+    {
+        return $this->hasMany(Esercizi::class);
     }
 
     public function evaluateEsercizio()

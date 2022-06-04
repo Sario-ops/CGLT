@@ -18,7 +18,7 @@ class TerapiaSearch extends Terapia
     {
         return [
             [['idUtente', 'idLogopedista'], 'safe'],
-            [['ID'], 'integer'],
+            [['ID'], 'string'],
         ];
     }
 

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+$request = Yii::$app->request;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Assegnato */
@@ -12,14 +13,12 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'idTerapia')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'idTerapia')->textInput(['value' => $request->get('ID'),'readonly'=> true]) ?>
 
     <?= $form->field($model, 'idEsercizio')->textInput() ?>
 
-    <?= $form->field($model, 'risposta')->textInput(['maxlength' => true]) ?>
-
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Aggiungi', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
