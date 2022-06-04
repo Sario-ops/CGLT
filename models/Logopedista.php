@@ -63,7 +63,7 @@ class Logopedista extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
      */
     public function getUtentes()
     {
-        return $this->hasMany(Utente::className(), ['idLogopedista' => 'username']);
+        return $this->hasMany(Utente::class, ['idLogopedista' => 'username']);
     }
 
     public static function findIdentity($id) {

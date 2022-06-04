@@ -16,6 +16,7 @@ use Yii;
  */
 class Esercizio extends \yii\db\ActiveRecord
 {
+
     public $risposte;
     /**
      * {@inheritdoc}

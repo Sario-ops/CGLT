@@ -63,11 +63,11 @@ class LoginForm extends Model
         if ($this->validate()) {
             switch ($this->customer) {
                 case 'L':
-                    return Yii::$app->logopedista->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+                    return Yii::$app->logopedista->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 1);
                 case 'C':
-                    return Yii::$app->caregiver->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+                    return Yii::$app->caregiver->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 1);
                 case 'U':
-                    return Yii::$app->utente->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0); 
+                    return Yii::$app->utente->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 1); 
             }
         }
         return false;
