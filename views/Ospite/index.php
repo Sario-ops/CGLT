@@ -16,12 +16,12 @@ use yii\bootstrap4\ActiveForm;
 
 
 <div class="form-group">
-    <?php foreach ($domande as $i => $domanda): ?>
+    <?php foreach ($quesiti as $i => $quesito): ?>
 
 
-        <p><?=Html::encode($domanda)?></p>
+        <p><?=Html::encode($quesito->domanda)?></p>
 
-        <?= $form->field($model, "risposteUser[$i]")->radioList($risposte) ?>
+        <?= $form->field($model, "risposte[$i]")->radioList($quesito->getArrayOptions()) ?>
 
     <?php endforeach; ?>
 
