@@ -2,23 +2,23 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use app\models\Utente;
 use yii\grid\GridView;
+use app\models\Esercizio;
 use yii\grid\ActionColumn;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\UtenteSearch */
+/* @var $searchModel app\models\EsercizioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Registra Utente';
+$this->title = 'Esercizios';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="utente-index">
+<div class="esercizio-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Utente', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Esercizio', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -28,19 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+
+            'id',
             'nome',
-            'cognome',
-            'cf',
-            'username',
-            'password',
-            'authkey',
-            'idCaregiver',
-            'idLogopedista',
-            'dataNascita',
+            'descrizione',
+            'conCaregiver',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Utente $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'username' => $model->username]);
+                'urlCreator' => function ($action, Esercizio $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
         ],
