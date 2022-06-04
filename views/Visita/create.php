@@ -5,8 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Visita */
 
-$this->title = 'Create Visita';
-$this->params['breadcrumbs'][] = ['label' => 'Visitas', 'url' => ['index']];
+$this->title = 'Visualizza Visita';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="visita-create">

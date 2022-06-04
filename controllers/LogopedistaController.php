@@ -8,6 +8,7 @@ use app\models\LoginForm;
 use app\models\Logopedista;
 use yii\filters\VerbFilter;
 use app\models\UtenteSearch;
+use app\models\DiagnosiSearch;
 use yii\filters\AccessControl;
 use app\models\LogopedistaSearch;
 use yii\web\NotFoundHttpException;

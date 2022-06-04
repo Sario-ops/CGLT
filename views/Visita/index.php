@@ -6,6 +6,9 @@ use yii\grid\GridView;
 use app\models\Visita;
 use yii\grid\ActionColumn;
 
+$request = Yii::$app->request;
+$username = $request->get('username');
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\VisitaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -18,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Visita', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Visita', ['/visita\create', 'model' => $model, 'username' => $username], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
