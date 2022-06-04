@@ -3,11 +3,11 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Esercizio */
+/* @var $modelEsercizio app\modelEsercizios\Esercizio */
 
-$this->title = 'Update Esercizio: ' . $model->ID;
+$this->title = 'Update Esercizio: ' . $modelEsercizio->id;
 $this->params['breadcrumbs'][] = ['label' => 'Esercizios', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->ID, 'url' => ['view', 'ID' => $model->ID]];
+$this->params['breadcrumbs'][] = ['label' => $modelEsercizio->id, 'url' => ['view', 'id' => $modelEsercizio->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="esercizio-update">
@@ -15,7 +15,8 @@ $this->params['breadcrumbs'][] = 'Update';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'modelEsercizio' => $modelEsercizio,
+        'modelsQuesito' => $modelsQuesito
     ]) ?>
 
 </div>

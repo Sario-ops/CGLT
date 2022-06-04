@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Esercizio;
+use app\models\Quesito;
 
 /**
- * EsercizioSearch represents the model behind the search form of `app\models\Esercizio`.
+ * QuesitoSearch represents the model behind the search form of `app\models\Quesito`.
  */
-class EsercizioSearch extends Esercizio
+class QuesitoSearch extends Quesito
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class EsercizioSearch extends Esercizio
     public function rules()
     {
         return [
-            [['id', 'conCaregiver'], 'integer'],
-            [['nome', 'descrizione'], 'safe'],
+            [['id', 'esercizio_id'], 'integer'],
+            [['domanda', 'opzioni_risposta', 'risposta_corretta', 'domanda_immagine'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class EsercizioSearch extends Esercizio
      */
     public function search($params)
     {
-        $query = Esercizio::find();
+        $query = Quesito::find();
 
         // add conditions that should always apply here
 
@@ -59,11 +59,13 @@ class EsercizioSearch extends Esercizio
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'conCaregiver' => $this->conCaregiver,
+            'esercizio_id' => $this->esercizio_id,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome])
-            ->andFilterWhere(['like', 'descrizione', $this->descrizione]);
+        $query->andFilterWhere(['like', 'domanda', $this->domanda])
+            ->andFilterWhere(['like', 'opzioni_risposta', $this->opzioni_risposta])
+            ->andFilterWhere(['like', 'risposta_corretta', $this->risposta_corretta])
+            ->andFilterWhere(['like', 'domanda_immagine', $this->domanda_immagine]);
 
         return $dataProvider;
     }

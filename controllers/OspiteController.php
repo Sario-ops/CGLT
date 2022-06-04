@@ -14,22 +14,19 @@ class OspiteController extends \yii\web\Controller
     {
         $model = $this->findModel();
 
-        $domande = $model->getArrayQuestion();
 
-        $risposte = $model -> getArrayResponse();
+        if ($model->load(Yii::$app->request->get()) && $model->save() ) {
+            $risultato = $model->evaluateEsercizio();   
 
-            if ($model->load(Yii::$app->request->get()) && $model->save() ) {
-                $risultato = $model->evaluateEsercizio();
+            return $this->render('finishTest',['result' => $risultato, 'numeroDomande' => count($model->quesitos)]);
+        }
 
-                return $this->render('finishTest',['result' => $risultato, 'numeroDomande' => count($domande)]);
-            }
-
-        return $this->render('index', ['model' => $model, 'domande' => $domande, 'risposte' => $risposte]);
+        return $this->render('index', ['model' => $model, 'quesiti' => $model->quesitos]);
     }
 
     protected function findModel()
     {
-        if (($model = Esercizio::findOne(['ID' => 1])) !== null) {
+        if (($model = Esercizio::findOne(['id' => 1])) !== null) {
             return $model;
         }
 

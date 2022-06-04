@@ -1,24 +1,23 @@
 <?php
 
-use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\grid\GridView;
-use app\models\Esercizio;
+use yii\helpers\Url;
 use yii\grid\ActionColumn;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\EsercizioSearch */
+/* @var $searchModel app\models\AddressSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Esercizios';
+$this->title = 'Addresses';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="esercizio-index">
+<div class="address-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Esercizio', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Address', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -30,12 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'nome',
-            'descrizione',
-            'conCaregiver',
+            'esercizio_id',
+            'domanda',
+            'opzioni_risposta',
+            'risposta_corretta',
+            //'domanda_immagine',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Esercizio $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Address $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
