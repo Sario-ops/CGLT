@@ -23,7 +23,7 @@ $this->title = 'Logopedista';
                 <?= Html::a('CREA TERAPIA', ['/terapia\create', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
-                <?= Html::a('CREA ESERCIZIO', ['/esercizio/create'], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('CREA ESERCIZIO', ['/esercizio'], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
                 <?= Html::a('MEMORIZZA DIAGNOSI', ['/diagnosi\create', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?>

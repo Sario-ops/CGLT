@@ -18,7 +18,7 @@ class EsercizioSearch extends Esercizio
     {
         return [
             [['id', 'conCaregiver'], 'integer'],
-            [['nome', 'descrizione'], 'safe'],
+            [['nome', 'descrizione', 'categoria'], 'safe'],
         ];
     }
 
@@ -63,7 +63,8 @@ class EsercizioSearch extends Esercizio
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome])
-            ->andFilterWhere(['like', 'descrizione', $this->descrizione]);
+            ->andFilterWhere(['like', 'descrizione', $this->descrizione])
+            ->andFilterWhere(['like', 'categoria', $this->descrizione]);
 
         return $dataProvider;
     }

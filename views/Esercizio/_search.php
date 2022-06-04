@@ -21,6 +21,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'descrizione') ?>
 
+    <?= $form->field($model, 'categoria') ?>
+
     <?= $form->field($model, 'conCaregiver') ?>
 
     <div class="form-group">

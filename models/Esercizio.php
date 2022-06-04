@@ -34,7 +34,7 @@ class Esercizio extends \yii\db\ActiveRecord
         return [
             [['conCaregiver'], 'integer'],
             [['nome'], 'string', 'max' => 32],
-            [['descrizione'], 'string', 'max' => 255],
+            [['descrizione', 'categoria'], 'string', 'max' => 255],
             [['risposte'], 'each', 'rule' => ['integer']],
         ];
     }
@@ -48,6 +48,7 @@ class Esercizio extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'descrizione' => 'Descrizione',
+            'categoria' => 'Categoria',
             'conCaregiver' => 'Assistenza Caregiver',
         ];
     }
@@ -59,7 +60,7 @@ class Esercizio extends \yii\db\ActiveRecord
      */
     public function getEsercizioAssegnatos()
     {
-        return $this->hasMany(EsercizioAssegnato::className(), ['idEsercizio' => 'id']);
+        return $this->hasMany(Assegnato::className(), ['idEsercizio' => 'id']);
     }
 
     /**

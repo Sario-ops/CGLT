@@ -10,7 +10,7 @@ use yii\grid\ActionColumn;
 /* @var $searchModel app\models\EsercizioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Esercizios';
+$this->title = 'Esercizi';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="esercizio-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Esercizio', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Nuovo Esercizio', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -32,11 +32,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nome',
             'descrizione',
+            'categoria',
             'conCaregiver',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Esercizio $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
+                    if( $action !== 'delete') {
+                        return Url::toRoute([$action, 'id' => $model->id]);
+                    }
                  }
             ],
         ],
