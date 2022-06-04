@@ -26,12 +26,15 @@ $this->title = 'Logopedista';
                 <?= Html::a('CREA ESERCIZIO', ['/esercizio/create'], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
-                <?= Html::a('MEMORIZZA DIAGNOSI', ['update', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('MEMORIZZA DIAGNOSI', ['/diagnosi\create', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
             </td>
         </tr>
         <tr>
             <td>
                 <?= Html::a('VISUALIZZA UTENTI', ['visualizza', 'utenti' => $model->getUtentes()], ['class' => 'btn btn-primary']) ?> 
+            </td>
+            <td>
+                <?= Html::a('PIANIFICA VISITA', ['/visita\create', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?> 
             </td>
         </tr>
     </table>
