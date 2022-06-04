@@ -20,10 +20,10 @@ $this->title = 'Logopedista';
     <table id="logopedista-activity">
         <tr>
             <td>
-                <?= Html::a('CREA TERAPIA', ['update', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('CREA TERAPIA', ['/terapia\create', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
-                <?= Html::a('CREA ESERCIZIO', ['update', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('CREA ESERCIZIO', ['/esercizio/create'], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
                 <?= Html::a('CREA DIAGNOSI', ['/diagnosi\create', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?>

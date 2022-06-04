@@ -37,6 +37,7 @@ class Logopedista extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
             [['cf'], 'string', 'max' => 16],
             [['username', 'password','authkey'], 'string', 'max' => 30],
             [['username', 'authkey'], 'unique'],
+            ['username', 'email'],
         ];
     }
 
@@ -62,7 +63,7 @@ class Logopedista extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
      */
     public function getUtentes()
     {
-        return $this->hasMany(Utente::className(), ['idLogopedista' => 'username']);
+        return $this->hasMany(Utente::class, ['idLogopedista' => 'username']);
     }
 
     public static function findIdentity($id) {
