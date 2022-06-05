@@ -4,42 +4,36 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\models\Assegnato;
+use app\models\Esercizio;
 use yii\grid\ActionColumn;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\AssegnatoSearch */
+/* @var $searchModel app\models\EsercizioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Assegnato';
+$this->title = 'Esercizi';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="assegnato-index">
+<div class="esercizio-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Assegnato', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'idTerapia',
-            'idEsercizio',
-            'risposta',
-            'stato',
-            //'valutazione',
+            'idTerapia', 'idEsercizio', 'stato', 'valutazione', 'risposta',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Assegnato $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                'template'=>'{execute}',
+                'buttons' => [
+                    'execute' => function ($url, Assegnato $model ) {
+                        return  Html::a('esegui', ['eseguiassegnato', 'idAssegnato' => $model->id], ['title' => Yii::t('yii', 'Esegui')]);
+                    }
+                ],
             ],
         ],
     ]); ?>

@@ -59,15 +59,17 @@ use wbraganca\dynamicform\DynamicFormWidget;
                         <?= $form->field($modelQuesito, "[{$i}]domanda")->textInput(['maxlength' => true]) ?>
                         <div class="row">
                             <div class="col-sm-6">
-                                <?= $form->field($modelQuesito, "[{$i}]opzioni_risposta")->textInput(['maxlength' => true, 'placeholder' => 'opzione1&opzione2&..']) ?>
+                                <?= $form->field($modelQuesito, "[{$i}]opzioni_risposta")->textInput(['maxlength' => true, 'placeholder' => 'opzione1&opzione2&..', 'value' => $modelQuesito->opzioni_risposta ? $modelQuesito->opzioni_risposta : 'corretto&sbagliato']) ?>
                             </div>
                             <div class="col-sm-6">
-                                <?= $form->field($modelQuesito, "[{$i}]risposta_corretta")->textInput(['maxlength' => true]) ?>
+                                <?= $form->field($modelQuesito, "[{$i}]risposta_corretta")->textInput(['maxlength' => true, 'value' => $modelQuesito->opzioni_risposta === 'corretto&sbagliato' ? 'corretto' : $modelQuesito->risposta_corretta]) ?>
                             </div>
                         </div><!-- .row -->
                         <div class="row">
                             <div class="col-sm-4">
-                                <?= $form->field($modelQuesito, "[{$i}]domanda_immagine")->fileInput() ?>
+                                <?php if (!($modelQuesito->domanda_immagine)) : ?>
+                                    <?= $form->field($modelQuesito, "[{$i}]domanda_immagine")->fileInput() ?>
+                                <?php endif; ?>
                             </div>
                         </div><!-- .row -->
                     </div>

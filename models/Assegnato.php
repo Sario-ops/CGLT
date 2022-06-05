@@ -7,9 +7,12 @@ use Yii;
 /**
  * This is the model class for table "assegnato".
  *
- * @property string $idTerapia
- * @property int $idEsercizio
+ * @property int $id
+ * @property string|null $idTerapia
+ * @property int|null $idEsercizio
  * @property string|null $risposta
+ * @property string|null $stato
+ * @property int|null $valutazione
  *
  * @property Esercizio $idEsercizio0
  * @property Terapia $idTerapia0
@@ -30,13 +33,12 @@ class Assegnato extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idTerapia', 'idEsercizio'], 'required'],
-            [['idEsercizio'], 'integer'],
+            [['idEsercizio', 'valutazione'], 'integer'],
+            [['stato'], 'string'],
             [['idTerapia'], 'string', 'max' => 5],
-            [['risposta'], 'string', 'max' => 20],
-            [['idTerapia', 'idEsercizio'], 'unique', 'targetAttribute' => ['idTerapia', 'idEsercizio']],
+            [['risposta'], 'string', 'max' => 255],
             [['idTerapia'], 'exist', 'skipOnError' => true, 'targetClass' => Terapia::className(), 'targetAttribute' => ['idTerapia' => 'ID']],
-            [['idEsercizio'], 'exist', 'skipOnError' => true, 'targetClass' => Esercizio::className(), 'targetAttribute' => ['idEsercizio' => 'ID']],
+            [['idEsercizio'], 'exist', 'skipOnError' => true, 'targetClass' => Esercizio::className(), 'targetAttribute' => ['idEsercizio' => 'id']],
         ];
     }
 
@@ -46,9 +48,12 @@ class Assegnato extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id' => 'ID',
             'idTerapia' => 'Id Terapia',
             'idEsercizio' => 'Id Esercizio',
             'risposta' => 'Risposta',
+            'stato' => 'Stato',
+            'valutazione' => 'Valutazione',
         ];
     }
 
@@ -59,7 +64,7 @@ class Assegnato extends \yii\db\ActiveRecord
      */
     public function getIdEsercizio0()
     {
-        return $this->hasOne(Esercizio::className(), ['ID' => 'idEsercizio']);
+        return $this->hasOne(Esercizio::className(), ['id' => 'idEsercizio']);
     }
 
     /**

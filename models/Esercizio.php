@@ -54,23 +54,13 @@ class Esercizio extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[EsercizioAssegnatos]].
+     * Gets query for [[Assegnatos]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getEsercizioAssegnatos()
+    public function getAssegnatos()
     {
         return $this->hasMany(Assegnato::className(), ['idEsercizio' => 'id']);
-    }
-
-    /**
-     * Gets query for [[IdTerapias]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIdTerapias()
-    {
-        return $this->hasMany(Terapia::className(), ['ID' => 'idTerapia'])->viaTable('esercizio_assegnato', ['idEsercizio' => 'id']);
     }
 
     /**
@@ -93,5 +83,18 @@ class Esercizio extends \yii\db\ActiveRecord
         }
 
         return $voto;
+    }
+
+
+    public function getRisposteString() {
+        $result = '';
+
+        foreach ($this->quesitos as $i => $quesito) {
+            $result = sprintf("%s%s",$result, $quesito->getArrayOptions()[$this->risposte[$i]].'&');
+        }
+
+        $result = rtrim($result, "& ");
+        return $result;
+
     }
 }
