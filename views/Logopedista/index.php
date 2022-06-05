@@ -45,5 +45,3 @@ $this->title = 'Logopedista';
         </tr>
     </table>
 </div>
-
-<!-- <iframe width="725" height="544" src="https://www.youtube.com/embed/sDvXhZtcp0w?autoplay=1" title="YouTube video player" frameborder="0" allow="autoplay;" allowfullscreen></iframe> -->

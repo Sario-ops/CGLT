@@ -1,9 +1,10 @@
 <?php
 
-use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\grid\ActionColumn;
+use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Quesito;
+use yii\grid\ActionColumn;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\AddressSearch */
@@ -36,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'domanda_immagine',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Address $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Quesito $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

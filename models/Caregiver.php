@@ -18,6 +18,8 @@ use yii\base\NotSupportedException;
  */
 class Caregiver extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
+
+    public $assistenzaPassword;
     /**
      * {@inheritdoc}
      */
@@ -35,7 +37,7 @@ class Caregiver extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfa
             [['username'], 'required'],
             [['nome', 'cognome'], 'string', 'max' => 15],
             [['cf'], 'string', 'max' => 16],
-            [['username', 'password','authkey'], 'string', 'max' => 30],
+            [['username', 'password','authkey', 'assistenzaPassword'], 'string', 'max' => 30],
             [['username'], 'unique'],
             ['username', 'email'],
         ];
@@ -53,6 +55,7 @@ class Caregiver extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfa
             'username' => 'Email',
             'password' => 'Password',
             'authkey' => 'AuthKey',
+            'assistenzaPassword' => 'Password Caregiver',
         ];
     }
 

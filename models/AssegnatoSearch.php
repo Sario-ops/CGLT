@@ -17,8 +17,8 @@ class AssegnatoSearch extends Assegnato
     public function rules()
     {
         return [
-            [['idTerapia', 'risposta'], 'safe'],
-            [['idEsercizio'], 'integer'],
+            [['id', 'idEsercizio', 'valutazione'], 'integer'],
+            [['idTerapia', 'risposta', 'stato'], 'safe'],
         ];
     }
 
@@ -58,11 +58,14 @@ class AssegnatoSearch extends Assegnato
 
         // grid filtering conditions
         $query->andFilterWhere([
+            'id' => $this->id,
             'idEsercizio' => $this->idEsercizio,
+            'valutazione' => $this->valutazione,
         ]);
 
         $query->andFilterWhere(['like', 'idTerapia', $this->idTerapia])
-            ->andFilterWhere(['like', 'risposta', $this->risposta]);
+            ->andFilterWhere(['like', 'risposta', $this->risposta])
+            ->andFilterWhere(['like', 'stato', $this->stato]);
 
         return $dataProvider;
     }

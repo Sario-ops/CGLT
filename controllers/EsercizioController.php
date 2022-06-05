@@ -183,7 +183,6 @@ class EsercizioController extends Controller
                         }
                         foreach ($modelsQuesito as $i => $modelQuesito) {
 
-                            $modelQuesito->save();
                             $image = UploadedFile::getInstance($modelQuesito, "[{$i}]domanda_immagine");
                             $modelQuesito->esercizio_id = $modelEsercizio->id;
 

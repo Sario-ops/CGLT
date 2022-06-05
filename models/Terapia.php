@@ -33,11 +33,11 @@ class Terapia extends \yii\db\ActiveRecord
     {
         return [
             [['ID'], 'required'],
-            [['ID'], 'string', 'max' => 5],
             [['idUtente', 'idLogopedista'], 'string', 'max' => 30],
+            [['ID'], 'string', 'max' => 5],
             [['ID'], 'unique'],
-            [['idLogopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::class, 'targetAttribute' => ['idLogopedista' => 'username']],
-            [['idUtente'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::class, 'targetAttribute' => ['idUtente' => 'username']],
+            [['idLogopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::className(), 'targetAttribute' => ['idLogopedista' => 'username']],
+            [['idUtente'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::className(), 'targetAttribute' => ['idUtente' => 'username']],
         ];
     }
 
@@ -54,13 +54,23 @@ class Terapia extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Assegnatos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAssegnatos()
+    {
+        return $this->hasMany(Assegnato::className(), ['idTerapia' => 'ID']);
+    }
+
+    /**
      * Gets query for [[IdLogopedista0]].
      *
      * @return \yii\db\ActiveQuery
      */
     public function getIdLogopedista()
     {
-        return $this->idLogopedista;
+        return $this->hasOne(Logopedista::className(), ['username' => 'idLogopedista']);
     }
 
     /**
@@ -70,7 +80,7 @@ class Terapia extends \yii\db\ActiveRecord
      */
     public function getIdUtente()
     {
-        return $this->hasOne(Utente::class, ['username' => 'idUtente']);
+        return $this->hasOne(Utente::className(), ['username' => 'idUtente']);
     }
 
     public function setIdLogopedista()

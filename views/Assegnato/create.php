@@ -1,11 +1,12 @@
 <?php
 
 use yii\helpers\Html;
-use app\models\Esercizio;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Assegnato */
 
-$this->title = 'Assegna esercizio';
+$this->title = 'Create Assegnato';
+$this->params['breadcrumbs'][] = ['label' => 'Assegnatos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="assegnato-create">
@@ -15,8 +16,5 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-    <?php
-    /*$esercizi=getAllExercise();
-    echo $esercizi;*/
-    ?>
+
 </div>
