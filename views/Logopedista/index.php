@@ -11,51 +11,37 @@ use yii\bootstrap4\ActiveForm;
 /* @var $searchModel app\models\LogopedistaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Logopedista Login';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Logopedista';
 ?>
 <div class="site-index">
+    <h1><?=Html::encode($model->nome), ' ', Html::encode($model->cognome) ?></h1>
 
-    <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">BENVENUTO!</h1>
-        <p class="lead"></p>
-    </div>
 
-    <div class="body-content">
-
-        <h1><?= Html::encode($this->title) ?></h1>
-
-        <p>Please fill out the following fields to login:</p>
-
-        <?php $form = ActiveForm::begin([
-            'id' => 'login-form',
-            'layout' => 'horizontal',
-            'fieldConfig' => [
-                'template' => "{label}\n{input}\n{error}",
-                'labelOptions' => ['class' => 'col-lg-1 col-form-label mr-lg-3'],
-                'inputOptions' => ['class' => 'col-lg-3 form-control'],
-                'errorOptions' => ['class' => 'col-lg-7 invalid-feedback'],
-            ],
-        ]); ?>
-
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-        <?= $form->field($model, 'password')->passwordInput() ?>
-
-        <?= $form->field($model, 'rememberMe')->checkbox([
-            'template' => "<div class=\"offset-lg-1 col-lg-3 custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-        ]) ?>
-
-        <p>
-            Non sei ancora registrato? <?= Html::a('Registrati', ['create']) ?>
-        </p>
-
-        <div class="form-group">
-            <div class="offset-lg-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            </div>
-        </div>
-
-        <?php ActiveForm::end(); ?>
-    </div>
+    <table id="logopedista-activity">
+        <tr>
+            <td>
+                <?= Html::a('CREA TERAPIA', ['/terapia\create', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+            </td>
+            <td>
+                <?= Html::a('CREA ESERCIZIO', ['/esercizio'], ['class' => 'btn btn-primary']) ?>
+            </td>
+            <td>
+                <?= Html::a('CREA DIAGNOSI', ['/diagnosi\create', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+            </td>
+            <td>
+                <?= Html::a('PIANIFICA VISITA', ['/visita\create', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <?= Html::a('VISUALIZZA DIAGNOSI', ['/diagnosi\index', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+            </td>
+            <td>
+                <?= Html::a('VISUALIZZA UTENTI', ['visualizza', 'utenti' => $model->getUtentes()], ['class' => 'btn btn-primary']) ?> 
+            </td>
+            <td>
+                <?= Html::a('VISUALIZZA VISITE', ['/visita\index', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?> 
+            </td>
+        </tr>
+    </table>
 </div>

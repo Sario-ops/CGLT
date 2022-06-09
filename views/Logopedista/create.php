@@ -5,8 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Logopedista */
 
-$this->title = 'Create Logopedista';
-$this->params['breadcrumbs'][] = ['label' => 'Logopedistas', 'url' => ['index']];
+$this->title = 'Registra Logopedista';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="logopedista-create">

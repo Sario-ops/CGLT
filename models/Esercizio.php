@@ -5,20 +5,19 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "esercizio".
+ * This is the model class for table "Esercizio".
  *
+ * @property int $id
  * @property string|null $nome
  * @property string|null $descrizione
- * @property int $ID
- * @property float|null $feedback
- * @property string|null $risposte
- * @property string|null $risposte_corretta
+ * @property int|null $conCaregiver
+ *
+ * @property Quesito[] $Quesitoes
  */
 class Esercizio extends \yii\db\ActiveRecord
 {
 
-    public $risposteUser;
-    public $rispostaCorrente;
+    public $risposte;
     /**
      * {@inheritdoc}
      */
@@ -33,11 +32,10 @@ class Esercizio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['feedback'], 'number'],
-            [['nome'], 'string', 'max' => 20],
-            [['descrizione'], 'string', 'max' => 300],
-            [['risposte'], 'string', 'max' => 100],
-            [['risposteUser'], 'each', 'rule' => ['integer']],
+            [['conCaregiver'], 'integer'],
+            [['nome'], 'string', 'max' => 32],
+            [['descrizione', 'categoria'], 'string', 'max' => 255],
+            [['risposte'], 'each', 'rule' => ['integer']],
         ];
     }
 
@@ -47,37 +45,56 @@ class Esercizio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id' => 'ID',
             'nome' => 'Nome',
             'descrizione' => 'Descrizione',
-            'ID' => 'ID',
-            'feedback' => 'Feedback',
-            'risposte' => 'Risposte',
-            'risposte_corretta' => 'Risposte Corretta',
+            'categoria' => 'Categoria',
+            'conCaregiver' => 'Assistenza Caregiver',
         ];
     }
 
-
-    public function getArrayQuestion()
+    /**
+     * Gets query for [[Assegnatos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAssegnatos()
     {
-        return explode('&', $this->descrizione);
+        return $this->hasMany(Assegnato::className(), ['idEsercizio' => 'id']);
     }
 
-    public function getArrayResponse()
+    /**
+     * Gets query for [[Quesitos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getQuesitos()
     {
-        return explode('&', $this->risposte);
+        return $this->hasMany(Quesito::className(), ['esercizio_id' => 'id']);
     }
+
 
     public function evaluateEsercizio()
     {
-        $risposte_cor = explode('&', $this->risposte_corretta);
         $voto = 0;
 
-        foreach ($this->getArrayQuestion() as $i => $domanda) {
-            if ($this->risposteUser[$i] === $risposte_cor[$i]) {
-                $voto++;
-            }
+        foreach ($this->quesitos as $i => $quesito) {
+            $voto += $quesito->evaluateEsercizio($this->risposte[$i]); 
         }
 
         return $voto;
+    }
+
+
+    public function getRisposteString() {
+        $result = '';
+
+        foreach ($this->quesitos as $i => $quesito) {
+            $result = sprintf("%s%s",$result, $quesito->getArrayOptions()[$this->risposte[$i]].'&');
+        }
+
+        $result = rtrim($result, "& ");
+        return $result;
+
     }
 }

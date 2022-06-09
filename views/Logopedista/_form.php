@@ -22,6 +22,22 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
+    <input type="checkbox" onclick="myFunction()">Show Password
+
+    <script> 
+        function myFunction() {
+        var x = document.getElementById("logopedista-password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+                  x.type = "password";
+            }
+            }
+     </script>
+
+    <br>
+    <br>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

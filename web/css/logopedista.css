@@ -1,9 +1,36 @@
 
 #btn_logopedista_home {
-    background-color:rgba(18, 189, 207, 1);
-    background-image: url(../../views/res/logopedista/doc_button.png);
+    background-color: #007bff;
 }
 
 #btn_logopedista_home:hover {
     background-color:cornflowerblue;
+}
+
+iframe {
+    pointer-events: none;
+}
+
+#logopedista-activity {
+    margin-top: 5%;
+}
+
+#logopedista-activity tr {
+    width: 100%;
+}
+
+#logopedista-activity td {
+    margin: 3%;
+    width: 20%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+}
+
+#logopedista-activity td a {
+    width: 100%;
+    padding: 30%;
+}
+
+a:not([href]):not([class]) {
+    display: none;
 }

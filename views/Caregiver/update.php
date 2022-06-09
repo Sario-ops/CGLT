@@ -6,8 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\Caregiver */
 
 $this->title = 'Update Caregiver: ' . $model->username;
-$this->params['breadcrumbs'][] = ['label' => 'Caregivers', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['view', 'username' => $model->username]];
+$this->params['breadcrumbs'][] = ['label' =>  'Profilo', 'url' => ['view', 'username' => $model->username]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="caregiver-update">

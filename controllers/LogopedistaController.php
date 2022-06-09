@@ -7,6 +7,9 @@ use yii\web\Controller;
 use app\models\LoginForm;
 use app\models\Logopedista;
 use yii\filters\VerbFilter;
+use app\models\UtenteSearch;
+use app\models\DiagnosiSearch;
+use yii\filters\AccessControl;
 use app\models\LogopedistaSearch;
 use yii\web\NotFoundHttpException;
 
@@ -20,17 +23,30 @@ class LogopedistaController extends Controller
      */
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'user' => 'logopedista', // this user object defined in web.php
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['login','create'],
+                        'roles' => ['?'],
+
                     ],
                 ],
-            ]
-        );
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
     }
 
     /**
@@ -40,23 +56,34 @@ class LogopedistaController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new LogopedistaSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        // $searchModel = new LogopedistaSearch();
+        // $dataProvider = $searchModel->search($this->request->queryParams);
+        $model = $this->findModel(Yii::$app->logopedista->identity->username);
+
+        return $this->render('index', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionLogin()
+    {
+        if (!Yii::$app->logopedista->isGuest) {
+            return $this->goHome();
+        }
+
         $model = new LoginForm();
 
         $model->setCustomer("L");
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            $logopedista = $this->findModel($model->username);
-            return $this->render('homePage', ['model'=> $logopedista]);
+            return $this->goBack();
         }
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'model'=> $model,
+        return $this->render('login', [
+            'model' => $model,
         ]);
     }
+
 
     /**
      * Displays a single Logopedista model.
@@ -82,7 +109,7 @@ class LogopedistaController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'username' => $model->username]);
+                return $this->redirect(['index']);
             }
         } else {
             $model->loadDefaultValues();
@@ -141,5 +168,26 @@ class LogopedistaController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionVisualizza() {
+
+        $searchModel = new UtenteSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+        $model = $this->findModel(Yii::$app->logopedista->identity->username);
+
+        return $this->render('visualizza', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider, 'utenti' => $model->getUtentes()]);
+    }
+
+    /**
+     * Logout action.
+     *
+     * @return Response
+     */
+    public function actionLogout()
+    {
+        Yii::$app->logopedista->logout();
+
+        return $this->redirect(['site/index']);
     }
 }

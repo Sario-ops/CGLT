@@ -96,3 +96,15 @@ p.home_page {
 .site-index > #first {
     margin-top: 10%;
 }
+
+.disabled {
+    display: none;
+}
+
+div[role="radiogroup"] {
+    display:flex;
+}
+
+div[role="radiogroup"] div {
+    margin-right: 10px;
+}

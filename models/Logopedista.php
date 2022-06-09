@@ -35,8 +35,9 @@ class Logopedista extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
             [['username'], 'required'],
             [['nome', 'cognome'], 'string', 'max' => 15],
             [['cf'], 'string', 'max' => 16],
-            [['username', 'password'], 'string', 'max' => 30],
-            [['username'], 'unique'],
+            [['username', 'password','authkey'], 'string', 'max' => 30],
+            [['username', 'authkey'], 'unique'],
+            ['username', 'email'],
         ];
     }
 
@@ -48,9 +49,10 @@ class Logopedista extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
         return [
             'nome' => 'Nome',
             'cognome' => 'Cognome',
-            'cf' => 'Cf',
-            'username' => 'Username',
+            'cf' => 'Codice fiscale',
+            'username' => 'Email',
             'password' => 'Password',
+            'authkey' => 'Authkey,'
         ];
     }
 
@@ -61,7 +63,7 @@ class Logopedista extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
      */
     public function getUtentes()
     {
-        return $this->hasMany(Utente::className(), ['idLogopedista' => 'username']);
+        return $this->hasMany(Utente::class, ['idLogopedista' => 'username']);
     }
 
     public static function findIdentity($id) {
@@ -78,11 +80,11 @@ class Logopedista extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
 
     public function getAuthKey()
     {
-        return $this->password;
+        return $this->authkey;
     }
 
     public function validateAuthKey($authKey) {
-        return $this->password === $authKey;
+        return $this->authkey === $authKey;
     }
 
 
