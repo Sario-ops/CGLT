@@ -148,5 +148,24 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return self::findOne(['username' => $username]);
     }
 
+    public function getEserciziTerapia($stato) {
+
+        $terapie = $this->terapias;
+        $esercizi_assegnati = [];
+
+        foreach ($terapie as $terapia) {
+
+            foreach ($terapia->assegnatos as $assegnato) {
+
+                if( $assegnato->stato === $stato ) {
+                    array_push($esercizi_assegnati, $assegnato);
+                }
+            }
+
+        }
+
+        return $esercizi_assegnati;
+    }
+
 }
 

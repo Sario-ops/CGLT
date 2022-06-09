@@ -3,12 +3,18 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Utente;
+use app\models\Terapia;
 use yii\web\Controller;
+use app\models\Assegnato;
 use app\models\Caregiver;
+use app\models\Esercizio;
 use app\models\LoginForm;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\CaregiverSearch;
+use Exception;
+use yii\data\ArrayDataProvider;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -171,6 +177,72 @@ class CaregiverController extends Controller
     }
 
     /**
+     * Finds the Utente model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param string $username
+     * @return Utente the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findUtente($username)
+    {
+        if (($model = Utente::findOne(['username' => $username])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Finds the Assegnato model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param string $username
+     * @return Assegnato the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findEsercizioAssegnato($id)
+    {
+        if (($model = Assegnato::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+
+    /**
+     * Finds the Assegnato model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param string $username
+     * @return Assegnato the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findTerapia($id)
+    {
+        if (($model = Terapia::findOne(['ID' => $id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Finds the Esercizio model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param int $id ID
+     * @return Esercizio the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findExercise($id)
+    {
+        if (($model = Esercizio::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+
+    /**
      * Logout action.
      *
      * @return Response
@@ -180,5 +252,60 @@ class CaregiverController extends Controller
         Yii::$app->caregiver->logout();
 
         return $this->redirect(['site/index']);
+    }
+
+
+    public function actionEsercizi_da_validare() {
+
+        $caregiver = $this->findModel(Yii::$app->caregiver->identity->username);
+        $esercizi_da_validare = [];
+
+        foreach( $caregiver->utentis as $utente) {
+            
+            if($utente->getEserciziTerapia('in validazione')) {
+                array_push($esercizi_da_validare, ...$utente->getEserciziTerapia('in validazione'));
+            }
+        }
+
+        $dataProvider = new ArrayDataProvider([
+            'key' => 'idTerapia',
+            'allModels' => $esercizi_da_validare,
+            'sort' => [
+                'attributes' => ['id','idTerapia', 'idEsercizio', 'stato', 'valutazione', 'risposta'],
+            ],
+        ]);
+
+        return $this->render('esercizi_da_validare', ['dataProvider' => $dataProvider]);
+    }
+
+    public function actionValida($idEsercizio) {
+
+        try{
+            $esercizio_assegnato = $this->findEsercizioAssegnato($idEsercizio);
+            $terapia = $this->findTerapia($esercizio_assegnato->idTerapia);
+            $esercizio = $this->findExercise($esercizio_assegnato->idEsercizio);
+            $utente = $this->findUtente($terapia->idUtente);
+    
+            if ($esercizio->load(Yii::$app->request->post()) && $esercizio->save() ) {
+                $risultato = $esercizio->valutazioneCaregiver();
+    
+                $esercizio_assegnato->valutazione = $risultato;
+                $esercizio_assegnato->stato = 'validato';
+    
+                $esercizio_assegnato->save();
+    
+                Yii::$app->session->setFlash('success', "Validazione esercizio avvenuta con successo");
+    
+                return $this->goBack();
+    
+            }
+    
+            return $this->render('esercizio', ['utente'=>$utente, 'esercizio' => $esercizio]);
+            
+        } catch(Exception $e) {
+            Yii::$app->session->setFlash('error', "Validazione non riuscita");
+            return $this->goBack();
+        } 
+
     }
 }

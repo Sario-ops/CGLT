@@ -85,6 +85,26 @@ class Esercizio extends \yii\db\ActiveRecord
         return $voto;
     }
 
+    public function valutazioneCaregiver() {
+
+        $valutazione = 0;
+
+        foreach ($this->risposte as $risposta) {
+            switch($risposta) {
+                case 0:
+                    $valutazione +=1;
+                break;
+                case 1:
+                    $valutazione += 0.5;
+                break;
+                case 2:
+                default:
+            }
+        }
+
+        return $valutazione;
+    }
+
 
     public function getRisposteString() {
         $result = '';

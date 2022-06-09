@@ -13,8 +13,8 @@ class ComposerStaticInit6f6818e97f938851082a3a8d03df9445
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
-        '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
+        '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
@@ -39,6 +39,7 @@ class ComposerStaticInit6f6818e97f938851082a3a8d03df9445
         ),
         'w' => 
         array (
+            'webzop\\notifications\\' => 21,
             'wbraganca\\dynamicform\\' => 22,
         ),
         'p' => 
@@ -136,6 +137,10 @@ class ComposerStaticInit6f6818e97f938851082a3a8d03df9445
         'yii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
+        ),
+        'webzop\\notifications\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/webzop/yii2-notifications',
         ),
         'wbraganca\\dynamicform\\' => 
         array (

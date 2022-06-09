@@ -1,21 +1,26 @@
 <?php
 
+
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\grid\ActionColumn;
 use app\models\Logopedista;
 use yii\bootstrap4\ActiveForm;
+use webzop\notifications\widgets\Notifications;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\LogopedistaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+if (Yii::$app->logopedista->identity->username != NULL){
+ $menuItems[] = \webzop\notifications\widgets\Notifications::widget(); 
+ }
 $this->title = 'Logopedista';
 ?>
 <div class="site-index">
+<?php echo $menuItems[0] ?>
     <h1><?=Html::encode($model->nome), ' ', Html::encode($model->cognome) ?></h1>
-
 
     <table id="logopedista-activity">
         <tr>
