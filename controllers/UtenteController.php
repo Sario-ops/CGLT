@@ -318,7 +318,7 @@ class UtenteController extends Controller
 
             $assegnato->stato = 'in validazione';
             $assegnato->save();
-            AccountNotification::create(AccountNotification::KEY_NEW_ACCOUNT, ['user' => Caregiver::findOne(['username' => 'caregiver'])])->send($caregiver->username);
+            AccountNotification::create(AccountNotification::KEY_NEW_ACCOUNT, ['user' => Caregiver::findOne(['username' => $caregiver->username])])->send($caregiver->username);
             return $this->render('finishExercise',['result' => 0, 
             'numeroDomande' => count($exercise->quesitos), 'conCaregiver' => true]);
         }
