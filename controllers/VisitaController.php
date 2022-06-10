@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use yii;
 use app\models\Visita;
 use app\models\VisitaSearch;
 use yii\web\Controller;
@@ -41,29 +40,23 @@ class VisitaController extends Controller
     {
         $searchModel = new VisitaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-        $model = new Visita();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'model' => $model,
         ]);
     }
 
     /**
      * Displays a single Visita model.
-     * @param string $idUtente Id Utente
-     * @param string $idLogopedista Id Logopedista
-     * @param string $idCaregiver Id Caregiver
-     * @param string $dataVisita Data Visita
-     * @param string $oraVisita Ora Visita
+     * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($idUtente, $idLogopedista, $idCaregiver, $dataVisita, $oraVisita)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($idUtente, $idLogopedista, $idCaregiver, $dataVisita, $oraVisita),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -78,7 +71,7 @@ class VisitaController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'idUtente' => $model->idUtente, 'idLogopedista' => $model->idLogopedista, 'idCaregiver' => $model->idCaregiver, 'dataVisita' => $model->dataVisita, 'oraVisita' => $model->oraVisita]);
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -92,20 +85,16 @@ class VisitaController extends Controller
     /**
      * Updates an existing Visita model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $idUtente Id Utente
-     * @param string $idLogopedista Id Logopedista
-     * @param string $idCaregiver Id Caregiver
-     * @param string $dataVisita Data Visita
-     * @param string $oraVisita Ora Visita
+     * @param int $id ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($idUtente, $idLogopedista, $idCaregiver, $dataVisita, $oraVisita)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($idUtente, $idLogopedista, $idCaregiver, $dataVisita, $oraVisita);
+        $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idUtente' => $model->idUtente, 'idLogopedista' => $model->idLogopedista, 'idCaregiver' => $model->idCaregiver, 'dataVisita' => $model->dataVisita, 'oraVisita' => $model->oraVisita]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -116,17 +105,13 @@ class VisitaController extends Controller
     /**
      * Deletes an existing Visita model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $idUtente Id Utente
-     * @param string $idLogopedista Id Logopedista
-     * @param string $idCaregiver Id Caregiver
-     * @param string $dataVisita Data Visita
-     * @param string $oraVisita Ora Visita
+     * @param int $id ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($idUtente, $idLogopedista, $idCaregiver, $dataVisita, $oraVisita)
+    public function actionDelete($id)
     {
-        $this->findModel($idUtente, $idLogopedista, $idCaregiver, $dataVisita, $oraVisita)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -134,17 +119,13 @@ class VisitaController extends Controller
     /**
      * Finds the Visita model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $idUtente Id Utente
-     * @param string $idLogopedista Id Logopedista
-     * @param string $idCaregiver Id Caregiver
-     * @param string $dataVisita Data Visita
-     * @param string $oraVisita Ora Visita
+     * @param int $id ID
      * @return Visita the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($idUtente, $idLogopedista, $idCaregiver, $dataVisita, $oraVisita)
+    protected function findModel($id)
     {
-        if (($model = Visita::findOne(['idUtente' => $idUtente, 'idLogopedista' => $idLogopedista, 'idCaregiver' => $idCaregiver, 'dataVisita' => $dataVisita, 'oraVisita' => $oraVisita])) !== null) {
+        if (($model = Visita::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

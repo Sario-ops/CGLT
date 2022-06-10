@@ -2,13 +2,14 @@
 
 namespace app\controllers;
 
-use yii;
-use app\models\Logopedista;
-use app\models\Diagnosi;
-use app\models\DiagnosiSearch;
+use Yii;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use app\models\Diagnosi;
 use yii\filters\VerbFilter;
+use app\models\UtenteSearch;
+use app\models\DiagnosiSearch;
+use yii\data\ArrayDataProvider;
+use yii\web\NotFoundHttpException;
 
 /**
  * DiagnosiController implements the CRUD actions for Diagnosi model.
@@ -40,40 +41,40 @@ class DiagnosiController extends Controller
      */
     public function actionIndex()
     {
+        // $searchModel = new DiagnosiSearch();
+        // $dataProvider = $searchModel->search($this->request->queryParams);
+
+        /* return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]); */
+
+        $model = $this->findModel(Yii::$app->logopedista->identity->username)->diagnosi;
         $searchModel = new DiagnosiSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-        $model = new Logopedista();
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'model'=> $model,
+        $dataProvider = new ArrayDataProvider([
+            'key' => 'id',
+            'allModels' => $model,
+            'sort' => [
+            'attributes' => ['id',
+            'idUtente','idLogopedista','idCaregiver',
+            'nomeUtente','cognomeUtente',
+            'dataDiagnosi','descrizioneDiagnosi'],
+            ]
         ]);
+       
+        return $this->render('index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
     }
-
-    /* 
-    $searchModel = new DiagnosiSearch();
-    $dataProvider = $searchModel->search($this->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    */
 
     /**
      * Displays a single Diagnosi model.
-     * @param string $idUtente Id Utente
-     * @param string $idLogopedista Id Logopedista
-     * @param string $idCaregiver Id Caregiver
-     * @param string $dataDiagnosi Data Diagnosi
+     * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($idUtente, $idLogopedista, $idCaregiver, $dataDiagnosi)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($idUtente, $idLogopedista, $idCaregiver, $dataDiagnosi),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -88,7 +89,7 @@ class DiagnosiController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'idUtente' => $model->idUtente, 'idLogopedista' => $model->idLogopedista, 'idCaregiver' => $model->idCaregiver, 'dataDiagnosi' => $model->dataDiagnosi]);
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -102,19 +103,16 @@ class DiagnosiController extends Controller
     /**
      * Updates an existing Diagnosi model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $idUtente Id Utente
-     * @param string $idLogopedista Id Logopedista
-     * @param string $idCaregiver Id Caregiver
-     * @param string $dataDiagnosi Data Diagnosi
+     * @param int $id ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($idUtente, $idLogopedista, $idCaregiver, $dataDiagnosi)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($idUtente, $idLogopedista, $idCaregiver, $dataDiagnosi);
+        $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idUtente' => $model->idUtente, 'idLogopedista' => $model->idLogopedista, 'idCaregiver' => $model->idCaregiver, 'dataDiagnosi' => $model->dataDiagnosi]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -125,16 +123,13 @@ class DiagnosiController extends Controller
     /**
      * Deletes an existing Diagnosi model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $idUtente Id Utente
-     * @param string $idLogopedista Id Logopedista
-     * @param string $idCaregiver Id Caregiver
-     * @param string $dataDiagnosi Data Diagnosi
+     * @param int $id ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($idUtente, $idLogopedista, $idCaregiver, $dataDiagnosi)
+    public function actionDelete($id)
     {
-        $this->findModel($idUtente, $idLogopedista, $idCaregiver, $dataDiagnosi)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -142,16 +137,13 @@ class DiagnosiController extends Controller
     /**
      * Finds the Diagnosi model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $idUtente Id Utente
-     * @param string $idLogopedista Id Logopedista
-     * @param string $idCaregiver Id Caregiver
-     * @param string $dataDiagnosi Data Diagnosi
+     * @param int $id ID
      * @return Diagnosi the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($idUtente, $idLogopedista, $idCaregiver, $dataDiagnosi)
+    protected function findModel($id)
     {
-        if (($model = Diagnosi::findOne(['idUtente' => $idUtente, 'idLogopedista' => $idLogopedista, 'idCaregiver' => $idCaregiver, 'dataDiagnosi' => $dataDiagnosi])) !== null) {
+        if (($model = Diagnosi::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

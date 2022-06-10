@@ -15,6 +15,8 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
+    <?= $form->field($model, 'id') ?>
+
     <?= $form->field($model, 'idUtente') ?>
 
     <?= $form->field($model, 'idLogopedista') ?>
@@ -23,13 +25,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nomeUtente') ?>
 
-    <?= $form->field($model, 'cognomeUtente') ?>
+    <?php // echo $form->field($model, 'cognomeUtente') ?>
 
-    <?= $form->field($model, 'dataPrenotazione') ?>
+    <?php // echo $form->field($model, 'dataPrenotazione') ?>
 
-    <?= $form->field($model, 'dataVisita') ?>
+    <?php // echo $form->field($model, 'dataVisita') ?>
 
-    <?= $form->field($model, 'oraVisita') ?>
+    <?php // echo $form->field($model, 'oraVisita') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

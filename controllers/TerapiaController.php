@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use yii;
+use app\models\Logopedista;
+use app\models\Utente;
 use app\models\Terapia;
 use app\models\TerapiaSearch;
 use yii\web\Controller;
@@ -40,10 +43,12 @@ class TerapiaController extends Controller
     {
         $searchModel = new TerapiaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $model = new Logopedista();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model' => $model,
         ]);
     }
 

@@ -2,16 +2,13 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use app\models\Diagnosi;
 use yii\grid\GridView;
+use app\models\Diagnosi;
 use yii\grid\ActionColumn;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\UtenteSearch */
+/* @var $searchModel app\models\DiagnosiSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
-$request = Yii::$app->request;
-$username = $request->get('username');
 
 $this->title = 'Diagnosi';
 $this->params['breadcrumbs'][] = $this->title;
@@ -22,34 +19,31 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Nuova Diagnosi', ['/diagnosi\create', 'model' => $model, 'username' => $username], ['class' => 'btn btn-success']) ?>
-    </p>
-    
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+            'id',
             'idUtente',
-            'idLogopedista',
+            // 'idLogopedista',
             'idCaregiver',
             'nomeUtente',
             'cognomeUtente',
             'dataDiagnosi',
-            'descrizioneDiagnosi',
+            // 'descrizioneDiagnosi',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Diagnosi $model, $key, $index, $column) {
                     if( $action == 'delete') {
-                        return Url::toRoute([$action, 'idLogopedista' => $model->idLogopedista]);
+                        return Url::toRoute([$action, 'id' => $model->id]);
                     }
                 }
             ],
         ],
     ]); ?>
+
 
 </div>

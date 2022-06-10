@@ -36,5 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
      
      <?= Html::a('Aggiungi esercizi', ['/assegnato\create', 'ID' => $model->ID], ['class' => 'btn btn-primary']) ?>
+     <?= Html::a('Esercizi assegnati', ['/assegnato\index', 'ID' => $model->ID], ['class' => 'btn btn-primary']) ?>
 
     </div>

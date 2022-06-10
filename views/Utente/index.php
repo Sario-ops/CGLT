@@ -20,7 +20,7 @@ $this->title = 'UTENTE';
     <table id="utente-activity">
         <tr>
             <td>
-                <?= Html::a('TERAPIA', ['terapia'], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('TERAPIA', ['terapia', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
                 <?= Html::a('ESERCIZI', ['esercizi'], ['class' => 'btn btn-primary']) ?>

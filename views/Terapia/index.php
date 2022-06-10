@@ -10,16 +10,15 @@ use yii\grid\ActionColumn;
 /* @var $searchModel app\models\TerapiaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Terapia';
+$request = Yii::$app->request;
+$username = $request->get('ID');
+
+$this->title = 'Visualizza Terapia';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="terapia-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Terapia', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 

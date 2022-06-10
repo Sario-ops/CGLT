@@ -24,6 +24,7 @@ $this->title = 'Caregiver';
             <td>
                 <?= Html::a('VALIDA ESERCIZI', ['esercizi_da_validare'], ['class' => 'btn btn-primary']) ?>
             </td>
+            </td>
         </tr>
     </table>
 </div>

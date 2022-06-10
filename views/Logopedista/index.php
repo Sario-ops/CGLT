@@ -47,6 +47,9 @@ $this->title = 'Logopedista';
             <td>
                 <?= Html::a('VISUALIZZA VISITE', ['/visita\index', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?> 
             </td>
+            <td>
+                <?= Html::a('MONITORAGGIO UTENTE', ['/terapia\index', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?> 
+            </td>
         </tr>
     </table>
 </div>
