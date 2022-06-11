@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Exception;
 use Yii;
 
 /**
@@ -74,10 +75,15 @@ class Quesito extends \yii\db\ActiveRecord
 
     public function evaluateEsercizio($i)
     {
-        if( $this->getArrayOptions()[$i] === $this->risposta_corretta ) {
-            return 1;
+        try{
+            if( $this->getArrayOptions()[$i] === $this->risposta_corretta ) {
+                return 1;
+            }
+
+        } catch (Exception $e) {
+
+            return 0;
         }
 
-        return 0;
     }
 }

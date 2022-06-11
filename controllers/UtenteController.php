@@ -190,18 +190,15 @@ class UtenteController extends Controller
 
         $exercise = $this->findExercise($id);
 
-        if ($exercise->load(Yii::$app->request->post()) && $exercise->save() ) {
+        if ($exercise->load(Yii::$app->request->post())) {
+            $exercise->setFeedback();
             $risultato = $exercise->evaluateEsercizio();
+            $exercise->save();
 
             return $this->render('finishExercise',['result' => $risultato, 
-            'numeroDomande' => count($exercise->quesitos), 'conCaregiver' => false]);
+            'numeroDomande' => count($exercise->quesitos), 'conCaregiver' => $exercise->conCaregiver]);
 
-        } else if (Yii::$app->request->isPost && $exercise->conCaregiver) {
-
-            return $this->render('finishExercise',['result' => 0, 
-            'numeroDomande' => count($exercise->quesitos), 'conCaregiver' => true]);
         }
-
 
         return $this->render('execute', ['esercizio' => $exercise, 'quesiti' => $exercise->quesitos]); 
     }
