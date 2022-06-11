@@ -8,6 +8,8 @@ use app\models\LoginForm;
 use app\models\Logopedista;
 use yii\filters\VerbFilter;
 use app\models\UtenteSearch;
+use app\models\VisitaSearch;
+use app\models\TerapiaSearch;
 use app\models\DiagnosiSearch;
 use yii\filters\AccessControl;
 use yii\data\ArrayDataProvider;
@@ -203,4 +205,95 @@ class LogopedistaController extends Controller
 
         return $this->redirect(['site/index']);
     }
+
+    public function actionVisita()
+    {
+        /* $searchModel = new VisitaSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]); */
+        
+        $model = $this->findModel(Yii::$app->logopedista->identity->username)->visitas;
+        $searchModel = new VisitaSearch();
+        $dataProvider = new ArrayDataProvider([
+            'key' => 'id',
+            'allModels' => $model,
+            'sort' => [
+                'attributes' => [            
+                'id',
+                'idUtente',
+                'idLogopedista',
+                'idCaregiver',
+                'nomeUtente',
+                'cognomeUtente',
+                'dataPrenotazione',
+                'dataVisita',
+                'oraVisita'],
+            ]
+        ]);
+
+        return $this->render('/visita\index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
+    }
+
+    public function actionDiagnosi()
+    {
+        /* $searchModel = new VisitaSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]); */
+        
+        $model = $this->findModel(Yii::$app->logopedista->identity->username)->diagnosis;
+        $searchModel = new DiagnosiSearch();
+        $dataProvider = new ArrayDataProvider([
+            'key' => 'id',
+            'allModels' => $model,
+            'sort' => [
+                'attributes' => [            
+                'id',
+                'idUtente',
+                'idLogopedista',
+                'idCaregiver',
+                'nomeUtente',
+                'cognomeUtente',
+                'dataPrenotazione',
+                'dataVisita',
+                'oraVisita'],
+            ]
+        ]);
+
+        return $this->render('/diagnosi\index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
+    }
+
+    public function actionTerapia()
+    {
+        /* $searchModel = new VisitaSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]); */
+        
+        $model = $this->findModel(Yii::$app->logopedista->identity->username)->terapias;
+        $searchModel = new TerapiaSearch();
+        $dataProvider = new ArrayDataProvider([
+            'key' => 'ID',
+            'allModels' => $model,
+            'sort' => [
+                'attributes' => [            
+                'ID',
+                'idUtente',
+                'idLogopedista'],
+            ]
+        ]);
+
+        return $this->render('/terapia\index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
+    }
+
 }

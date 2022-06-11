@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idCaregiver') ?>
 
-    <?= $form->field($model, 'nomeUtente') ?>
+    <?php // echo $form->field($model, 'nomeUtente') ?>
 
     <?php // echo $form->field($model, 'cognomeUtente') ?>
 

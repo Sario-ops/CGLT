@@ -7,10 +7,10 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Visita */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Visitas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+
 <div class="visita-view">
 
     <h1><?= Html::encode($this->title) ?></h1>

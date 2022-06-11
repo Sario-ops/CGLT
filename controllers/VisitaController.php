@@ -2,11 +2,13 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\Visita;
-use app\models\VisitaSearch;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\VisitaSearch;
+use yii\data\ArrayDataProvider;
+use yii\web\NotFoundHttpException;
 
 /**
  * VisitaController implements the CRUD actions for Visita model.
@@ -38,13 +40,35 @@ class VisitaController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new VisitaSearch();
+        /* $searchModel = new VisitaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]); */
+        
+        $model = $this->findModel(Yii::$app->logopedista->identity->username)->idLogopedista;
+        $searchModel = new VisitaSearch();
+        $dataProvider = new ArrayDataProvider([
+            'key' => 'id',
+            'allModels' => $model,
+            'sort' => [
+                'attributes' => [            
+                'id',
+                'idUtente',
+                'idLogopedista',
+                'idCaregiver',
+                'nomeUtente',
+                'cognomeUtente',
+                'dataPrenotazione',
+                'dataVisita',
+                'oraVisita'],
+            ]
         ]);
+       
+        return $this->render('index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
+
     }
 
     /**
@@ -131,4 +155,5 @@ class VisitaController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

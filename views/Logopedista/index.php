@@ -17,7 +17,9 @@ if (Yii::$app->logopedista->identity->username != NULL){
  $menuItems[] = \webzop\notifications\widgets\Notifications::widget(); 
  }
 $this->title = 'Logopedista';
+
 ?>
+
 <div class="site-index">
 <?php echo $menuItems[0] ?>
     <h1><?=Html::encode($model->nome), ' ', Html::encode($model->cognome) ?></h1>
@@ -39,16 +41,16 @@ $this->title = 'Logopedista';
         </tr>
         <tr>
             <td>
-                <?= Html::a('VISUALIZZA DIAGNOSI', ['/diagnosi\index', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('VISUALIZZA DIAGNOSI', ['diagnosi'], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
-                <?= Html::a('VISUALIZZA UTENTI', ['visualizza', 'utenti' => $model->getUtentes()], ['class' => 'btn btn-primary']) ?> 
+                <?= Html::a('VISUALIZZA UTENTI', ['visualizza'], ['class' => 'btn btn-primary']) ?> 
             </td>
             <td>
-                <?= Html::a('VISUALIZZA VISITE', ['/visita\index', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?> 
+                <?= Html::a('VISUALIZZA VISITE', ['visita'], ['class' => 'btn btn-primary']) ?> 
             </td>
             <td>
-                <?= Html::a('MONITORAGGIO UTENTE', ['/terapia\index', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?> 
+                <?= Html::a('MONITORAGGIO UTENTE', ['terapia'], ['class' => 'btn btn-primary']) ?> 
             </td>
         </tr>
     </table>

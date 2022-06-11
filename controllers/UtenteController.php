@@ -322,7 +322,6 @@ class UtenteController extends Controller
             return $this->render('finishExercise',['result' => 0, 
             'numeroDomande' => count($exercise->quesitos), 'conCaregiver' => true]);
         }
-
         return $this->render('execute', ['esercizio' => $exercise, 'quesiti' => $exercise->quesitos]);
     }
 }

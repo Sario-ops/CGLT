@@ -21,7 +21,7 @@ use Yii;
  * @property Logopedista $idLogopedista0
  * @property Utente $idUtente0
  */
-class Visita extends \yii\db\ActiveRecord
+class Visita extends \yii\db\ActiveRecord 
 {
     /**
      * {@inheritdoc}
