@@ -28,10 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'idTerapia', 'idEsercizio', 'stato', 'valutazione', 'risposta',
             [
                 'class' => ActionColumn::className(),
-                'template'=>'{execute}',
+                'template'=>'{valida}',
                 'buttons' => [
-                    'execute' => function ($url, Assegnato $model ) {
-                        return  Html::a('<i class="fa fa-play-circle"></i>', ['eseguiassegnato', 'idAssegnato' => $model->id], ['title' => Yii::t('yii', 'Esegui')]);
+                    'valida' => function ($url, Assegnato $model ) {
+                        return  Html::a('<i class="fa fa-gavel"></i>', ['valida', 'idEsercizio' => $model->id], ['title' => Yii::t('yii', 'Valida')]);
                     }
                 ],
             ],

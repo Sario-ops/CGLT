@@ -5138,6 +5138,58 @@
             "install-path": "../webmozart/assert"
         },
         {
+            "name": "webzop/yii2-notifications",
+            "version": "0.2",
+            "version_normalized": "0.2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webzop/yii2-notifications.git",
+                "reference": "3261371342048faed04fb8c78942b3bee63bb05a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webzop/yii2-notifications/zipball/3261371342048faed04fb8c78942b3bee63bb05a",
+                "reference": "3261371342048faed04fb8c78942b3bee63bb05a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6",
+                "yiisoft/yii2": "*"
+            },
+            "time": "2018-02-04T09:23:12+00:00",
+            "type": "yii2-extension",
+            "extra": {
+                "bootstrap": "webzop\\notifications\\Bootstrap"
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "webzop\\notifications\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Gonçalo Esteves",
+                    "email": "goncalo.p.esteves@gmail.com",
+                    "homepage": "https://webzop.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Notifications module for Yii2",
+            "keywords": [
+                "yii2",
+                "yii2-manage-notifications",
+                "yii2-notifications",
+                "yii2-notifications-module"
+            ],
+            "support": {
+                "issues": "https://github.com/webzop/yii2-notifications/issues",
+                "source": "https://github.com/webzop/yii2-notifications/tree/0.2"
+            },
+            "install-path": "../webzop/yii2-notifications"
+        },
+        {
             "name": "yiisoft/yii2",
             "version": "2.0.45",
             "version_normalized": "2.0.45.0",

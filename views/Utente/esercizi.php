@@ -35,10 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template'=>'{execute}',
                 'buttons' => [
                     'execute' => function ($url, Esercizio $model ) {
-                        if($model->conCaregiver) {
-                            return Html::a('esegui', ['permission', 'id' => $model->id], ['title' => Yii::t('yii', 'Esegui')]);
-                        } 
-                        return  Html::a('esegui', $url, ['title' => Yii::t('yii', 'Esegui')]);
+                        return  Html::a('<i class="fa fa-play-circle"></i>', $url, ['title' => Yii::t('yii', 'Esegui')]);
                     }
                 ],
             ],

@@ -3,7 +3,7 @@
         'name' => 'yiisoft/yii2-app-basic',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'be4212de4cb64cf6946c2816b9a15088e937efcd',
+        'reference' => 'ec932975688ba3288c3d3c5e54084171ea18d0b9',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -751,6 +751,15 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+        'webzop/yii2-notifications' => array(
+            'pretty_version' => '0.2',
+            'version' => '0.2.0.0',
+            'reference' => '3261371342048faed04fb8c78942b3bee63bb05a',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../webzop/yii2-notifications',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'yiisoft/yii2' => array(
             'pretty_version' => '2.0.45',
             'version' => '2.0.45.0',
@@ -763,7 +772,7 @@
         'yiisoft/yii2-app-basic' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'be4212de4cb64cf6946c2816b9a15088e937efcd',
+            'reference' => 'ec932975688ba3288c3d3c5e54084171ea18d0b9',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

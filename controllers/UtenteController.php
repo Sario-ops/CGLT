@@ -6,8 +6,10 @@ use Yii;
 use app\models\Utente;
 use yii\web\Controller;
 use app\models\Assegnato;
+use app\models\Caregiver;
 use app\models\Esercizio;
 use app\models\LoginForm;
+use app\models\Logopedista;
 use yii\filters\VerbFilter;
 use app\models\UtenteSearch;
 use yii\filters\AccessControl;
@@ -15,6 +17,7 @@ use app\models\AssegnatoSearch;
 use app\models\EsercizioSearch;
 use yii\data\ArrayDataProvider;
 use yii\web\NotFoundHttpException;
+use app\notifications\AccountNotification;
 /**
  * UtenteController implements the CRUD actions for Utente model.
  */
@@ -276,23 +279,10 @@ class UtenteController extends Controller
     public function actionTerapia() {
 
         $utente = $this->findModel(Yii::$app->utente->identity->username);
-        $terapie = $utente->terapias;
-        $esercizi_assegnati = [];
-
-        foreach ($terapie as $terapia) {
-
-            foreach ($terapia->assegnatos as $assegnato) {
-
-                if( $assegnato->stato === 'da eseguire' ) {
-                    array_push($esercizi_assegnati, $assegnato);
-                }
-            }
-
-        }
 
         $dataProvider = new ArrayDataProvider([
             'key'=>'idEsercizio',
-            'allModels' => $esercizi_assegnati,
+            'allModels' => $utente->getEserciziTerapia('da eseguire'),
             'sort' => [
                 'attributes' => ['id','idTerapia', 'idEsercizio', 'stato', 'valutazione', 'risposta'],
             ],
@@ -306,6 +296,7 @@ class UtenteController extends Controller
 
         $assegnato = $this->findAssegnato($idAssegnato);
         $exercise = $this->findExercise($assegnato->idEsercizio);
+        $caregiver = Caregiver::findOne(['username' => $this->findModel(Yii::$app->utente->identity->username)->idCaregiver]);
 
         if($exercise->conCaregiver && $assistenza === false) {
             $this->redirect(['permission', 'id' => $assegnato->id, 'assegnato' => true]);
@@ -314,9 +305,12 @@ class UtenteController extends Controller
         if ($exercise->load(Yii::$app->request->post()) && $exercise->save() ) {
             $risultato = $exercise->evaluateEsercizio();
 
+            $utente = $this->findModel(Yii::$app->utente->identity->username);
+
             $assegnato->valutazione = $risultato;
             $assegnato->stato = 'validato';
             $assegnato->risposta = $exercise->getRisposteString();
+            AccountNotification::create(AccountNotification::ESERCIZIO_ESEGUITO, ['user' => $assegnato])->send(((Logopedista::findOne(['username'=>$utente->idLogopedista]))->username));
 
 
             $assegnato->save();
@@ -327,7 +321,8 @@ class UtenteController extends Controller
         } else if (Yii::$app->request->isPost && $exercise->conCaregiver) {
 
             $assegnato->stato = 'in validazione';
-
+            $assegnato->save();
+            AccountNotification::create(AccountNotification::ESERCIZIO_DA_VALUTARE, ['user' => $assegnato])->send($caregiver->username);
             return $this->render('finishExercise',['result' => 0, 
             'numeroDomande' => count($exercise->quesitos), 'conCaregiver' => true]);
         }

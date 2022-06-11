@@ -108,3 +108,11 @@ div[role="radiogroup"] {
 div[role="radiogroup"] div {
     margin-right: 10px;
 }
+
+.dropdown.nav-notifications {
+    padding-top: 3%;
+}
+
+.dropdown-menu.show {
+    display: table;
+}

@@ -15,7 +15,8 @@ $this->title = 'Esegui Esercizio';
 ?>
 <div class="execute-index">
 
-    <h2><?=Html::encode($esercizio->nome)?></h2>
+    <h2>Utente: <?=Html::encode($utente->nome)?>  <?=Html::encode($utente->cognome)?></h2>
+    <h3><?=Html::encode($esercizio->nome)?></h3>
     <h4><?=Html::encode($esercizio->descrizione)?></h4>
     <?php
         $form = ActiveForm::begin([
@@ -24,8 +25,7 @@ $this->title = 'Esegui Esercizio';
 
 
     <div class="form-group">
-        <input class="disabled" value="1" />
-        <?php foreach ($quesiti as $i => $quesito): ?>
+        <?php foreach ($esercizio->quesitos as $i => $quesito): ?>
 
             <?php if ($quesito->domanda_immagine) : ?>
                 <?= Html::img('@web/image/esercizi/'.$quesito->esercizio_id.'/'.$quesito->domanda_immagine) ?>
@@ -34,9 +34,7 @@ $this->title = 'Esegui Esercizio';
             
             <p><?=Html::encode($quesito->domanda)?></p>
 
-            <?php if ($quesito->getArrayOptions()[0] !== '')  : ?>
-            <?= $form->field($esercizio, "risposte[$i]")->radioList($quesito->getArrayOptions()) ?>
-            <?php endif; ?>
+            <?= $form->field($esercizio, "risposte[$i]")->radioList(['ottimo', 'buono', 'discreto']) ?>
 
         <?php endforeach; ?>
 
