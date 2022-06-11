@@ -60,6 +60,7 @@ class EsercizioSearch extends Esercizio
         $query->andFilterWhere([
             'id' => $this->id,
             'conCaregiver' => $this->conCaregiver,
+            'rating' => $this->rating,
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome])
