@@ -3,12 +3,13 @@
 /** @var yii\web\View $this */
 /** @var string $content */
 
-use app\assets\AppAsset;
 use app\widgets\Alert;
-use yii\bootstrap4\Breadcrumbs;
-use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
+use app\assets\AppAsset;
+use yii\bootstrap4\Html;
 use yii\bootstrap4\NavBar;
+use yii\bootstrap4\Breadcrumbs;
+use webzop\notifications\widgets\Notifications;
 
 AppAsset::register($this);
 $homeUrl = null;
@@ -19,6 +20,7 @@ $homeUrl = null;
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -50,7 +52,8 @@ $homeUrl = null;
                 )
                 . Html::endForm()
                 . '</li>'
-            )
+            ),
+            ('<li class="notification">' . Notifications::widget(). '</li>')
         ],
     ]);
     NavBar::end();
@@ -79,7 +82,8 @@ $homeUrl = null;
                 )
                 . Html::endForm()
                 . '</li>'
-            )
+            ),
+            ('<li class="notification">' . Notifications::widget(). '</li>')
         ],
     ]);
     NavBar::end();
@@ -108,7 +112,8 @@ $homeUrl = null;
                 )
                 . Html::endForm()
                 . '</li>'
-            )
+            ),
+            ('<li class="notification">' . Notifications::widget(). '</li>')
         ],
     ]);
     NavBar::end();

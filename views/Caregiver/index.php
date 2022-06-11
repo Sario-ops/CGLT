@@ -16,7 +16,6 @@ $this->title = 'Caregiver';
 ?>
 <div class="site-index">
 
-    <?php echo Notifications::widget() ?>
     <h1><?= Html::encode($model->nome),' ', Html::encode($model->cognome) ?></h1>
 
     <table id="caregiver-activity">

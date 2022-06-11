@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use Exception;
 use app\models\Utente;
 use app\models\Terapia;
 use yii\web\Controller;
@@ -10,12 +11,13 @@ use app\models\Assegnato;
 use app\models\Caregiver;
 use app\models\Esercizio;
 use app\models\LoginForm;
+use app\models\Logopedista;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\CaregiverSearch;
-use Exception;
 use yii\data\ArrayDataProvider;
 use yii\web\NotFoundHttpException;
+use app\notifications\AccountNotification;
 
 /**
  * CaregiverController implements the CRUD actions for Caregiver model.
@@ -295,6 +297,7 @@ class CaregiverController extends Controller
                 $esercizio_assegnato->save();
     
                 Yii::$app->session->setFlash('success', "Validazione esercizio avvenuta con successo");
+                AccountNotification::create(AccountNotification::ESERCIZIO_ESEGUITO, ['user' => $esercizio_assegnato])->send((Logopedista::findOne(['username'=>$utente->idLogopedista]))->username);
     
                 return $this->goBack();
     

@@ -7,9 +7,9 @@ use webzop\notifications\Notification;
 
 class AccountNotification extends Notification
 {
-    const KEY_NEW_ACCOUNT = 'new_account';
+    const ESERCIZIO_DA_VALUTARE = 'esercizio_da_valutare';
 
-    const KEY_RESET_PASSWORD = 'reset_password';
+    const ESERCIZIO_ESEGUITO = 'esrcizio_eseguito';
 
     /**
      * @var \yii\web\User the user object
@@ -21,10 +21,10 @@ class AccountNotification extends Notification
      */
     public function getTitle(){
         switch($this->key){
-            case self::KEY_NEW_ACCOUNT:
+            case self::ESERCIZIO_DA_VALUTARE:
                 return Yii::t('app', 'Nuovo esercizio da valutare {user}', ['user' => '#'.$this->user->id]);
-            case self::KEY_RESET_PASSWORD:
-                return Yii::t('app', 'Instructions to reset the password');
+            case self::ESERCIZIO_ESEGUITO:
+                return Yii::t('app', 'Esercizio terapia #{user} eseguito', ['user' => $this->user->idTerapia]);
         }
     }
 
@@ -32,7 +32,13 @@ class AccountNotification extends Notification
      * @inheritdoc
      */
     public function getRoute(){
-        return ['/caregiver/esercizi_da_validare', 'id' => $this->user->id];
+        switch($this->key){
+            case self::ESERCIZIO_DA_VALUTARE:
+                return ['/caregiver/esercizi_da_validare', 'id' => $this->user->id];
+            case self::ESERCIZIO_ESEGUITO:
+                return ['/caregiver/esercizi_da_validare', 'id' => $this->user->id];
+        }
+        
     }
 
 

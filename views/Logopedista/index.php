@@ -13,13 +13,9 @@ use webzop\notifications\widgets\Notifications;
 /* @var $searchModel app\models\LogopedistaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-if (Yii::$app->logopedista->identity->username != NULL){
- $menuItems[] = \webzop\notifications\widgets\Notifications::widget(); 
- }
 $this->title = 'Logopedista';
 ?>
 <div class="site-index">
-<?php echo $menuItems[0] ?>
     <h1><?=Html::encode($model->nome), ' ', Html::encode($model->cognome) ?></h1>
 
     <table id="logopedista-activity">

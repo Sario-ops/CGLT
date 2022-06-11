@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template'=>'{execute}',
                 'buttons' => [
                     'execute' => function ($url, Assegnato $model ) {
-                        return  Html::a('esegui', ['eseguiassegnato', 'idAssegnato' => $model->id], ['title' => Yii::t('yii', 'Esegui')]);
+                        return  Html::a('<i class="fa fa-play-circle"></i>', ['eseguiassegnato', 'idAssegnato' => $model->id], ['title' => Yii::t('yii', 'Esegui')]);
                     }
                 ],
             ],

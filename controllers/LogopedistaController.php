@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\UtenteSearch;
 use app\models\DiagnosiSearch;
 use yii\filters\AccessControl;
+use yii\data\ArrayDataProvider;
 use app\models\LogopedistaSearch;
 use yii\web\NotFoundHttpException;
 
@@ -175,8 +176,25 @@ class LogopedistaController extends Controller
         $searchModel = new UtenteSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $model = $this->findModel(Yii::$app->logopedista->identity->username);
+        
+        $dataProvider = new ArrayDataProvider([
+            'key'=>'id',
+            'allModels' => $model->utentes,
+            'sort' => [
+                'attributes' => [
+                    'nome',
+                    'cognome',
+                    'cf',
+                    'username',
+                    'dataNascita',
+                    'idCaregiver',
+                    'idLogopedista',
+                ],
+            ],
+        ]);
+        
 
-        return $this->render('visualizza', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider, 'utenti' => $model->getUtentes()]);
+        return $this->render('visualizza', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
     }
 
     /**

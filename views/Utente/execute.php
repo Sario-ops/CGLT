@@ -34,8 +34,8 @@ $this->title = 'Esegui Esercizio';
             
             <p><?=Html::encode($quesito->domanda)?></p>
 
-            <?php if (!$esercizio->conCaregiver) : ?>
-                <?= $form->field($esercizio, "risposte[$i]")->radioList($quesito->getArrayOptions()) ?>
+            <?php if ($quesito->getArrayOptions()[0] !== '')  : ?>
+            <?= $form->field($esercizio, "risposte[$i]")->radioList($quesito->getArrayOptions()) ?>
             <?php endif; ?>
 
         <?php endforeach; ?>

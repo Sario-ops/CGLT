@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template'=>'{valida}',
                 'buttons' => [
                     'valida' => function ($url, Assegnato $model ) {
-                        return  Html::a('valida', ['valida', 'idEsercizio' => $model->id], ['title' => Yii::t('yii', 'Valida')]);
+                        return  Html::a('<i class="fa fa-gavel"></i>', ['valida', 'idEsercizio' => $model->id], ['title' => Yii::t('yii', 'Valida')]);
                     }
                 ],
             ],

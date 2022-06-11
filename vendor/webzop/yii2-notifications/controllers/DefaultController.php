@@ -105,7 +105,8 @@ class DefaultController extends Controller
 
     public function actionDeleteAll()
     {
-        Yii::$app->getDb()->createCommand()->delete('{{%notifications}}')->execute();
+        $userId = $this->getUser();
+        Yii::$app->getDb()->createCommand()->delete('{{%notifications}}', ['user_id' => $userId])->execute();
 
         if(Yii::$app->getRequest()->getIsAjax()){
             return $this->ajaxResponse(1);

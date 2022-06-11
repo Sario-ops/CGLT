@@ -15,7 +15,7 @@ $this->title = Yii::t('modules/notifications', 'Notifications');
 
     <h1>
         <span class="icon icon-bell"></span>
-        <a href="<?= Url::to(['/notifications/manage']) ?>"><?= Yii::t('modules/notifications', 'Notifications') ?></a>
+        <div><?= Yii::t('modules/notifications', 'Notifications') ?></div>
     </h1>
 </div>
 
