@@ -15,15 +15,21 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <!-- <//?=  $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'nome') ?>
+    <//?= $form->field($model, 'nome') ?>
 
-    <?= $form->field($model, 'descrizione') ?>
+    <//?= $form->field($model, 'descrizione') ?>
 
-    <?= $form->field($model, 'categoria') ?>
+    <//?= $form->field($model, 'categoria') ?>
 
-    <?= $form->field($model, 'conCaregiver') ?>
+    <//?= $form->field($model, 'conCaregiver') ?> -->
+
+    <?php // echo $form->field($model, 'rating') ?>
+
+    <?php // echo $form->field($model, 'votazioni') ?>
+
+    <?= $form->field($model, 'idLogopedista') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

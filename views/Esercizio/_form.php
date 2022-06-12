@@ -10,6 +10,9 @@ use wbraganca\dynamicform\DynamicFormWidget;
             'enctype' => 'multipart/form-data',
             'id' => 'dynamic-form'
         ]]); ?>
+        <div class='creatorExercise'>
+            <?= $form->field($modelEsercizio, 'idLogopedista')->textInput(['maxlength' => true, 'value' => Yii::$app->logopedista->identity->username]) ?>
+        </div>
         <?= $form->field($modelEsercizio, 'nome')->textInput(['maxlength' => true]) ?>
         <?= $form->field($modelEsercizio, 'descrizione')->textInput(['maxlength' => true]) ?>
         <?= $form->field($modelEsercizio, 'categoria')->textInput(['maxlength' => true]) ?>

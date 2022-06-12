@@ -61,3 +61,27 @@ iframe {
 
 }
 
+#utente-activity {
+    margin-top: 5%;
+}
+
+#utente-activity {
+    width: 100%;
+}
+
+#utente-activity tr {
+    width: 100%;
+}
+
+#utente-activity td {
+    margin: 3%;
+    width: 20%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+}
+
+#utente-activity td a {
+    width: 100%;
+    padding: 30%;
+}
+
