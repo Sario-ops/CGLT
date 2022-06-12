@@ -2,14 +2,15 @@
 
 namespace app\controllers;
 
-use yii;
-use app\models\Logopedista;
+use Yii;
 use app\models\Utente;
 use app\models\Terapia;
-use app\models\TerapiaSearch;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use app\models\Logopedista;
 use yii\filters\VerbFilter;
+use app\models\TerapiaSearch;
+use yii\data\ArrayDataProvider;
+use yii\web\NotFoundHttpException;
 
 /**
  * TerapiaController implements the CRUD actions for Terapia model.
@@ -41,7 +42,7 @@ class TerapiaController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new TerapiaSearch();
+        /* $searchModel = new TerapiaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $model = new Logopedista();
 
@@ -49,7 +50,23 @@ class TerapiaController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model' => $model,
-        ]);
+        ]); */
+
+        $model = $this->findModel(Yii::$app->logopedista->identity->username)->idLogopedista;
+        $searchModel = new TerapiaSearch();
+        $dataProvider = new ArrayDataProvider([
+            'key' => 'ID',
+            'allModels' => $model,
+            'sort' => [
+                'attributes' => [            
+                'ID',
+                'idUtente',
+                'idLogopedista',
+            ]
+        ]
+    ]);
+       
+        return $this->render('index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
     }
 
     /**
@@ -136,4 +153,35 @@ class TerapiaController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    /* public function actionAndamento()
+    {
+        $model = $this->findModel(Yii::$app->logopedista->identity->username)->terapias;
+        $searchModel = new TerapiaSearch();
+        $dataProvider = new ArrayDataProvider([
+            'key' => 'ID',
+            'allModels' => $model,
+            'sort' => [
+                'attributes' => [            
+                'ID',
+                'idUtente',
+                'idLogopedista'],
+            ]
+        ]);
+
+        return $this->render('andamento', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
+
+    } */
+
+    public function actionRecap() {
+
+        $searchModel = new TerapiaSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('recap', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]); 
+    }
+
 }

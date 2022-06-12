@@ -59,8 +59,6 @@ class VisitaController extends Controller
                 'idUtente',
                 'idLogopedista',
                 'idCaregiver',
-                'nomeUtente',
-                'cognomeUtente',
                 'dataPrenotazione',
                 'dataVisita',
                 'oraVisita'],

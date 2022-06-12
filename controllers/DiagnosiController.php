@@ -57,7 +57,6 @@ class DiagnosiController extends Controller
             'sort' => [
             'attributes' => ['id',
             'idUtente','idLogopedista','idCaregiver',
-            'nomeUtente','cognomeUtente',
             'dataDiagnosi','descrizioneDiagnosi'],
             ]
         ]);

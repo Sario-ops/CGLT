@@ -21,10 +21,6 @@ $username = $request->get('username');
 
     <?= $form->field($model, 'idCaregiver')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'nomeUtente')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'cognomeUtente')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'dataPrenotazione')->textInput(['placeholder' => 'YYYY-MM-DD']) ?>
 
     <?= $form->field($model, 'dataVisita')->textInput(['placeholder' => 'YYYY-MM-DD']) ?>

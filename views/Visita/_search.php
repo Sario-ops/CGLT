@@ -23,10 +23,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idCaregiver') ?>
 
-    <?php // echo $form->field($model, 'nomeUtente') ?>
-
-    <?php // echo $form->field($model, 'cognomeUtente') ?>
-
     <?php // echo $form->field($model, 'dataPrenotazione') ?>
 
     <?php // echo $form->field($model, 'dataVisita') ?>

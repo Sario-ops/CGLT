@@ -6,8 +6,10 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Terapia */
 
+$request = Yii::$app->request;
+$ID = $request->get('ID');
+
 $this->title = $model->ID;
-$this->params['breadcrumbs'][] = ['label' => 'Terapia', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -36,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
      
      <?= Html::a('Aggiungi esercizi', ['/assegnato\create', 'ID' => $model->ID], ['class' => 'btn btn-primary']) ?>
+     <?= Html::a('Andamento terapia', ['recap', 'ID' => $model->ID], ['class' => 'btn btn-primary']) ?>
      <?= Html::a('Esercizi assegnati', ['/assegnato\index', 'ID' => $model->ID], ['class' => 'btn btn-primary']) ?>
 
     </div>

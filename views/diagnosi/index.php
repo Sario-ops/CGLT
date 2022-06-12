@@ -33,10 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'idUtente',
             // 'idLogopedista',
             'idCaregiver',
-            'nomeUtente',
-            'cognomeUtente',
             'dataDiagnosi',
-            // 'descrizioneDiagnosi',
+            'descrizioneDiagnosi',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Diagnosi $model, $key, $index, $column) {

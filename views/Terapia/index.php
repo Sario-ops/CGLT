@@ -11,7 +11,7 @@ use yii\grid\ActionColumn;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $request = Yii::$app->request;
-$username = $request->get('ID');
+$username = $request->get('idLogopedista');
 
 $this->title = 'Visualizza Terapia';
 $this->params['breadcrumbs'][] = $this->title;
@@ -22,11 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('../terapia/_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -36,7 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Terapia $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'ID' => $model->ID]);
+                    if ($action !== 'delete' && $action !== 'update') {
+                        return Url::toRoute(['../terapia\view', 'ID' => $model->ID]);
+                    }
                  }
             ],
         ],
