@@ -54,7 +54,7 @@ class Quesito extends \yii\db\ActiveRecord
             'domanda' => 'Domanda',
             'opzioni_risposta' => 'Opzioni Risposta',
             'risposta_corretta' => 'Risposta Corretta',
-            'domanda_immagine' => 'Domanda Immagine',
+            'domanda_immagine' => 'Immagine',
         ];
     }
 
