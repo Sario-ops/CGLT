@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Nuovo Esercizio', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -35,9 +35,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'categoria',
             'conCaregiver',
             [
+                'attribute' => 'rating',
+                'label' => 'Indice Gradimento',
+            ],
+            [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Esercizio $model, $key, $index, $column) {
-                    if( $action !== 'delete') {
+                    if( $action !== 'delete' && $action !== 'update') {
+                        return Url::toRoute([$action, 'id' => $model->id]);
+                    } else if ( ($action === 'delete' || $action === 'update') && $model->idLogopedista === Yii::$app->logopedista->identity->username ) {
                         return Url::toRoute([$action, 'id' => $model->id]);
                     }
                  }

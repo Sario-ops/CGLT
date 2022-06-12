@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use Exception;
+use yii\db\Query;
 
 /**
  * This is the model class for table "Esercizio".
@@ -32,10 +34,13 @@ class Esercizio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['conCaregiver'], 'integer'],
+            [['nome','descrizione','categoria'], 'required'],
+            [['conCaregiver','votazioni'], 'integer'],
+            [['rating'], 'number'],
             [['nome'], 'string', 'max' => 32],
             [['descrizione', 'categoria'], 'string', 'max' => 255],
             [['risposte'], 'each', 'rule' => ['integer']],
+            [['idLogopedista'], 'string', 'max' => 30],
         ];
     }
 
@@ -50,6 +55,9 @@ class Esercizio extends \yii\db\ActiveRecord
             'descrizione' => 'Descrizione',
             'categoria' => 'Categoria',
             'conCaregiver' => 'Assistenza Caregiver',
+            'rating' => 'Rating',
+            'votazioni' => 'Votazioni',
+            'idLogopedista' => 'Logopedista creatore',
         ];
     }
 
@@ -76,13 +84,38 @@ class Esercizio extends \yii\db\ActiveRecord
 
     public function evaluateEsercizio()
     {
-        $voto = 0;
+        try {
+            $voto = 0;
+    
+            foreach ($this->quesitos as $i => $quesito) {
+                $voto += $quesito->evaluateEsercizio($this->risposte[$i]); 
+            }
+    
+            return $voto;
+            
+        } catch (Exception $e) {
+            return 0;
+        }
+    }
 
-        foreach ($this->quesitos as $i => $quesito) {
-            $voto += $quesito->evaluateEsercizio($this->risposte[$i]); 
+    public function valutazioneCaregiver() {
+
+        $valutazione = 0;
+
+        foreach ($this->risposte as $risposta) {
+            switch($risposta) {
+                case 0:
+                    $valutazione +=1;
+                break;
+                case 1:
+                    $valutazione += 0.5;
+                break;
+                case 2:
+                default:
+            }
         }
 
-        return $voto;
+        return $valutazione;
     }
 
 
@@ -96,5 +129,24 @@ class Esercizio extends \yii\db\ActiveRecord
         $result = rtrim($result, "& ");
         return $result;
 
+    }
+
+    public function setFeedback() {
+        
+        try {
+
+            $current_date = Esercizio::findOne(['id' => $this->id]);
+
+            if($this->rating == 0) {
+                $this->rating = $current_date->rating;
+                return;
+            }
+
+            $this->rating = ($current_date->rating * $this->votazioni + $this->rating) / ($this->votazioni + 1);
+            $this->votazioni+=1;
+
+        } catch (Exception $e) {
+            echo "<div>$e</div>";
+        }
     }
 }

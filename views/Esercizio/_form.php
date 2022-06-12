@@ -10,6 +10,9 @@ use wbraganca\dynamicform\DynamicFormWidget;
             'enctype' => 'multipart/form-data',
             'id' => 'dynamic-form'
         ]]); ?>
+        <div class='creatorExercise'>
+            <?= $form->field($modelEsercizio, 'idLogopedista')->textInput(['maxlength' => true, 'value' => Yii::$app->logopedista->identity->username]) ?>
+        </div>
         <?= $form->field($modelEsercizio, 'nome')->textInput(['maxlength' => true]) ?>
         <?= $form->field($modelEsercizio, 'descrizione')->textInput(['maxlength' => true]) ?>
         <?= $form->field($modelEsercizio, 'categoria')->textInput(['maxlength' => true]) ?>
@@ -18,7 +21,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
     ]) ?>
 
     <div class="panel panel-default">
-        <div class="panel-heading"><h3><i class="glyphicon glyphicon-envelope"></i> QUESITI</h3></div>
+        <div class="panel-heading"><h3><i class="fa fa-tasks"></i> QUESITI</h3></div>
         <div class="panel-body">
              <?php DynamicFormWidget::begin([
                 'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
@@ -44,8 +47,8 @@ use wbraganca\dynamicform\DynamicFormWidget;
                     <div class="panel-heading">
                         <h4 class="panel-title pull-left">QUESITO</h4>
                         <div class="pull-right">
-                            <button type="button" class="add-item btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></button>
-                            <button type="button" class="remove-item btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus"></i></button>
+                            <button type="button" class="add-item btn btn-success btn-xs"><i class="fa fa-plus"></i></button>
+                            <button type="button" class="remove-item btn btn-danger btn-xs"><i class="fa fa-minus"></i></button>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -59,10 +62,10 @@ use wbraganca\dynamicform\DynamicFormWidget;
                         <?= $form->field($modelQuesito, "[{$i}]domanda")->textInput(['maxlength' => true]) ?>
                         <div class="row">
                             <div class="col-sm-6">
-                                <?= $form->field($modelQuesito, "[{$i}]opzioni_risposta")->textInput(['maxlength' => true, 'placeholder' => 'opzione1&opzione2&..', 'value' => $modelQuesito->opzioni_risposta ? $modelQuesito->opzioni_risposta : 'corretto&sbagliato']) ?>
+                                <?= $form->field($modelQuesito, "[{$i}]opzioni_risposta")->textInput(['maxlength' => true, 'placeholder' => 'opzione1&opzione2&..']) ?>
                             </div>
                             <div class="col-sm-6">
-                                <?= $form->field($modelQuesito, "[{$i}]risposta_corretta")->textInput(['maxlength' => true, 'value' => $modelQuesito->opzioni_risposta === 'corretto&sbagliato' ? 'corretto' : $modelQuesito->risposta_corretta]) ?>
+                                <?= $form->field($modelQuesito, "[{$i}]risposta_corretta")->textInput(['maxlength' => true]) ?>
                             </div>
                         </div><!-- .row -->
                         <div class="row">

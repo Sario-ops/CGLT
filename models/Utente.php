@@ -59,7 +59,7 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             'nome' => 'Nome',
             'cognome' => 'Cognome',
-            'cf' => 'Cf',
+            'cf' => 'Codice fiscale',
             'username' => 'Username',
             'dataNascita' => 'Data Nascita',
             'password' => 'Password',
@@ -146,6 +146,25 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public static function findByUsername($username)
     {
         return self::findOne(['username' => $username]);
+    }
+
+    public function getEserciziTerapia($stato) {
+
+        $terapie = $this->terapias;
+        $esercizi_assegnati = [];
+
+        foreach ($terapie as $terapia) {
+
+            foreach ($terapia->assegnatos as $assegnato) {
+
+                if( $assegnato->stato === $stato ) {
+                    array_push($esercizi_assegnati, $assegnato);
+                }
+            }
+
+        }
+
+        return $esercizi_assegnati;
     }
 
 }

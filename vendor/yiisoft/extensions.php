@@ -57,4 +57,14 @@ return array (
       '@wbraganca/dynamicform' => $vendorDir . '/newerton/yii2-dynamicform',
     ),
   ),
+  'webzop/yii2-notifications' => 
+  array (
+    'name' => 'webzop/yii2-notifications',
+    'version' => '0.2.0.0',
+    'alias' => 
+    array (
+      '@webzop/notifications' => $vendorDir . '/webzop/yii2-notifications',
+    ),
+    'bootstrap' => 'webzop\\notifications\\Bootstrap',
+  ),
 );
