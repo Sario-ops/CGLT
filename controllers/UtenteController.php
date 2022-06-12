@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use Yii;
+use Exception;
+use app\models\Codice;
 use app\models\Utente;
 use yii\web\Controller;
 use app\models\Assegnato;
@@ -106,19 +108,12 @@ class UtenteController extends Controller
         ]);
     }
 
-    public function actionCodice()
-    {
-        return $this->render('codice');
-    }
-
-
-
     /**
      * Creates a new Utente model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($utente,$logopedista)
     {
         $model = new Utente();
 
@@ -132,6 +127,8 @@ class UtenteController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'utente' => $utente,
+            'logopedista' => $logopedista,
         ]);
     }
 
@@ -332,5 +329,22 @@ class UtenteController extends Controller
         }
 
         return $this->render('execute', ['esercizio' => $exercise, 'quesiti' => $exercise->quesitos]);
+    }
+
+
+    public function actionCodice() 
+    {
+        $model = new \app\models\Codice();
+        try{
+            if ($model->load(Yii::$app->request->post())) {
+                $codice = Codice::findOne(['codice'=>$model->codice]);
+            return $this->redirect(['create', 'utente'=>$codice->utente, 'logopedista'=>$codice->logopedista]);
+            }
+        }catch(Exception $e){
+            Yii::$app->session->setFlash('error', "Codice non valido");
+        }
+        return $this->render('codice', [
+            'model' => $model,
+        ]);
     }
 }

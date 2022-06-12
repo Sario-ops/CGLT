@@ -39,7 +39,7 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['username'], 'required'],
+            [['username', 'idCaregiver'], 'required'],
             [['dataNascita'], 'safe'],
             [['nome', 'cognome'], 'string', 'max' => 15],
             [['cf'], 'string', 'max' => 16],

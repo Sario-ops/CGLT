@@ -35,8 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
 
         <p>
-            Non sei ancora registrato? <?= Html::a('Registrati', ['codice'])
-            // Html::a('Registrati', ['create']) ?>
+            Non sei ancora registrato? <?= Html::a('Registrati', ['codice']) ?>
         </p>
 
         <div class="form-group">

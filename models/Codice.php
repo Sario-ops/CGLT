@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use Exception;
 
 /**
  * This is the model class for table "codice".
@@ -31,6 +32,7 @@ class Codice extends \yii\db\ActiveRecord
             [['codice'], 'string', 'max' => 8],
             [['logopedista', 'utente'], 'string', 'max' => 30],
             [['codice'], 'unique'],
+            [['utente'], 'unique', 'skipOnError' => true, 'targetClass' => Utente::class, 'targetAttribute' => ['utente' => 'username']],
         ];
     }
 

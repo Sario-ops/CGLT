@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'cf')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'username')->textInput(['value' => $utente, 'readonly'=> true]) ?>
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
     
@@ -26,17 +26,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idCaregiver')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'idLogopedista')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'idLogopedista')->textInput(['value' => $logopedista, 'readonly'=> true]) ?>
 
-    <?
-    $update = Yii::$app()->db->createCommand()
-              ->update('utente', 
-                   array(
-                      'logopedista' => "ciao@gmail.com",
-                   ),
-                   'username='.'utente@gmail.com'
-              );
-    ?>
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
