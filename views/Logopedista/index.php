@@ -20,7 +20,7 @@ $this->title = 'Logopedista';
     <table id="logopedista-activity">
         <tr>
             <td>
-                <?= Html::a('CREA TERAPIA', ['/terapia\create', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('CREA TERAPIA', ['/terapia', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
                 <?= Html::a('CREA ESERCIZIO', ['/esercizio'], ['class' => 'btn btn-primary']) ?>
@@ -41,6 +41,9 @@ $this->title = 'Logopedista';
             </td>
             <td>
                 <?= Html::a('VISUALIZZA VISITE', ['/visita\index', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?> 
+            </td>
+            <td>
+                <?= Html::a('CODICI ISCRIZIONE', ['/codice', 'username' => $model->username], ['class' => 'btn btn-primary']) ?> 
             </td>
         </tr>
     </table>

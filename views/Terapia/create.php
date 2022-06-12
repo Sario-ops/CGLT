@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Terapia */
+$username = Yii::$app->request;
 
 $this->title = 'Crea Terapia';
 $this->params['breadcrumbs'][] = $this->title;

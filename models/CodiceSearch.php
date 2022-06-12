@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Terapia;
+use app\models\Codice;
 
 /**
- * TerapiaSearch represents the model behind the search form of `app\models\Terapia`.
+ * CodiceSearch represents the model behind the search form of `app\models\Codice`.
  */
-class TerapiaSearch extends Terapia
+class CodiceSearch extends Codice
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,7 @@ class TerapiaSearch extends Terapia
     public function rules()
     {
         return [
-            [['idUtente', 'idLogopedista', 'ID', 'scadenza'], 'safe'],
+            [['codice', 'logopedista', 'utente'], 'safe'],
         ];
     }
 
@@ -39,7 +39,7 @@ class TerapiaSearch extends Terapia
      */
     public function search($params)
     {
-        $query = Terapia::find();
+        $query = Codice::find();
 
         // add conditions that should always apply here
 
@@ -55,17 +55,10 @@ class TerapiaSearch extends Terapia
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-            'scadenza' => $this->scadenza,
-        ]);
-           
         // grid filtering conditions
-        $query->andFilterWhere([
-            'ID' => $this->ID,
-        ]);
-
-        $query->andFilterWhere(['like', 'idUtente', $this->idUtente])
-            ->andFilterWhere(['like', 'idLogopedista', $this->idLogopedista]);
+        $query->andFilterWhere(['like', 'codice', $this->codice])
+            ->andFilterWhere(['like', 'logopedista', $this->logopedista])
+            ->andFilterWhere(['like', 'utente', $this->utente]);
 
         return $dataProvider;
     }

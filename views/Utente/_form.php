@@ -28,6 +28,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idLogopedista')->textInput(['maxlength' => true]) ?>
 
+    <?
+    $update = Yii::$app()->db->createCommand()
+              ->update('utente', 
+                   array(
+                      'logopedista' => "ciao@gmail.com",
+                   ),
+                   'username='.'utente@gmail.com'
+              );
+    ?>
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

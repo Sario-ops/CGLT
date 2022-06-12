@@ -38,7 +38,7 @@ class UtenteController extends Controller
                         ],
                         [
                             'allow' => true,
-                            'actions' => ['login','create'],
+                            'actions' => ['login','create','codice'],
                             'roles' => ['?'],
     
                         ],
@@ -101,6 +101,11 @@ class UtenteController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($username),
         ]);
+    }
+
+    public function actionCodice()
+    {
+        return $this->render('codice');
     }
 
     /**
