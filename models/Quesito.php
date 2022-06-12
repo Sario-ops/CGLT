@@ -34,6 +34,7 @@ class Quesito extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['domanda'], 'required'],
             [['esercizio_id'], 'integer'],
             [['domanda', 'domanda_immagine'], 'string', 'max' => 255],
             [['opzioni_risposta'], 'string', 'max' => 128],

@@ -34,11 +34,13 @@ class Esercizio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['nome','descrizione','categoria'], 'required'],
             [['conCaregiver','votazioni'], 'integer'],
             [['rating'], 'number'],
             [['nome'], 'string', 'max' => 32],
             [['descrizione', 'categoria'], 'string', 'max' => 255],
             [['risposte'], 'each', 'rule' => ['integer']],
+            [['idLogopedista'], 'string', 'max' => 30],
         ];
     }
 
@@ -54,7 +56,8 @@ class Esercizio extends \yii\db\ActiveRecord
             'categoria' => 'Categoria',
             'conCaregiver' => 'Assistenza Caregiver',
             'rating' => 'Rating',
-            'votazioni' => 'Votazioni'
+            'votazioni' => 'Votazioni',
+            'idLogopedista' => 'Logopedista creatore',
         ];
     }
 

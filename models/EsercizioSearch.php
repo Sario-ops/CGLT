@@ -17,8 +17,9 @@ class EsercizioSearch extends Esercizio
     public function rules()
     {
         return [
-            [['id', 'conCaregiver'], 'integer'],
-            [['nome', 'descrizione', 'categoria'], 'safe'],
+            [['id', 'conCaregiver', 'votazioni'], 'integer'],
+            [['nome', 'descrizione', 'categoria', 'idLogopedista'], 'safe'],
+            [['rating'], 'number'],
         ];
     }
 
@@ -61,11 +62,13 @@ class EsercizioSearch extends Esercizio
             'id' => $this->id,
             'conCaregiver' => $this->conCaregiver,
             'rating' => $this->rating,
+            'votazioni' => $this->votazioni,
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome])
             ->andFilterWhere(['like', 'descrizione', $this->descrizione])
-            ->andFilterWhere(['like', 'categoria', $this->descrizione]);
+            ->andFilterWhere(['like', 'categoria', $this->categoria])
+            ->andFilterWhere(['like', 'idLogopedista', $this->idLogopedista]);
 
         return $dataProvider;
     }
