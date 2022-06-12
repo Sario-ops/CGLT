@@ -15,4 +15,12 @@ $this->title = 'Caregiver';
 ?>
 <div class="site-index">
     <h1><?= Html::encode($model->nome),' ', Html::encode($model->cognome) ?></h1>
-</div>
+    
+    <table id="logopedista-activity">
+        <tr>
+            <td>
+                <?= Html::a('RICHIEDI VISITA', ['/visita'], ['class' => 'btn btn-primary']) ?>
+            </td>
+        </tr>
+    </table>
+   </div>

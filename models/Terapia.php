@@ -33,7 +33,7 @@ class Terapia extends \yii\db\ActiveRecord
     {
         return [
             [['ID'], 'required'],
-            [['scadenza'],'safe'],
+            [['scadenza'],'required'],
             [['idUtente', 'idLogopedista'], 'string', 'max' => 30],
             [['ID'], 'string', 'max' => 5],
             [['ID'], 'unique'],

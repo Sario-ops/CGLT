@@ -2,11 +2,13 @@
 
 namespace app\controllers;
 
+use Yii;
+use Exception;
 use app\models\Terapia;
-use app\models\TerapiaSearch;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\TerapiaSearch;
+use yii\web\NotFoundHttpException;
 
 /**
  * TerapiaController implements the CRUD actions for Terapia model.
@@ -67,19 +69,20 @@ class TerapiaController extends Controller
      */
     public function actionCreate()
     {
+        try
+        {
         $model = new Terapia();
 
-        if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'ID' => $model->ID]);
             }
-        } else {
-            $model->loadDefaultValues();
-        }
-
+        } catch(Exception $e)
+        {
+            Yii::$app->session->setFlash('error', "Data non valida");
+        }  
         return $this->render('create', [
             'model' => $model,
-        ]);
+        ]);            
     }
 
     /**

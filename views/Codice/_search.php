@@ -16,11 +16,11 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'codice') ?>
+<!--
+    <//?= $form->field($model, 'logopedista') ?>
 
-    <?= $form->field($model, 'logopedista') ?>
-
-    <?= $form->field($model, 'utente') ?>
-
+    <//?= $form->field($model, 'utente') ?>
+-->
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>

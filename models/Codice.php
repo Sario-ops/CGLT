@@ -8,7 +8,8 @@ use Yii;
  * This is the model class for table "codice".
  *
  * @property string $codice
- * @property string|null $username
+ * @property string|null $logopedista
+ * @property string|null $utente
  */
 class Codice extends \yii\db\ActiveRecord
 {

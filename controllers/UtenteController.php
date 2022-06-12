@@ -108,6 +108,8 @@ class UtenteController extends Controller
         return $this->render('codice');
     }
 
+
+
     /**
      * Creates a new Utente model.
      * If creation is successful, the browser will be redirected to the 'view' page.
