@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Exception;
 use Yii;
 
 /**
@@ -33,6 +34,7 @@ class Quesito extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['domanda'], 'required'],
             [['esercizio_id'], 'integer'],
             [['domanda', 'domanda_immagine'], 'string', 'max' => 255],
             [['opzioni_risposta'], 'string', 'max' => 128],
@@ -52,7 +54,7 @@ class Quesito extends \yii\db\ActiveRecord
             'domanda' => 'Domanda',
             'opzioni_risposta' => 'Opzioni Risposta',
             'risposta_corretta' => 'Risposta Corretta',
-            'domanda_immagine' => 'Domanda Immagine',
+            'domanda_immagine' => 'Immagine',
         ];
     }
 
@@ -74,10 +76,15 @@ class Quesito extends \yii\db\ActiveRecord
 
     public function evaluateEsercizio($i)
     {
-        if( $this->getArrayOptions()[$i] === $this->risposta_corretta ) {
-            return 1;
+        try{
+            if( $this->getArrayOptions()[$i] === $this->risposta_corretta ) {
+                return 1;
+            }
+
+        } catch (Exception $e) {
+
+            return 0;
         }
 
-        return 0;
     }
 }

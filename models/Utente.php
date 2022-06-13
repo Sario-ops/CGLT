@@ -59,13 +59,13 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             'nome' => 'Nome',
             'cognome' => 'Cognome',
-            'cf' => 'Cf',
+            'cf' => 'Codice fiscale',
             'username' => 'Username',
             'dataNascita' => 'Data Nascita',
             'password' => 'Password',
             'authkey' => 'Authkey',
-            'idCaregiver' => 'Id Caregiver',
-            'idLogopedista' => 'Id Logopedista',
+            'idCaregiver' => 'Email Caregiver',
+            'idLogopedista' => 'Email Logopedista',
         ];
     }
 

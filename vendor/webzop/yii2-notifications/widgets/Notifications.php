@@ -70,7 +70,7 @@ class Notifications extends \yii\base\Widget
     {
         $html  = Html::beginTag('li', $this->options);
         $html .= Html::beginTag('a', ['href' => '#', 'class' => 'dropdown-toggle', 'data-toggle' => 'dropdown']);
-        $html .= Html::tag('span', '', ['class' => 'glyphicon glyphicon-bell']);
+        $html .= Html::tag('span', '', ['class' => 'fa fa-bell']);
 
         $count = self::getCountUnseen();
         $countOptions = array_merge([

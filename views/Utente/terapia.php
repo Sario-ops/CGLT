@@ -25,13 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idTerapia', 'idEsercizio', 'stato', 'valutazione', 'risposta',
+            'idTerapia', 'idEsercizio', 'stato', //'valutazione', 'risposta',
             [
                 'class' => ActionColumn::className(),
                 'template'=>'{execute}',
                 'buttons' => [
                     'execute' => function ($url, Assegnato $model ) {
-                        return  Html::a('esegui', ['eseguiassegnato', 'idAssegnato' => $model->id], ['title' => Yii::t('yii', 'Esegui')]);
+                        return  Html::a('<h3><i class="fa fa-play-circle"></i></h3>', ['eseguiassegnato', 'idAssegnato' => $model->id], ['title' => Yii::t('yii', 'Esegui')]);
                     }
                 ],
             ],

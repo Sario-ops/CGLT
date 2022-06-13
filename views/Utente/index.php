@@ -18,10 +18,10 @@ $this->title = 'UTENTE';
     <table id="utente-activity">
         <tr>
             <td>
-                <?= Html::a('TERAPIA', ['terapia'], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('<h4>TERAPIA</h4>', ['terapia'], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
-                <?= Html::a('ESERCIZI', ['esercizi'], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('<h4>ESERCIZI LIBERI</h4>', ['esercizi'], ['class' => 'btn btn-primary']) ?>
             </td>
         </tr>
     </table>

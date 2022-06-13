@@ -9,6 +9,7 @@ use app\models\Assegnato;
 use app\models\Caregiver;
 use app\models\Esercizio;
 use app\models\LoginForm;
+use app\models\Logopedista;
 use yii\filters\VerbFilter;
 use app\models\UtenteSearch;
 use app\models\TerapiaSearch;
@@ -190,18 +191,15 @@ class UtenteController extends Controller
 
         $exercise = $this->findExercise($id);
 
-        if ($exercise->load(Yii::$app->request->post()) && $exercise->save() ) {
+        if ($exercise->load(Yii::$app->request->post())) {
+            $exercise->setFeedback();
             $risultato = $exercise->evaluateEsercizio();
+            $exercise->save();
 
             return $this->render('finishExercise',['result' => $risultato, 
-            'numeroDomande' => count($exercise->quesitos), 'conCaregiver' => false]);
+            'numeroDomande' => count($exercise->quesitos), 'conCaregiver' => $exercise->conCaregiver]);
 
-        } else if (Yii::$app->request->isPost && $exercise->conCaregiver) {
-
-            return $this->render('finishExercise',['result' => 0, 
-            'numeroDomande' => count($exercise->quesitos), 'conCaregiver' => true]);
         }
-
 
         return $this->render('execute', ['esercizio' => $exercise, 'quesiti' => $exercise->quesitos]); 
     }
@@ -319,9 +317,12 @@ class UtenteController extends Controller
         if ($exercise->load(Yii::$app->request->post()) && $exercise->save() ) {
             $risultato = $exercise->evaluateEsercizio();
 
+            $utente = $this->findModel(Yii::$app->utente->identity->username);
+
             $assegnato->valutazione = $risultato;
             $assegnato->stato = 'validato';
             $assegnato->risposta = $exercise->getRisposteString();
+            AccountNotification::create(AccountNotification::ESERCIZIO_ESEGUITO, ['user' => $assegnato])->send(((Logopedista::findOne(['username'=>$utente->idLogopedista]))->username));
 
 
             $assegnato->save();
@@ -333,7 +334,7 @@ class UtenteController extends Controller
 
             $assegnato->stato = 'in validazione';
             $assegnato->save();
-            AccountNotification::create(AccountNotification::KEY_NEW_ACCOUNT, ['user' => Caregiver::findOne(['username' => $caregiver->username])])->send($caregiver->username);
+            AccountNotification::create(AccountNotification::ESERCIZIO_DA_VALUTARE, ['user' => $assegnato])->send($caregiver->username);
             return $this->render('finishExercise',['result' => 0, 
             'numeroDomande' => count($exercise->quesitos), 'conCaregiver' => true]);
         }
