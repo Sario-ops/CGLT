@@ -334,7 +334,7 @@ class CaregiverController extends Controller
             ]
         ]);
 
-        return $this->render('/terapia\index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
+        return $this->render('terapia', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
 
     }
     
