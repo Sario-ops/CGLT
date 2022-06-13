@@ -2,11 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Assegnato;
-use app\models\AssegnatoSearch;
+use Yii;
+use app\models\Terapia;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use app\models\Assegnato;
 use yii\filters\VerbFilter;
+use app\models\DiagnosiSearch;
+use app\models\AssegnatoSearch;
+use yii\data\ArrayDataProvider;
+use yii\data\ActiveDataProvider;
+use yii\web\NotFoundHttpException;
 
 /**
  * AssegnatoController implements the CRUD actions for Assegnato model.
@@ -36,15 +41,31 @@ class AssegnatoController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($idTerapia)
     {
-        $searchModel = new AssegnatoSearch();
+       
+        /* $searchModel = new AssegnatoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]); */
+        
+        $model = Terapia::findOne(['ID' => $idTerapia]);
+        $searchModel = new AssegnatoSearch();
+        $dataProvider = new ArrayDataProvider([
+            'key' => 'id',
+            'allModels' => $model->assegnatos,
+            'sort' => [
+            'attributes' => ['id',
+            'idTerapia','idEsercizio',
+            'risposta','stato','valutazione'],
+            ]
         ]);
+       
+        return $this->render('index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]); 
+
     }
 
     /**
@@ -132,3 +153,5 @@ class AssegnatoController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
+
+?>

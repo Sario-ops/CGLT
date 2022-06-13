@@ -11,7 +11,7 @@ use yii\grid\ActionColumn;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $request = Yii::$app->request;
-$username = $request->get('id');
+$username = $request->get('idLogopedista');
 
 $this->title = 'Visualizza Diagnosi';
 $this->params['breadcrumbs'][] = $this->title;

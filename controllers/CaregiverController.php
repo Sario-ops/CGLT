@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use Yii;
-use Exception;
 use app\models\Utente;
 use app\models\Terapia;
 use yii\web\Controller;
@@ -13,10 +12,12 @@ use app\models\Esercizio;
 use app\models\LoginForm;
 use app\models\Logopedista;
 use yii\filters\VerbFilter;
+use app\models\TerapiaSearch;
 use yii\filters\AccessControl;
 use app\models\CaregiverSearch;
 use yii\data\ArrayDataProvider;
 use yii\web\NotFoundHttpException;
+use Exception;
 use app\notifications\AccountNotification;
 
 /**
@@ -311,4 +312,30 @@ class CaregiverController extends Controller
         } 
 
     }
+
+    public function actionTerapia()
+    {
+        $utenti = $this->findModel(Yii::$app->caregiver->identity->username)->utentis;
+        $terapie = [];
+        foreach ($utenti as $utente) {
+            foreach ($utente->terapias as $terapia) {
+                array_push($terapie,$terapia);
+            }
+        }
+        $searchModel = new TerapiaSearch();
+        $dataProvider = new ArrayDataProvider([
+            'key' => 'ID',
+            'allModels' => $terapie,
+            'sort' => [
+                'attributes' => [            
+                'ID',
+                'idUtente',
+                'idLogopedista'],
+            ]
+        ]);
+
+        return $this->render('/terapia\index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
+
+    }
+    
 }

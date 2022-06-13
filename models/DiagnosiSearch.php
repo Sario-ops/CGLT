@@ -17,6 +17,7 @@ class DiagnosiSearch extends Diagnosi
     public function rules()
     {
         return [
+            [['id'], 'integer'],
             [['idUtente', 'idLogopedista', 'idCaregiver', 'nomeUtente', 'cognomeUtente', 'dataDiagnosi', 'descrizioneDiagnosi'], 'safe'],
         ];
     }
@@ -57,6 +58,7 @@ class DiagnosiSearch extends Diagnosi
 
         // grid filtering conditions
         $query->andFilterWhere([
+            'id' => $this->id,
             'dataDiagnosi' => $this->dataDiagnosi,
         ]);
 
