@@ -82,6 +82,11 @@ class Logopedista extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
     {
         return $this->authkey;
     }
+    
+    public function setAuthKey($authkey)
+    {
+        $this->authkey=$authkey;
+    }
 
     public function validateAuthKey($authKey) {
         return $this->authkey === $authKey;

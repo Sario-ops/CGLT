@@ -17,7 +17,7 @@ class VisitaSearch extends Visita
     public function rules()
     {
         return [
-            [['idUtente', 'idLogopedista', 'idCaregiver', 'nomeUtente', 'cognomeUtente', 'dataPrenotazione', 'dataVisita', 'oraVisita'], 'safe'],
+            [['idUtente', 'idLogopedista', 'dataPrenotazione', 'dataVisita', 'oraVisita'], 'safe'],
         ];
     }
 
@@ -64,7 +64,6 @@ class VisitaSearch extends Visita
 
         $query->andFilterWhere(['like', 'idUtente', $this->idUtente])
             ->andFilterWhere(['like', 'idLogopedista', $this->idLogopedista])
-            ->andFilterWhere(['like', 'idCaregiver', $this->idCaregiver])
             ->andFilterWhere(['like', 'nomeUtente', $this->nomeUtente])
             ->andFilterWhere(['like', 'cognomeUtente', $this->cognomeUtente]);
 

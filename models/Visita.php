@@ -36,15 +36,12 @@ class Visita extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idUtente', 'idLogopedista', 'idCaregiver', 'dataVisita', 'oraVisita'], 'required'],
             [['dataPrenotazione', 'dataVisita', 'oraVisita'], 'safe'],
+            [['stato'], 'integer'],
             [['idUtente'], 'string', 'max' => 20],
-            [['idLogopedista', 'idCaregiver'], 'string', 'max' => 30],
-            [['nomeUtente', 'cognomeUtente'], 'string', 'max' => 15],
-            [['idUtente', 'idLogopedista', 'idCaregiver', 'dataVisita', 'oraVisita'], 'unique', 'targetAttribute' => ['idUtente', 'idLogopedista', 'idCaregiver', 'dataVisita', 'oraVisita']],
+            [['idLogopedista'], 'string', 'max' => 30],
             [['idLogopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::className(), 'targetAttribute' => ['idLogopedista' => 'username']],
             [['idUtente'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::className(), 'targetAttribute' => ['idUtente' => 'username']],
-            [['idCaregiver'], 'exist', 'skipOnError' => true, 'targetClass' => Caregiver::className(), 'targetAttribute' => ['idCaregiver' => 'username']],
         ];
     }
 
@@ -54,26 +51,16 @@ class Visita extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id' => 'ID',
             'idUtente' => 'Id Utente',
             'idLogopedista' => 'Id Logopedista',
-            'idCaregiver' => 'Id Caregiver',
-            'nomeUtente' => 'Nome Utente',
-            'cognomeUtente' => 'Cognome Utente',
             'dataPrenotazione' => 'Data Prenotazione',
             'dataVisita' => 'Data Visita',
             'oraVisita' => 'Ora Visita',
+            'stato' => 'Stato',
         ];
     }
 
-    /**
-     * Gets query for [[IdCaregiver0]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIdCaregiver0()
-    {
-        return $this->hasOne(Caregiver::className(), ['username' => 'idCaregiver']);
-    }
 
     /**
      * Gets query for [[IdLogopedista0]].
@@ -93,5 +80,15 @@ class Visita extends \yii\db\ActiveRecord
     public function getIdUtente0()
     {
         return $this->hasOne(Utente::className(), ['username' => 'idUtente']);
+    }
+
+    public function setData($data)
+    {
+        $this->dataPrenotazione=$data;
+    }
+
+    public function setStato($stato)
+    {
+        $this->stato=$stato;
     }
 }

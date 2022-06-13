@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use Exception;
 use app\models\Utente;
+use app\models\Visita;
 use app\models\Terapia;
 use yii\web\Controller;
 use app\models\Assegnato;
@@ -114,7 +115,7 @@ class CaregiverController extends Controller
     public function actionCreate()
     {
         $model = new Caregiver();
-
+        $model->setauthkey(Yii::$app->security->generateRandomString(10));
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['index']);
@@ -310,5 +311,26 @@ class CaregiverController extends Controller
             return $this->goBack();
         } 
 
+    }
+
+    public function actionVisita()
+    {
+        $model = new Visita();
+        $model->setData(date("Y-m-d"));
+        
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                $model->stato=0;
+                $model->save();
+                return $this->redirect(['..\visita/view', 'idUtente' => $model->idUtente, 'idLogopedista' => $model->idLogopedista, 'dataVisita' => $model->dataVisita, 'oraVisita' => $model->oraVisita]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('..\visita/create', [
+            'model' => $model,
+            'username' => null,
+        ]);
     }
 }

@@ -136,6 +136,11 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->password === $password;
     }
     
+    public function setAuthKey($authkey)
+    {
+        $this->authkey=$authkey;
+    }
+
     /**
      * Finds user by username
      *

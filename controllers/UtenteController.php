@@ -113,12 +113,13 @@ class UtenteController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate($utente,$logopedista)
+    public function actionCreate($utente,$logopedista,$codice)
     {
         $model = new Utente();
-
+        $model->setauthkey(Yii::$app->security->generateRandomString(10));
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
+                Codice::findOne(['codice'=>$codice])->delete();
                 return $this->redirect(['view', 'username' => $model->username]);
             }
         } else {
@@ -338,7 +339,7 @@ class UtenteController extends Controller
         try{
             if ($model->load(Yii::$app->request->post())) {
                 $codice = Codice::findOne(['codice'=>$model->codice]);
-            return $this->redirect(['create', 'utente'=>$codice->utente, 'logopedista'=>$codice->logopedista]);
+            return $this->redirect(['create', 'utente'=>$codice->utente, 'logopedista'=>$codice->logopedista,'codice'=>$model->codice]);
             }
         }catch(Exception $e){
             Yii::$app->session->setFlash('error', "Codice non valido");
@@ -346,5 +347,13 @@ class UtenteController extends Controller
         return $this->render('codice', [
             'model' => $model,
         ]);
+        
     }
+/*
+public function actionDelete($codice)
+{
+    $this->findModel($codice)->delete();
+
+    return $this->redirect(['index']);
+}*/
 }

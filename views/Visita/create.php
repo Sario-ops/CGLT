@@ -1,11 +1,10 @@
 <?php
 
 use yii\helpers\Html;
-
 /* @var $this yii\web\View */
 /* @var $model app\models\Visita */
 
-$this->title = 'Visualizza Visita';
+$this->title = 'Pianifica Visita';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="visita-create">
@@ -14,6 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'username' => $username,
     ]) ?>
 
 </div>

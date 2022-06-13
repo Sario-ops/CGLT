@@ -85,6 +85,11 @@ class Caregiver extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfa
     {
         return $this->authkey;
     }
+    
+    public function setAuthKey($authkey)
+    {
+        $this->authkey=$authkey;
+    }
 
     public function validateAuthKey($authKey) {
         return $this->authkey === $authKey;

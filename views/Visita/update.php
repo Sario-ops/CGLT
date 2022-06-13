@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $model app\models\Visita */
 
 $this->title = 'Update Visita: ' . $model->idUtente;
-$this->params['breadcrumbs'][] = ['label' => 'Visitas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->idUtente, 'url' => ['view', 'idUtente' => $model->idUtente, 'idLogopedista' => $model->idLogopedista, 'idCaregiver' => $model->idCaregiver, 'dataVisita' => $model->dataVisita, 'oraVisita' => $model->oraVisita]];
+$this->params['breadcrumbs'][] = ['label' => 'Visita', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->idUtente, 'url' => ['view', 'idUtente' => $model->idUtente, 'idLogopedista' => $model->idLogopedista, 'dataVisita' => $model->dataVisita, 'oraVisita' => $model->oraVisita]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="visita-update">

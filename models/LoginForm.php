@@ -101,4 +101,9 @@ class LoginForm extends Model
     {
         $this->customer = $customer;
     }
+    
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
 }

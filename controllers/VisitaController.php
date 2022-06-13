@@ -2,12 +2,14 @@
 
 namespace app\controllers;
 
+use app;
+use app\models\LoginForm;
 use yii;
 use app\models\Visita;
-use app\models\VisitaSearch;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\VisitaSearch;
+use yii\web\NotFoundHttpException;
 
 /**
  * VisitaController implements the CRUD actions for Visita model.
@@ -23,7 +25,7 @@ class VisitaController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -60,10 +62,10 @@ class VisitaController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($idUtente, $idLogopedista, $idCaregiver, $dataVisita, $oraVisita)
+    public function actionView($idUtente, $idLogopedista, $dataVisita, $oraVisita)
     {
         return $this->render('view', [
-            'model' => $this->findModel($idUtente, $idLogopedista, $idCaregiver, $dataVisita, $oraVisita),
+            'model' => $this->findModel($idUtente, $idLogopedista, $dataVisita, $oraVisita),
         ]);
     }
 
@@ -72,13 +74,16 @@ class VisitaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+
+    /*public function actionCreate()
     {
         $model = new Visita();
-
+        $model->setData(date("Y-m-d"));
+        
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'idUtente' => $model->idUtente, 'idLogopedista' => $model->idLogopedista, 'idCaregiver' => $model->idCaregiver, 'dataVisita' => $model->dataVisita, 'oraVisita' => $model->oraVisita]);
+            if ($model->load($this->request->post())) {
+                $model->save();
+                return $this->redirect(['view', 'idUtente' => $model->idUtente, 'idLogopedista' => $model->idLogopedista, 'dataVisita' => $model->dataVisita, 'oraVisita' => $model->oraVisita]);
             }
         } else {
             $model->loadDefaultValues();
@@ -87,7 +92,7 @@ class VisitaController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
-    }
+    }*/
 
     /**
      * Updates an existing Visita model.
@@ -100,12 +105,12 @@ class VisitaController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($idUtente, $idLogopedista, $idCaregiver, $dataVisita, $oraVisita)
+    public function actionUpdate($idUtente, $idLogopedista, $dataVisita, $oraVisita)
     {
-        $model = $this->findModel($idUtente, $idLogopedista, $idCaregiver, $dataVisita, $oraVisita);
+        $model = $this->findModel($idUtente, $idLogopedista, $dataVisita, $oraVisita);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idUtente' => $model->idUtente, 'idLogopedista' => $model->idLogopedista, 'idCaregiver' => $model->idCaregiver, 'dataVisita' => $model->dataVisita, 'oraVisita' => $model->oraVisita]);
+            return $this->redirect(['view', 'idUtente' => $model->idUtente, 'idLogopedista' => $model->idLogopedista, 'dataVisita' => $model->dataVisita, 'oraVisita' => $model->oraVisita]);
         }
 
         return $this->render('update', [
@@ -124,9 +129,9 @@ class VisitaController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($idUtente, $idLogopedista, $idCaregiver, $dataVisita, $oraVisita)
+    public function actionDelete($idUtente, $idLogopedista, $dataVisita, $oraVisita)
     {
-        $this->findModel($idUtente, $idLogopedista, $idCaregiver, $dataVisita, $oraVisita)->delete();
+        $this->findModel($idUtente, $idLogopedista, $dataVisita, $oraVisita)->delete();
 
         return $this->redirect(['index']);
     }
@@ -142,9 +147,9 @@ class VisitaController extends Controller
      * @return Visita the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($idUtente, $idLogopedista, $idCaregiver, $dataVisita, $oraVisita)
+    protected function findModel($idUtente, $idLogopedista, $dataVisita, $oraVisita)
     {
-        if (($model = Visita::findOne(['idUtente' => $idUtente, 'idLogopedista' => $idLogopedista, 'idCaregiver' => $idCaregiver, 'dataVisita' => $dataVisita, 'oraVisita' => $oraVisita])) !== null) {
+        if (($model = Visita::findOne(['idUtente' => $idUtente, 'idLogopedista' => $idLogopedista, 'dataVisita' => $dataVisita, 'oraVisita' => $oraVisita])) !== null) {
             return $model;
         }
 

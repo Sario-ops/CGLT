@@ -7,7 +7,7 @@ use yii\grid\GridView;
 use yii\grid\ActionColumn;
 use app\models\Logopedista;
 use yii\bootstrap4\ActiveForm;
-use webzop\notifications\widgets\Notifications;
+use webzop\notifications\widgets\Notifications; 
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\LogopedistaSearch */
@@ -17,7 +17,9 @@ $this->title = 'Logopedista';
 ?>
 <div class="site-index">
     <h1><?=Html::encode($model->nome), ' ', Html::encode($model->cognome) ?></h1>
-
+    <? 
+    ?>
+    
     <table id="logopedista-activity">
         <tr>
             <td>
@@ -30,7 +32,7 @@ $this->title = 'Logopedista';
                 <?= Html::a('CREA DIAGNOSI', ['/diagnosi\create', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
-                <?= Html::a('PIANIFICA VISITA', ['/visita\create', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?> 
+                <?= Html::a('PIANIFICA VISITA', ['visita'], ['class' => 'btn btn-primary']) ?> 
             </td>
         </tr>
         <tr>
