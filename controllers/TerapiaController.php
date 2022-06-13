@@ -144,23 +144,4 @@ class TerapiaController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    /* public function actionAndamento()
-    {
-        $model = $this->findModel(Yii::$app->logopedista->identity->username)->terapias;
-        $searchModel = new TerapiaSearch();
-        $dataProvider = new ArrayDataProvider([
-            'key' => 'ID',
-            'allModels' => $model,
-            'sort' => [
-                'attributes' => [            
-                'ID',
-                'idUtente',
-                'idLogopedista'],
-            ]
-        ]);
-
-        return $this->render('andamento', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
-
-    } */
-
 }

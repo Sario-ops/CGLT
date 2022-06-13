@@ -76,4 +76,15 @@ class Assegnato extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Terapia::className(), ['ID' => 'idTerapia']);
     }
+
+        /**
+     * Gets query for [[Assegnatos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAssegnatos()
+    {
+        return $this->hasMany(Assegnato::className(), ['idTerapia' => 'ID']);
+    }
+    
 }

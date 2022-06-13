@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+        <?= Html::a('<< Back', ['/logopedista\terapia'], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Update', ['update', 'ID' => $model->ID], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'ID' => $model->ID], [
             'class' => 'btn btn-danger',
@@ -39,6 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
      
      <?= Html::a('Aggiungi esercizi', ['/assegnato\create', 'ID' => $model->ID], ['class' => 'btn btn-primary']) ?>
-     <?= Html::a('Esercizi assegnati', ['/assegnato\index', 'ID' => $model->ID], ['class' => 'btn btn-primary']) ?>
+     <?= Html::a('Esercizi assegnati', ['/assegnato\index', 'idTerapia' => $model->ID], ['class' => 'btn btn-primary']) ?>
 
     </div>

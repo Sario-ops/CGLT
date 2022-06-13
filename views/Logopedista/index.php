@@ -50,7 +50,7 @@ $this->title = 'Logopedista';
                 <?= Html::a('VISUALIZZA VISITE', ['visita'], ['class' => 'btn btn-primary']) ?> 
             </td>
             <td>
-                <?= Html::a('MONITORAGGIO UTENTE', ['terapia'], ['class' => 'btn btn-primary']) ?> 
+                <?= Html::a('MONITORA TERAPIA', ['terapia'], ['class' => 'btn btn-primary']) ?> 
             </td>
         </tr>
     </table>

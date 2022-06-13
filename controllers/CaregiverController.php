@@ -309,5 +309,30 @@ class CaregiverController extends Controller
         } 
 
     }
+
+    public function actionTerapia()
+    {
+        $utenti = $this->findModel(Yii::$app->caregiver->identity->username)->utentis;
+        $terapie = [];
+        foreach ($utenti as $utente) {
+            foreach ($utente->terapias as $terapia) {
+                array_push($terapie,$terapia);
+            }
+        }
+        $searchModel = new TerapiaSearch();
+        $dataProvider = new ArrayDataProvider([
+            'key' => 'ID',
+            'allModels' => $terapie,
+            'sort' => [
+                'attributes' => [            
+                'ID',
+                'idUtente',
+                'idLogopedista'],
+            ]
+        ]);
+
+        return $this->render('/terapia\index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
+
+    }
     
 }

@@ -3,12 +3,14 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Terapia;
 use yii\web\Controller;
 use app\models\Assegnato;
 use yii\filters\VerbFilter;
 use app\models\DiagnosiSearch;
 use app\models\AssegnatoSearch;
 use yii\data\ArrayDataProvider;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -39,22 +41,22 @@ class AssegnatoController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($idTerapia)
     {
-        /*
-        $searchModel = new AssegnatoSearch();
+       
+        /* $searchModel = new AssegnatoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]); */
-
-        $model = $this->findModel(Yii::$app->logopedista->identity->username)->assegnato;
+        
+        $model = Terapia::findOne(['ID' => $idTerapia]);
         $searchModel = new AssegnatoSearch();
         $dataProvider = new ArrayDataProvider([
             'key' => 'id',
-            'allModels' => $model,
+            'allModels' => $model->assegnatos,
             'sort' => [
             'attributes' => ['id',
             'idTerapia','idEsercizio',
@@ -62,7 +64,7 @@ class AssegnatoController extends Controller
             ]
         ]);
        
-        return $this->render('index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
+        return $this->render('index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]); 
 
     }
 
