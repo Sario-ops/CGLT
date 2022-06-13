@@ -75,13 +75,6 @@ $config = [
             //'showScriptName' => false,
             'rules' => [],
         ],
-        'assetManager' => [
-            'bundles' => [
-                'dosamigos\chartjs\ChartJsAsset' => [
-                    'sourcePath' => '@vendor/nnnick/chartjs/dist',
-                ],
-            ],
-        ],
     ],
     'modules' => [
         'notifications' => [

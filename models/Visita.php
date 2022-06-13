@@ -10,6 +10,9 @@ use Yii;
  * @property int $id
  * @property string|null $idUtente
  * @property string|null $idLogopedista
+ * @property string|null $idCaregiver
+ * @property string|null $nomeUtente
+ * @property string|null $cognomeUtente
  * @property string|null $dataPrenotazione
  * @property string|null $dataVisita
  * @property string|null $oraVisita
@@ -36,9 +39,11 @@ class Visita extends \yii\db\ActiveRecord
         return [
             [['dataPrenotazione', 'dataVisita', 'oraVisita'], 'safe'],
             [['idUtente'], 'string', 'max' => 20],
-            [['idLogopedista'], 'string', 'max' => 30],
+            [['idLogopedista', 'idCaregiver'], 'string', 'max' => 30],
+            [['nomeUtente', 'cognomeUtente'], 'string', 'max' => 15],
             [['idLogopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::className(), 'targetAttribute' => ['idLogopedista' => 'username']],
             [['idUtente'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::className(), 'targetAttribute' => ['idUtente' => 'username']],
+            [['idCaregiver'], 'exist', 'skipOnError' => true, 'targetClass' => Caregiver::className(), 'targetAttribute' => ['idCaregiver' => 'username']],
         ];
     }
 
@@ -52,10 +57,22 @@ class Visita extends \yii\db\ActiveRecord
             'idUtente' => 'Id Utente',
             'idLogopedista' => 'Id Logopedista',
             'idCaregiver' => 'Id Caregiver',
+            'nomeUtente' => 'Nome Utente',
+            'cognomeUtente' => 'Cognome Utente',
             'dataPrenotazione' => 'Data Prenotazione',
             'dataVisita' => 'Data Visita',
             'oraVisita' => 'Ora Visita',
         ];
+    }
+
+    /**
+     * Gets query for [[IdCaregiver0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdCaregiver0()
+    {
+        return $this->hasOne(Caregiver::className(), ['username' => 'idCaregiver']);
     }
 
     /**

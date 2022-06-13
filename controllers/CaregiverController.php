@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use Yii;
-use Exception;
 use app\models\Utente;
 use app\models\Terapia;
 use yii\web\Controller;
@@ -12,9 +11,9 @@ use app\models\Caregiver;
 use app\models\Esercizio;
 use app\models\LoginForm;
 use yii\filters\VerbFilter;
-use app\models\TerapiaSearch;
 use yii\filters\AccessControl;
 use app\models\CaregiverSearch;
+use Exception;
 use yii\data\ArrayDataProvider;
 use yii\web\NotFoundHttpException;
 
@@ -309,5 +308,4 @@ class CaregiverController extends Controller
         } 
 
     }
-    
 }

@@ -33,9 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'idUtente',
             // 'idLogopedista',
             'idCaregiver',
-            // 'nomeUtente',
-            // 'cognomeUtente',
-            // 'dataDiagnosi',
+            'nomeUtente',
+            'cognomeUtente',
+            'dataDiagnosi',
             // 'descrizioneDiagnosi',
             [
                 'class' => ActionColumn::className(),

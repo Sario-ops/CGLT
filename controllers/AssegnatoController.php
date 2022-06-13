@@ -2,14 +2,11 @@
 
 namespace app\controllers;
 
-use Yii;
-use yii\web\Controller;
 use app\models\Assegnato;
-use yii\filters\VerbFilter;
-use app\models\DiagnosiSearch;
 use app\models\AssegnatoSearch;
-use yii\data\ArrayDataProvider;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
 /**
  * AssegnatoController implements the CRUD actions for Assegnato model.
@@ -41,29 +38,13 @@ class AssegnatoController extends Controller
      */
     public function actionIndex()
     {
-        /*
         $searchModel = new AssegnatoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]); */
-
-        $model = $this->findModel(Yii::$app->logopedista->identity->username)->assegnato;
-        $searchModel = new AssegnatoSearch();
-        $dataProvider = new ArrayDataProvider([
-            'key' => 'id',
-            'allModels' => $model,
-            'sort' => [
-            'attributes' => ['id',
-            'idTerapia','idEsercizio',
-            'risposta','stato','valutazione'],
-            ]
         ]);
-       
-        return $this->render('index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
-
     }
 
     /**

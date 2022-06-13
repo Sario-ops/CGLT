@@ -22,10 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php echo $this->render('../terapia/_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -35,18 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Terapia $model, $key, $index, $column) {
-                    /* if( $action == 'view') {
-                        return Url::toRoute('/terapia\view', ['/terapia\view', 'ID' => $model->ID], ['title' => Yii::t('yii', '/terapia\view')]);
-                    }
-                    if( $action == 'update') {
-                        return Url::toRoute('/terapia\update', ['ID' => $model->ID]);
-                    } */
-                    if ($action !== 'delete') {
-                        return Url::toRoute([$action, 'ID' => $model->idUtente]);
-                    }
+                    return Url::toRoute([$action, 'ID' => $model->ID]);
                  }
             ],
         ],
     ]); ?>
+
 
 </div>

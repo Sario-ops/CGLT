@@ -34,4 +34,3 @@ iframe {
 a:not([href]):not([class]) {
     display: none;
 }
-

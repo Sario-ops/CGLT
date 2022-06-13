@@ -40,6 +40,7 @@ class Diagnosi extends \yii\db\ActiveRecord
             [['dataDiagnosi'], 'safe'],
             [['idUtente'], 'string', 'max' => 20],
             [['idLogopedista', 'idCaregiver'], 'string', 'max' => 30],
+            [['nomeUtente', 'cognomeUtente'], 'string', 'max' => 15],
             [['descrizioneDiagnosi'], 'string', 'max' => 16000],
             [['idLogopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::className(), 'targetAttribute' => ['idLogopedista' => 'username']],
             [['idUtente'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::className(), 'targetAttribute' => ['idUtente' => 'username']],
@@ -57,6 +58,8 @@ class Diagnosi extends \yii\db\ActiveRecord
             'idUtente' => 'Id Utente',
             'idLogopedista' => 'Id Logopedista',
             'idCaregiver' => 'Id Caregiver',
+            'nomeUtente' => 'Nome Utente',
+            'cognomeUtente' => 'Cognome Utente',
             'dataDiagnosi' => 'Data Diagnosi',
             'descrizioneDiagnosi' => 'Descrizione Diagnosi',
         ];
