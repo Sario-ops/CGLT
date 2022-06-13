@@ -64,8 +64,8 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'dataNascita' => 'Data Nascita',
             'password' => 'Password',
             'authkey' => 'Authkey',
-            'idCaregiver' => 'Id Caregiver',
-            'idLogopedista' => 'Id Logopedista',
+            'idCaregiver' => 'Email Caregiver',
+            'idLogopedista' => 'Email Logopedista',
         ];
     }
 

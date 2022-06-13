@@ -17,7 +17,8 @@ class VisitaSearch extends Visita
     public function rules()
     {
         return [
-            [['idUtente', 'idLogopedista', 'dataPrenotazione', 'dataVisita', 'oraVisita'], 'safe'],
+            [['id'], 'integer'],
+            [['idUtente', 'idLogopedista', 'idCaregiver', 'nomeUtente', 'cognomeUtente', 'dataPrenotazione', 'dataVisita', 'oraVisita'], 'safe'],
         ];
     }
 
@@ -57,6 +58,7 @@ class VisitaSearch extends Visita
 
         // grid filtering conditions
         $query->andFilterWhere([
+            'id' => $this->id,
             'dataPrenotazione' => $this->dataPrenotazione,
             'dataVisita' => $this->dataVisita,
             'oraVisita' => $this->oraVisita,

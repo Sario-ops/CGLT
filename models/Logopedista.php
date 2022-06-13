@@ -92,6 +92,35 @@ class Logopedista extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
         return $this->authkey === $authKey;
     }
 
+        /**
+     * Gets query for [[Visitas]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVisitas()
+    {
+        return $this->hasMany(Visita::className(), ['idLogopedista' => 'username']);
+    }
+
+        /**
+     * Gets query for [[Diagnosis]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDiagnosis()
+    {
+        return $this->hasMany(Diagnosi::className(), ['idLogopedista' => 'username']);
+    }
+
+    /**
+     * Gets query for [[Terapias]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTerapias()
+    {
+        return $this->hasMany(Terapia::className(), ['idLogopedista' => 'username']);
+    }
 
     /**
      * Finds user by username

@@ -10,35 +10,32 @@ use yii\grid\ActionColumn;
 /* @var $searchModel app\models\AddressSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Addresses';
+$this->title = 'Quesiti';
+$this->params['breadcrumbs'][] = ['label' => 'Esercizi', 'url' => ['/esercizio/index']];
+$this->params['breadcrumbs'][] = ['label' => "$idEsercizio", 'url' => ['/esercizio/view', 'id' => $idEsercizio]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="address-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Address', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'esercizio_id',
+            //'id',
+            //'esercizio_id',
             'domanda',
             'opzioni_risposta',
             'risposta_corretta',
-            //'domanda_immagine',
+            'domanda_immagine',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Quesito $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
+                    if($action === 'view') {
+                        return Url::toRoute([$action, 'id' => $model->id]);
+                    }
                  }
             ],
         ],

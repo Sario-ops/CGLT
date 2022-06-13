@@ -7,20 +7,21 @@ use Yii;
 /**
  * This is the model class for table "visita".
  *
- * @property string $idUtente
- * @property string $idLogopedista
- * @property string $idCaregiver
+ * @property int $id
+ * @property string|null $idUtente
+ * @property string|null $idLogopedista
+ * @property string|null $idCaregiver
  * @property string|null $nomeUtente
  * @property string|null $cognomeUtente
  * @property string|null $dataPrenotazione
- * @property string $dataVisita
- * @property string $oraVisita
+ * @property string|null $dataVisita
+ * @property string|null $oraVisita
  *
  * @property Caregiver $idCaregiver0
  * @property Logopedista $idLogopedista0
  * @property Utente $idUtente0
  */
-class Visita extends \yii\db\ActiveRecord
+class Visita extends \yii\db\ActiveRecord 
 {
     /**
      * {@inheritdoc}
@@ -60,8 +61,7 @@ class Visita extends \yii\db\ActiveRecord
             'stato' => 'Stato',
         ];
     }
-
-
+    
     /**
      * Gets query for [[IdLogopedista0]].
      *

@@ -3,10 +3,12 @@
 namespace app\controllers;
 
 use app\models\Quesito;
-use app\models\QuesitoSearch;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use app\models\Esercizio;
 use yii\filters\VerbFilter;
+use app\models\QuesitoSearch;
+use yii\data\ArrayDataProvider;
+use yii\web\NotFoundHttpException;
 
 /**
  * QuesitoController implements the CRUD actions for Quesito model.
@@ -36,13 +38,19 @@ class QuesitoController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($idEsercizio)
     {
-        $searchModel = new QuesitoSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $esercizio = Esercizio::findOne(['id' => $idEsercizio]);
+        $dataProvider = new ArrayDataProvider([
+            'key'=>'id',
+            'allModels' => $esercizio->quesitos,
+            'sort' => [
+                'attributes' => ['id', 'domanda','opzioni_risposta', 'esercizio_id', 'risposta_corretta', 'domanda_immagine'],
+            ],
+        ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'idEsercizio' => $idEsercizio,
             'dataProvider' => $dataProvider,
         ]);
     }

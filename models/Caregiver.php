@@ -119,4 +119,14 @@ class Caregiver extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfa
     {
         return $this->password === $password;
     }
+
+    /**
+     * Gets query for [[Terapias]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTerapias()
+    {
+        return $this->hasMany(Terapia::className(), ['idLogopedista' => 'username']);
+    }
 }

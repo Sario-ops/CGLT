@@ -19,12 +19,6 @@ $username = $request->get('username');
 
     <?= $form->field($model, 'idLogopedista')->textInput(['value' => $username, 'readonly'=> true]) ?>
 
-    <?= $form->field($model, 'idCaregiver')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'nomeUtente')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'cognomeUtente')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'dataDiagnosi')->textInput(['placeholder' => 'YYYY-MM-DD']) ?>
 
     <?= $form->field($model, 'descrizioneDiagnosi')->textArea(['rows' => 5]) ?>

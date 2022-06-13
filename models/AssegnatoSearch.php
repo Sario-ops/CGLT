@@ -2,9 +2,10 @@
 
 namespace app\models;
 
+use Yii;
 use yii\base\Model;
-use yii\data\ActiveDataProvider;
 use app\models\Assegnato;
+use yii\data\ActiveDataProvider;
 
 /**
  * AssegnatoSearch represents the model behind the search form of `app\models\Assegnato`.

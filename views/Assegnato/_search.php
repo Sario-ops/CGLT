@@ -21,9 +21,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idEsercizio') ?>
 
-    <?= $form->field($model, 'risposta') ?>
+    <?php // $form->field($model, 'risposta') ?>
 
-    <?= $form->field($model, 'stato') ?>
+    <?php // $form->field($model, 'stato') ?>
 
     <?php // echo $form->field($model, 'valutazione') ?>
 
