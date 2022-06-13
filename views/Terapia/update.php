@@ -5,8 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Terapia */
 
+$request = Yii::$app->request;
+$ID = $request->get('ID');
+
+
 $this->title = 'Update Terapia: ' . $model->ID;
-$this->params['breadcrumbs'][] = ['label' => 'Terapias', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->ID, 'url' => ['view', 'ID' => $model->ID]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

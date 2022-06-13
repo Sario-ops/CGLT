@@ -21,12 +21,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idLogopedista') ?>
 
-    <?= $form->field($model, 'idCaregiver') ?>
-
-    <?= $form->field($model, 'nomeUtente') ?>
-
-    <?= $form->field($model, 'cognomeUtente') ?>
-
     <?= $form->field($model, 'dataDiagnosi') ?>
 
     <?= $form->field($model, 'descrizioneDiagnosi') ?>

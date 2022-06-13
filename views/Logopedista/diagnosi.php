@@ -32,9 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'idUtente',
             // 'idLogopedista',
-            'idCaregiver',
-            'nomeUtente',
-            'cognomeUtente',
             'dataDiagnosi',
             // 'descrizioneDiagnosi',
             [

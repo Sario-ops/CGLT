@@ -11,6 +11,7 @@ use app\models\Esercizio;
 use app\models\LoginForm;
 use yii\filters\VerbFilter;
 use app\models\UtenteSearch;
+use app\models\TerapiaSearch;
 use yii\filters\AccessControl;
 use app\models\AssegnatoSearch;
 use app\models\EsercizioSearch;
@@ -290,7 +291,21 @@ class UtenteController extends Controller
         return $this->render('terapia', ['dataProvider' => $dataProvider]);
     }
 
+    /* public function actionRecap() {
 
+        $utente = $this->findModel(Yii::$app->utente->identity->username);
+
+        $dataProvider = new ArrayDataProvider([
+            'key'=>'idEsercizio',
+            'allModels' => $utente->getEserciziTerapia('da eseguire'),
+            'sort' => [
+                'attributes' => ['id','idTerapia', 'idEsercizio', 'stato', 'valutazione', 'risposta'],
+            ],
+        ]);
+
+         return $this->render('recap', ['dataProvider' => $dataProvider]);
+    } */
+    
     public function actionEseguiassegnato($idAssegnato, $assistenza=false) {
 
         $assegnato = $this->findAssegnato($idAssegnato);
@@ -325,3 +340,4 @@ class UtenteController extends Controller
         return $this->render('execute', ['esercizio' => $exercise, 'quesiti' => $exercise->quesitos]);
     }
 }
+

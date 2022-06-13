@@ -14,9 +14,7 @@ use yii\bootstrap4\ActiveForm;
 $this->title = 'UTENTE';
 ?>
 <div class="utente-index">
-    <h1><?=Html::encode($model->nome), ' ', Html::encode($model->cognome) ?></h1>
-
-
+    <h1><?='Benvenuto, ' ,Html::encode($model->nome), ' ', Html::encode($model->cognome) ?></h1>
     <table id="utente-activity">
         <tr>
             <td>

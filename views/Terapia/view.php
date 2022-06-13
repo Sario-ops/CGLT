@@ -6,8 +6,11 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Terapia */
 
+$request = Yii::$app->request;
+$ID = $request->get('ID');
+
+
 $this->title = $model->ID;
-$this->params['breadcrumbs'][] = ['label' => 'Terapia', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

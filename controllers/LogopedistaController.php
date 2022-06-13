@@ -208,14 +208,6 @@ class LogopedistaController extends Controller
 
     public function actionVisita()
     {
-        /* $searchModel = new VisitaSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]); */
-        
         $model = $this->findModel(Yii::$app->logopedista->identity->username)->visitas;
         $searchModel = new VisitaSearch();
         $dataProvider = new ArrayDataProvider([
@@ -240,14 +232,6 @@ class LogopedistaController extends Controller
 
     public function actionDiagnosi()
     {
-        /* $searchModel = new VisitaSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]); */
-        
         $model = $this->findModel(Yii::$app->logopedista->identity->username)->diagnosis;
         $searchModel = new DiagnosiSearch();
         $dataProvider = new ArrayDataProvider([
@@ -272,14 +256,6 @@ class LogopedistaController extends Controller
 
     public function actionTerapia()
     {
-        /* $searchModel = new VisitaSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]); */
-        
         $model = $this->findModel(Yii::$app->logopedista->identity->username)->terapias;
         $searchModel = new TerapiaSearch();
         $dataProvider = new ArrayDataProvider([
@@ -294,6 +270,7 @@ class LogopedistaController extends Controller
         ]);
 
         return $this->render('/terapia\index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
+
     }
 
 }

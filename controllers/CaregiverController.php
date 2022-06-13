@@ -11,11 +11,12 @@ use app\models\Caregiver;
 use app\models\Esercizio;
 use app\models\LoginForm;
 use yii\filters\VerbFilter;
+use app\models\TerapiaSearch;
 use yii\filters\AccessControl;
 use app\models\CaregiverSearch;
-use Exception;
 use yii\data\ArrayDataProvider;
 use yii\web\NotFoundHttpException;
+use Exception;
 
 /**
  * CaregiverController implements the CRUD actions for Caregiver model.
@@ -308,4 +309,5 @@ class CaregiverController extends Controller
         } 
 
     }
+    
 }

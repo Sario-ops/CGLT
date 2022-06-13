@@ -56,8 +56,7 @@ class DiagnosiController extends Controller
             'allModels' => $model,
             'sort' => [
             'attributes' => ['id',
-            'idUtente','idLogopedista','idCaregiver',
-            'nomeUtente','cognomeUtente',
+            'idUtente','idLogopedista',
             'dataDiagnosi','descrizioneDiagnosi'],
             ]
         ]);
