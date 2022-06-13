@@ -35,8 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Terapia $model, $key, $index, $column) {
-                    if ($action !== 'delete') {
-                        return Url::toRoute([$action, 'ID' => $model->idUtente]);
+                    if ($action == 'view') {
+                        return Url::toRoute(['../terapia\visualizza', 'ID' => $model->ID]);
                     }
                  }
             ],

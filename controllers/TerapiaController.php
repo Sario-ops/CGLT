@@ -71,6 +71,13 @@ class TerapiaController extends Controller
         ]);
     }
 
+    public function actionVisualizza($ID)
+    {
+        return $this->render('visualizza', [
+            'model' => $this->findModel($ID),
+        ]);
+    }
+
     /**
      * Creates a new Terapia model.
      * If creation is successful, the browser will be redirected to the 'view' page.

@@ -13,20 +13,12 @@ $this->title = $model->ID;
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="terapia-view">
+<div class="terapia-visualizza">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('<< Back', ['/logopedista\terapia'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Update', ['update', 'ID' => $model->ID], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'ID' => $model->ID], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('<< Back', ['/caregiver\terapia'], ['class' => 'btn btn-danger',]) ?>
     </p>
 
     <?= DetailView::widget([
@@ -35,11 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'idUtente',
             'idLogopedista',
             'ID',
-            'scadenza'
         ],
     ]) ?>
      
-     <?= Html::a('Aggiungi esercizi', ['/assegnato\create', 'ID' => $model->ID], ['class' => 'btn btn-primary']) ?>
      <?= Html::a('Esercizi assegnati', ['/assegnato\index', 'idTerapia' => $model->ID], ['class' => 'btn btn-primary']) ?>
 
     </div>
