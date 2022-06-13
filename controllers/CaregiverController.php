@@ -322,6 +322,7 @@ class CaregiverController extends Controller
             if ($model->load($this->request->post())) {
                 $model->stato=0;
                 $model->save();
+               // AccountNotification::create(AccountNotification::CONFERMA_VISITA, ['visita' => $model->id])->send(((Logopedista::findOne(['username'=>$utente->idLogopedista]))->username));
                 return $this->redirect(['..\visita/view', 'idUtente' => $model->idUtente, 'idLogopedista' => $model->idLogopedista, 'dataVisita' => $model->dataVisita, 'oraVisita' => $model->oraVisita]);
             }
         } else {
