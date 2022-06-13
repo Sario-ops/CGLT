@@ -69,7 +69,7 @@ class UtenteController extends Controller
     {
         // $searchModel = new UtenteSearch();
         // $dataProvider = $searchModel->search($this->request->queryParams);
-
+        
         $model = $this->findModel(Yii::$app->utente->identity->username);
 
         return $this->render('index', [

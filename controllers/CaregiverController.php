@@ -323,8 +323,8 @@ class CaregiverController extends Controller
             if ($model->load($this->request->post())) {
                 $model->stato=0;
                 $model->save();
-               // AccountNotification::create(AccountNotification::CONFERMA_VISITA, ['visita' => $model->id])->send(((Logopedista::findOne(['username'=>$utente->idLogopedista]))->username));
-                return $this->redirect(['..\visita/view', 'idUtente' => $model->idUtente, 'idLogopedista' => $model->idLogopedista, 'dataVisita' => $model->dataVisita, 'oraVisita' => $model->oraVisita]);
+                AccountNotification::create(AccountNotification::CONFERMA_VISITA, ['user' => $model])->send(((Logopedista::findOne(['username'=>$model->idLogopedista]))->username));
+                return $this->redirect(['..\visita/view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -358,6 +358,5 @@ class CaregiverController extends Controller
         ]);
 
         return $this->render('/terapia\index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
-
     }
 }

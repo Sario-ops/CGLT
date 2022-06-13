@@ -216,7 +216,7 @@ class LogopedistaController extends Controller
             if ($model->load($this->request->post())) {
                 $model->stato=1;
                 $model->save();
-                return $this->redirect(['..\visita/view', 'idUtente' => $model->idUtente, 'idLogopedista' => $model->idLogopedista, 'dataVisita' => $model->dataVisita, 'oraVisita' => $model->oraVisita]);
+                return $this->redirect(['..\visita/view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -230,11 +230,17 @@ class LogopedistaController extends Controller
  
     public function actionVisita()
     {
-        $model = $this->findModel(Yii::$app->logopedista->identity->username)->visitas;
+        $confermate=[];
+        $visite = $this->findModel(Yii::$app->logopedista->identity->username)->visitas;
+        foreach($visite as $visita){
+            if($visita->stato==1){
+                array_push($confermate,$visita);
+            }
+        }
         $searchModel = new VisitaSearch();
         $dataProvider = new ArrayDataProvider([
             'key' => 'id',
-            'allModels' => $model,
+            'allModels' => $confermate,
             'sort' => [
                 'attributes' => [            
                 'id',
@@ -295,4 +301,11 @@ class LogopedistaController extends Controller
 
     }
 
+    public function actionConfermavisita($id)
+    {
+        $visita=Visita::findOne(['id'=>$id]);
+        $visita->stato=1;
+        $visita->save();
+        return $this->redirect('visita');
+    } 
 }

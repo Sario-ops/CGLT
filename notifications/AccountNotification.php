@@ -28,7 +28,7 @@ class AccountNotification extends Notification
             case self::ESERCIZIO_ESEGUITO:
                 return Yii::t('app', 'Esercizio terapia #{user} eseguito', ['user' => $this->user->idTerapia]);
             case self::CONFERMA_VISITA:
-                return Yii::t('app', 'Richiesta visita {visita}', ['visita' => '#'.$this->user->id]);
+                return Yii::t('app', 'Richiesta visita {user}', ['user' => '#'.$this->user->id]);
         }
     }
 
@@ -41,6 +41,8 @@ class AccountNotification extends Notification
                 return ['/caregiver/esercizi_da_validare', 'id' => $this->user->id];
             case self::ESERCIZIO_ESEGUITO:
                 return ['/caregiver/esercizi_da_validare', 'id' => $this->user->id];
+            case self::CONFERMA_VISITA:
+                return ['/visita/view', 'id'=> $this->user->id];
         }   
     }
 }

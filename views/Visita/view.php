@@ -23,6 +23,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?php if($model->stato == 0):?>
+        
+        <?= Html::a('Conferma visita',['/logopedista/confermavisita','id'=>$model->id], ['class' => 'btn btn-primary'])?>
+
+        <?php endif;?>
     </p>
 
     <?= DetailView::widget([
