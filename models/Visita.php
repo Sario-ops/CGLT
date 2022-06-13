@@ -38,6 +38,7 @@ class Visita extends \yii\db\ActiveRecord
     {
         return [
             [['dataPrenotazione', 'dataVisita', 'oraVisita'], 'safe'],
+            [['stato'], 'integer'],
             [['idUtente'], 'string', 'max' => 20],
             [['idLogopedista'], 'string', 'max' => 30],
             [['idLogopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::className(), 'targetAttribute' => ['idLogopedista' => 'username']],
@@ -57,6 +58,7 @@ class Visita extends \yii\db\ActiveRecord
             'dataPrenotazione' => 'Data Prenotazione',
             'dataVisita' => 'Data Visita',
             'oraVisita' => 'Ora Visita',
+            'stato' => 'Stato',
         ];
     }
     
@@ -78,5 +80,15 @@ class Visita extends \yii\db\ActiveRecord
     public function getIdUtente0()
     {
         return $this->hasOne(Utente::className(), ['username' => 'idUtente']);
+    }
+
+    public function setData($data)
+    {
+        $this->dataPrenotazione=$data;
+    }
+
+    public function setStato($stato)
+    {
+        $this->stato=$stato;
     }
 }

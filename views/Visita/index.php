@@ -31,15 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'idUtente',
-            // 'idLogopedista',
-            'idCaregiver',
-            //'nomeUtente',
-            //'cognomeUtente',
-            //'dataPrenotazione',
+            'idLogopedista',
+            'dataPrenotazione',
             'dataVisita',
             'oraVisita',
             [
-                'class' => ActionColumn::className(),
+                'class' => ActionColumn::class,
                 'urlCreator' => function ($action, Visita $model, $key, $index, $column) {
                     if( $action == 'delete') {
                         return Url::toRoute([$action, 'id' => $model->id]);

@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Utente;
+use app\models\Visita;
 use app\models\Terapia;
 use yii\web\Controller;
 use app\models\Assegnato;
@@ -115,7 +116,7 @@ class CaregiverController extends Controller
     public function actionCreate()
     {
         $model = new Caregiver();
-
+        $model->setauthkey(Yii::$app->security->generateRandomString(10));
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['index']);
@@ -313,6 +314,28 @@ class CaregiverController extends Controller
 
     }
 
+    public function actionVisita()
+    {
+        $model = new Visita();
+        $model->setData(date("Y-m-d"));
+        
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                $model->stato=0;
+                $model->save();
+                AccountNotification::create(AccountNotification::CONFERMA_VISITA, ['user' => $model])->send(((Logopedista::findOne(['username'=>$model->idLogopedista]))->username));
+                return $this->redirect(['..\visita/view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('..\visita/create', [
+            'model' => $model,
+            'username' => null,
+        ]);
+    }
+
     public function actionTerapia()
     {
         $utenti = $this->findModel(Yii::$app->caregiver->identity->username)->utentis;
@@ -337,5 +360,4 @@ class CaregiverController extends Controller
         return $this->render('terapia', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
 
     }
-    
 }

@@ -16,7 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -24,6 +23,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?php if($model->stato == 0):?>
+        
+        <?= Html::a('Conferma visita',['/logopedista/confermavisita','id'=>$model->id], ['class' => 'btn btn-primary'])?>
+
+        <?php endif;?>
     </p>
 
     <?= DetailView::widget([
@@ -32,12 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'idUtente',
             'idLogopedista',
-            'idCaregiver',
-            'nomeUtente',
-            'cognomeUtente',
             'dataPrenotazione',
             'dataVisita',
             'oraVisita',
+            'stato',
         ],
     ]) ?>
 

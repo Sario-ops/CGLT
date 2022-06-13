@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\LoginForm;
 use Yii;
 use app\models\Visita;
 use yii\web\Controller;
@@ -24,7 +25,7 @@ class VisitaController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -86,10 +87,12 @@ class VisitaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+
+    /*public function actionCreate()
     {
         $model = new Visita();
-
+        $model->setData(date("Y-m-d"));
+        
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -101,7 +104,7 @@ class VisitaController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
-    }
+    }*/
 
     /**
      * Updates an existing Visita model.

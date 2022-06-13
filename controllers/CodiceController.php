@@ -2,19 +2,16 @@
 
 namespace app\controllers;
 
-use Yii;
-use Exception;
-use app\models\Terapia;
+use app\models\Codice;
+use app\models\CodiceSearch;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use app\models\TerapiaSearch;
 use yii\web\NotFoundHttpException;
-use yii\data\ArrayDataProvider;
+use yii\filters\VerbFilter;
 
 /**
- * TerapiaController implements the CRUD actions for Terapia model.
+ * CodiceController implements the CRUD actions for Codice model.
  */
-class TerapiaController extends Controller
+class CodiceController extends Controller
 {
     /**
      * @inheritDoc
@@ -35,85 +32,69 @@ class TerapiaController extends Controller
     }
 
     /**
-     * Lists all Terapia models.
+     * Lists all Codice models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $model = $this->findModel(Yii::$app->logopedista->identity->username)->idLogopedista;
-        $searchModel = new TerapiaSearch();
-        $dataProvider = new ArrayDataProvider([
-            'key' => 'ID',
-            'allModels' => $model,
-            'sort' => [
-                'attributes' => [            
-                'ID',
-                'idUtente',
-                'idLogopedista',
-            ]
-        ]
-    ]);
-       
-        return $this->render('index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
+        $searchModel = new CodiceSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
-     * Displays a single Terapia model.
-     * @param int $ID ID
+     * Displays a single Codice model.
+     * @param string $codice Codice
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($ID)
+    public function actionView($codice)
     {
         return $this->render('view', [
-            'model' => $this->findModel($ID),
-        ]);
-    }
-
-    public function actionVisualizza($ID)
-    {
-        return $this->render('visualizza', [
-            'model' => $this->findModel($ID),
+            'model' => $this->findModel($codice),
         ]);
     }
 
     /**
-     * Creates a new Terapia model.
+     * Creates a new Codice model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        try
-        {
-        $model = new Terapia();
+        $model = new Codice();
 
+        if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'ID' => $model->ID]);
+                return $this->redirect(['view', 'codice' => $model->codice]);
             }
-        } catch(Exception $e)
-        {
-            Yii::$app->session->setFlash('error', "Data non valida");
-        }  
+        } else {
+            $model->loadDefaultValues();
+        }
+
         return $this->render('create', [
             'model' => $model,
-        ]);            
+        ]);
     }
 
     /**
-     * Updates an existing Terapia model.
+     * Updates an existing Codice model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $ID ID
+     * @param string $codice Codice
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($ID)
+    public function actionUpdate($codice)
     {
-        $model = $this->findModel($ID);
+        $model = $this->findModel($codice);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'ID' => $model->ID]);
+            return $this->redirect(['view', 'codice' => $model->codice]);
         }
 
         return $this->render('update', [
@@ -122,33 +103,32 @@ class TerapiaController extends Controller
     }
 
     /**
-     * Deletes an existing Terapia model.
+     * Deletes an existing Codice model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $ID ID
+     * @param string $codice Codice
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($ID)
+    public function actionDelete($codice)
     {
-        $this->findModel($ID)->delete();
+        $this->findModel($codice)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Terapia model based on its primary key value.
+     * Finds the Codice model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $ID ID
-     * @return Terapia the loaded model
+     * @param string $codice Codice
+     * @return Codice the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($ID)
+    protected function findModel($codice)
     {
-        if (($model = Terapia::findOne(['ID' => $ID])) !== null) {
+        if (($model = Codice::findOne(['codice' => $codice])) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
 }

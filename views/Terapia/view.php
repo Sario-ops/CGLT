@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'idUtente',
             'idLogopedista',
             'ID',
+            'scadenza'
         ],
     ]) ?>
      

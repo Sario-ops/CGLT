@@ -33,11 +33,12 @@ class Terapia extends \yii\db\ActiveRecord
     {
         return [
             [['ID'], 'required'],
+            [['scadenza'],'required'],
             [['idUtente', 'idLogopedista'], 'string', 'max' => 30],
             [['ID'], 'string', 'max' => 5],
             [['ID'], 'unique'],
-            [['idLogopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::className(), 'targetAttribute' => ['idLogopedista' => 'username']],
-            [['idUtente'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::className(), 'targetAttribute' => ['idUtente' => 'username']],
+            [['idLogopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::class, 'targetAttribute' => ['idLogopedista' => 'username']],
+            [['idUtente'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::class, 'targetAttribute' => ['idUtente' => 'username']],
         ];
     }
 
@@ -50,8 +51,10 @@ class Terapia extends \yii\db\ActiveRecord
             'idUtente' => 'Id Utente',
             'idLogopedista' => 'Id Logopedista',
             'ID' => 'ID',
+            'scadenza' => 'Scadenza',
         ];
     }
+
 
     /**
      * Gets query for [[Assegnatos]].

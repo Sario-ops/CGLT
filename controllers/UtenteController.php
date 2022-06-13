@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use Yii;
+use Exception;
+use app\models\Codice;
 use app\models\Utente;
 use yii\web\Controller;
 use app\models\Assegnato;
@@ -42,7 +44,7 @@ class UtenteController extends Controller
                         ],
                         [
                             'allow' => true,
-                            'actions' => ['login','create'],
+                            'actions' => ['login','create','codice'],
                             'roles' => ['?'],
     
                         ],
@@ -67,7 +69,7 @@ class UtenteController extends Controller
     {
         // $searchModel = new UtenteSearch();
         // $dataProvider = $searchModel->search($this->request->queryParams);
-
+        
         $model = $this->findModel(Yii::$app->utente->identity->username);
 
         return $this->render('index', [
@@ -112,12 +114,13 @@ class UtenteController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($utente,$logopedista,$codice)
     {
         $model = new Utente();
-
+        $model->setauthkey(Yii::$app->security->generateRandomString(10));
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
+                Codice::findOne(['codice'=>$codice])->delete();
                 return $this->redirect(['view', 'username' => $model->username]);
             }
         } else {
@@ -126,6 +129,8 @@ class UtenteController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'utente' => $utente,
+            'logopedista' => $logopedista,
         ]);
     }
 
@@ -340,5 +345,22 @@ class UtenteController extends Controller
         }
         return $this->render('execute', ['esercizio' => $exercise, 'quesiti' => $exercise->quesitos]);
     }
-}
 
+
+    public function actionCodice() 
+    {
+        $model = new \app\models\Codice();
+        try{
+            if ($model->load(Yii::$app->request->post())) {
+                $codice = Codice::findOne(['codice'=>$model->codice]);
+            return $this->redirect(['create', 'utente'=>$codice->utente, 'logopedista'=>$codice->logopedista,'codice'=>$model->codice]);
+            }
+        }catch(Exception $e){
+            Yii::$app->session->setFlash('error', "Codice non valido");
+        }
+        return $this->render('codice', [
+            'model' => $model,
+        ]);
+        
+    }
+}

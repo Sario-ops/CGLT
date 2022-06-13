@@ -17,9 +17,12 @@ $this->title = 'Caregiver';
 <div class="site-index">
 
     <h1><?= Html::encode($model->nome),' ', Html::encode($model->cognome) ?></h1>
-
-    <table id="caregiver-activity">
+    
+    <table id="logopedista-activity">
         <tr>
+            <td>
+                <?= Html::a('RICHIEDI VISITA', ['visita'], ['class' => 'btn btn-primary']) ?>
+            </td>
             <td>
                 <?= Html::a('VALIDA ESERCIZI', ['esercizi_da_validare'], ['class' => 'btn btn-primary']) ?>
             </td>

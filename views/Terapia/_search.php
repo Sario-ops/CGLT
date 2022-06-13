@@ -17,13 +17,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idUtente') ?>
 
-    <?= $form->field($model, 'idLogopedista') ?>
-
     <?= $form->field($model, 'ID') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton('Cerca', ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('Azzera', ['class' => 'btn btn-outline-secondary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

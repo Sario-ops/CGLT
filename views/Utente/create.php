@@ -11,9 +11,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="utente-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
+    
     <?= $this->render('_form', [
         'model' => $model,
+        'utente' => $utente,
+        'logopedista' => $logopedista,
     ]) ?>
 
 </div>

@@ -39,7 +39,7 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['username'], 'required'],
+            [['username', 'idCaregiver'], 'required'],
             [['dataNascita'], 'safe'],
             [['nome', 'cognome'], 'string', 'max' => 15],
             [['cf'], 'string', 'max' => 16],
@@ -136,6 +136,11 @@ class Utente extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->password === $password;
     }
     
+    public function setAuthKey($authkey)
+    {
+        $this->authkey=$authkey;
+    }
+
     /**
      * Finds user by username
      *

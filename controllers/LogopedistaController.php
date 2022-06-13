@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Visita;
 use yii\web\Controller;
 use app\models\LoginForm;
 use app\models\Logopedista;
@@ -109,7 +110,7 @@ class LogopedistaController extends Controller
     public function actionCreate()
     {
         $model = new Logopedista();
-
+        $model->setauthkey(Yii::$app->security->generateRandomString(10));
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['index']);
@@ -204,15 +205,42 @@ class LogopedistaController extends Controller
         Yii::$app->logopedista->logout();
 
         return $this->redirect(['site/index']);
-    }
+    }  
 
+    public function actionCreatevisita()
+    {
+        $model = new Visita();
+        $model->setData(date("Y-m-d"));
+        
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                $model->stato=1;
+                $model->save();
+                return $this->redirect(['..\visita/view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('..\visita/create', [
+            'model' => $model,
+            'username' => Yii::$app->logopedista->identity->username,
+        ]);
+    }
+ 
     public function actionVisita()
     {
-        $model = $this->findModel(Yii::$app->logopedista->identity->username)->visitas;
+        $confermate=[];
+        $visite = $this->findModel(Yii::$app->logopedista->identity->username)->visitas;
+        foreach($visite as $visita){
+            if($visita->stato==1){
+                array_push($confermate,$visita);
+            }
+        }
         $searchModel = new VisitaSearch();
         $dataProvider = new ArrayDataProvider([
             'key' => 'id',
-            'allModels' => $model,
+            'allModels' => $confermate,
             'sort' => [
                 'attributes' => [            
                 'id',
@@ -273,4 +301,11 @@ class LogopedistaController extends Controller
 
     }
 
+    public function actionConfermavisita($id)
+    {
+        $visita=Visita::findOne(['id'=>$id]);
+        $visita->stato=1;
+        $visita->save();
+        return $this->redirect('visita');
+    } 
 }

@@ -65,11 +65,7 @@ class VisitaSearch extends Visita
         ]);
 
         $query->andFilterWhere(['like', 'idUtente', $this->idUtente])
-            ->andFilterWhere(['like', 'idLogopedista', $this->idLogopedista])
-            ->andFilterWhere(['like', 'idCaregiver', $this->idCaregiver])
-            ->andFilterWhere(['like', 'nomeUtente', $this->nomeUtente])
-            ->andFilterWhere(['like', 'cognomeUtente', $this->cognomeUtente]);
-
+            ->andFilterWhere(['like', 'idLogopedista', $this->idLogopedista]);
         return $dataProvider;
     }
 }
