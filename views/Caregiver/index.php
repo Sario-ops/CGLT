@@ -21,7 +21,7 @@ $this->title = 'Caregiver';
     <table id="logopedista-activity">
         <tr>
             <td>
-                <?= Html::a('RICHIEDI VISITA', ['visita'], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('RICHIEDI VISITA', ['visita',], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
                 <?= Html::a('VALIDA ESERCIZI', ['esercizi_da_validare'], ['class' => 'btn btn-primary']) ?>

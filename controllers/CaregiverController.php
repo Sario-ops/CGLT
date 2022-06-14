@@ -324,7 +324,7 @@ class CaregiverController extends Controller
                 $model->stato=0;
                 $model->save();
                 AccountNotification::create(AccountNotification::CONFERMA_VISITA, ['user' => $model])->send(((Logopedista::findOne(['username'=>$model->idLogopedista]))->username));
-                return $this->redirect(['..\visita/view', 'id' => $model->id]);
+                return $this->redirect(['..\visita/view', 'id' => $model->id,  'tipo' =>'C']);
             }
         } else {
             $model->loadDefaultValues();

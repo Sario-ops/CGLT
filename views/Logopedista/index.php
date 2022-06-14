@@ -34,7 +34,7 @@ $this->title = 'Logopedista';
                 <?= Html::a('CREA DIAGNOSI', ['/diagnosi\create', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
-                <?= Html::a('PIANIFICA VISITA', ['Createvisita'], ['class' => 'btn btn-primary']) ?> 
+                <?= Html::a('PIANIFICA VISITA', ['createvisita'], ['class' => 'btn btn-primary']) ?> 
             </td>
         </tr>
         <tr>

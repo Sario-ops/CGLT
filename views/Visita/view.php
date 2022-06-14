@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?php if($model->stato == 0):?>
+        <?php if($model->stato == 0 && Yii::$app->request->get('tipo') != 'C'):?>
         
         <?= Html::a('Conferma visita',['/logopedista/confermavisita','id'=>$model->id], ['class' => 'btn btn-primary'])?>
 
