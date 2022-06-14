@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\CodiceRecupera;
 use Yii;
 use app\models\Visita;
 use yii\web\Controller;
@@ -15,6 +16,7 @@ use app\models\DiagnosiSearch;
 use yii\filters\AccessControl;
 use yii\data\ArrayDataProvider;
 use app\models\LogopedistaSearch;
+use Exception;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -38,7 +40,7 @@ class LogopedistaController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['login','create'],
+                        'actions' => ['login', 'create', 'recupera', 'cambiopassword'],
                         'roles' => ['?'],
 
                     ],
@@ -271,15 +273,12 @@ class LogopedistaController extends Controller
                 'idUtente',
                 'idLogopedista',
                 'idCaregiver',
-                'nomeUtente',
-                'cognomeUtente',
-                'dataPrenotazione',
-                'dataVisita',
-                'oraVisita'],
+                'dataDiagnosi',
+                ],
             ]
         ]);
 
-        return $this->render('/diagnosi\index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
+        return $this->render('/diagnosi\index', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider ]);
     }
 
     public function actionTerapia()
@@ -307,5 +306,52 @@ class LogopedistaController extends Controller
         $visita->stato=1;
         $visita->save();
         return $this->redirect('visita');
-    } 
+    }
+
+    public function actionRecupera() {
+
+        $logopedista = new Logopedista();
+        if($logopedista->load(Yii::$app->request->post())) {
+
+            try{
+                $logopedista = $this->findModel(['username' => $logopedista->username]);
+                Yii::$app->mailer->compose()
+                ->setTo($logopedista->username)
+                ->setFrom('clgtpronuntia@gmail.com')
+                ->setSubject('Password Dimenticata')
+                ->setTextBody("Questo è il tuo codice $logopedista->password")
+                ->send();
+                return $this->redirect(['cambiopassword', 'email' => $logopedista->username]);
+
+            } catch(Exception $e) {
+                Yii::$app->session->setFlash('error', "Impossibile inviare il codice di cambio password");
+            }
+        }
+        return $this->render('../site/recoverpassword', ['model' => $logopedista]);
+    }
+
+    public function actionCambiopassword($email) {
+
+        $logopedista = $this->findModel(['username' =>$email]);
+        $oldPassword = $logopedista->password;
+        $codice = new CodiceRecupera();
+
+        try {
+            if($logopedista->load(Yii::$app->request->post()) && $codice->load(Yii::$app->request->post())) {
+    
+                if( $codice->codice == $oldPassword ) {
+                    $logopedista->save();
+                    return $this->redirect(['index']);
+                } else {
+                    Yii::$app->session->setFlash('error', "Codice non valido");
+                }
+            }
+
+        } catch (Exception $e) {
+            Yii::$app->session->setFlash('error', "Impossibile cambiare password");
+        }
+
+
+        return $this->render('../site/cambiapassword', ['model' => $logopedista, 'codice' => $codice ]);
+    }
 }

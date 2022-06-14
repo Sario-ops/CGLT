@@ -25,33 +25,30 @@ $this->title = 'Logopedista';
     <table id="logopedista-activity">
         <tr>
             <td>
-                <?= Html::a('CREA TERAPIA', ['/terapia\create', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('<h3>CREA TERAPIA</h3>', ['/terapia\create', 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
-                <?= Html::a('CREA ESERCIZIO', ['/esercizio'], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('<h3>CREA ESERCIZIO</h3>', ['/esercizio'], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
-                <?= Html::a('CREA DIAGNOSI', ['/diagnosi\create', 'model' => $model, 'username' => $model->username], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('<h3>MEMORIZZA DIAGNOSI</h3>', ['diagnosi'], ['class' => 'btn btn-primary']) ?>
             </td>
             <td>
-                <?= Html::a('PIANIFICA VISITA', ['createvisita'], ['class' => 'btn btn-primary']) ?> 
+                <?= Html::a('<h3>PIANIFICA VISITA</h3>', ['createvisita'], ['class' => 'btn btn-primary']) ?>
             </td>
         </tr>
         <tr>
             <td>
-                <?= Html::a('VISUALIZZA DIAGNOSI', ['diagnosi'], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('<h3>VISUALIZZA UTENTI</h3>', ['visualizza'], ['class' => 'btn btn-primary']) ?> 
             </td>
             <td>
-                <?= Html::a('VISUALIZZA UTENTI', ['visualizza'], ['class' => 'btn btn-primary']) ?> 
+                <?= Html::a('<h3>VISUALIZZA VISITE</h3>', ['visita'], ['class' => 'btn btn-primary']) ?> 
             </td>
             <td>
-                <?= Html::a('VISUALIZZA VISITE', ['visita'], ['class' => 'btn btn-primary']) ?> 
+                <?= Html::a('<h3>MONITORA TERAPIA</h3>', ['terapia'], ['class' => 'btn btn-primary']) ?> 
             </td>
             <td>
-                <?= Html::a('MONITORA TERAPIA', ['terapia'], ['class' => 'btn btn-primary']) ?> 
-            </td>
-            <td>
-                <?= Html::a('CODICI ISCRIZIONE', ['/codice', 'username' => $model->username], ['class' => 'btn btn-primary']) ?> 
+                <?= Html::a('<h3>CODICI ISCRIZIONE</h3>', ['/codice', 'username' => $model->username], ['class' => 'btn btn-primary']) ?> 
             </td>
         </tr>
     </table>

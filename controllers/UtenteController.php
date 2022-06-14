@@ -15,6 +15,7 @@ use app\models\Logopedista;
 use yii\filters\VerbFilter;
 use app\models\UtenteSearch;
 use app\models\TerapiaSearch;
+use app\models\CodiceRecupera;
 use yii\filters\AccessControl;
 use app\models\AssegnatoSearch;
 use app\models\EsercizioSearch;
@@ -44,7 +45,7 @@ class UtenteController extends Controller
                         ],
                         [
                             'allow' => true,
-                            'actions' => ['login','create','codice'],
+                            'actions' => ['login','create','codice', 'recupera', 'cambiopassword'],
                             'roles' => ['?'],
     
                         ],
@@ -362,5 +363,51 @@ class UtenteController extends Controller
             'model' => $model,
         ]);
         
+    }
+
+    public function actionRecupera() {
+
+        $utente = new Utente();
+        if($utente->load(Yii::$app->request->post())) {
+
+            try{
+                $utente = $this->findModel(['username' => $utente->username]);
+                Yii::$app->mailer->compose()
+                ->setTo($utente->idCaregiver)
+                ->setFrom('clgtpronuntia@gmail.com')
+                ->setSubject('Password Dimenticata')
+                ->setTextBody("Questo è il tuo codice $utente->password")
+                ->send();
+                return $this->redirect(['cambiopassword', 'email' => $utente->username]);
+
+            } catch(Exception $e) {
+                Yii::$app->session->setFlash('error', "Impossibile inviare il codice di cambio password");
+            }
+        }
+        return $this->render('../site/recoverpassword', ['model' => $utente]);
+    }
+
+    public function actionCambiopassword($email) {
+
+        $utente = $this->findModel(['username' =>$email]);
+        $oldPassword = $utente->password;
+        $codice = new CodiceRecupera();
+
+        try {
+            if($utente->load(Yii::$app->request->post()) && $codice->load(Yii::$app->request->post())) {
+    
+                if( $codice->codice == $oldPassword ) {
+                    $utente->save();
+                    return $this->redirect(['index']);
+                } else {
+                    Yii::$app->session->setFlash('error', "Codice non valido");
+                }
+            }
+
+        } catch (Exception $e) {
+            Yii::$app->session->setFlash('error', "Impossibile cambiare password");
+        }
+
+        return $this->render('../site/cambiapassword', ['model' => $utente, 'codice' => $codice ]);
     }
 }

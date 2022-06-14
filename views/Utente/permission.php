@@ -29,7 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="form-group">
             <div class="offset-lg-1 col-lg-11">
-                <?= Html::submitButton('Conferma', ['class' => 'btn btn-primary', 'name' => 'confirm-button']) ?>
+                <button class="btn btn-primary" id="buttonPassword" onclick="hidePassword()">Conferma</button>
+                <?= Html::submitButton('', ['class' => 'disabled', 'id' => 'submitPassw']) ?>
             </div>
         </div>
 

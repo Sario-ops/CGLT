@@ -16,3 +16,10 @@ $(function() {
         $('#submitRate').trigger('click');
     })
 })
+
+function hidePassword() {
+    let passw = $('input[type="password"]').val();
+    let obj = CryptoJS.MD5(passw);
+    $('input[type="password"]').val(obj);
+    $('#submitPassw').trigger('click');
+}

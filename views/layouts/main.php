@@ -21,6 +21,7 @@ $homeUrl = null;
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -47,7 +48,7 @@ $homeUrl = null;
                 '<li>'
                 . Html::beginForm(['/logopedista/logout'], 'post', ['class' => 'form-inline'])
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->logopedista->identity->username . ')',
+                    'Logout',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -77,7 +78,7 @@ $homeUrl = null;
                 '<li>'
                 . Html::beginForm(['/caregiver/logout'], 'post', ['class' => 'form-inline'])
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->caregiver->identity->username . ')',
+                    'Logout',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -107,7 +108,7 @@ $homeUrl = null;
                 '<li>'
                 . Html::beginForm(['/utente/logout'], 'post', ['class' => 'form-inline'])
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->utente->identity->username . ')',
+                    'Logout',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()

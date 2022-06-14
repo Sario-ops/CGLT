@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
+        <?= $form->field($model, 'password')->passwordInput(['value' => '']) ?>
 
         <?= $form->field($model, 'rememberMe')->checkbox([
             'template' => "<div class=\"offset-lg-1 col-lg-3 custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
@@ -37,10 +37,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <p>
             Non sei ancora registrato? <?= Html::a('Registrati', ['codice']) ?>
         </p>
+        <p>
+            <?= Html::a('Password dimenticata?', ['recupera']) ?>
+        </p>
 
         <div class="form-group">
             <div class="offset-lg-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <button class="btn btn-primary" id="buttonPassword" onclick="hidePassword()">Login</button>
+                <?= Html::submitButton('', ['class' => 'disabled', 'id' => 'submitPassw']) ?>
             </div>
         </div>
 

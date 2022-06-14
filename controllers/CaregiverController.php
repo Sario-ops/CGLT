@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use Exception;
 use app\models\Utente;
 use app\models\Visita;
 use app\models\Terapia;
@@ -14,11 +15,11 @@ use app\models\LoginForm;
 use app\models\Logopedista;
 use yii\filters\VerbFilter;
 use app\models\TerapiaSearch;
+use app\models\CodiceRecupera;
 use yii\filters\AccessControl;
 use app\models\CaregiverSearch;
 use yii\data\ArrayDataProvider;
 use yii\web\NotFoundHttpException;
-use Exception;
 use app\notifications\AccountNotification;
 
 /**
@@ -44,7 +45,7 @@ class CaregiverController extends Controller
                         ],
                         [
                             'allow' => true,
-                            'actions' => ['login','create'],
+                            'actions' => ['login','create', 'recupera', 'cambiopassword'],
                             'roles' => ['?'],
     
                         ],
@@ -359,5 +360,52 @@ class CaregiverController extends Controller
 
         return $this->render('terapia', ['searchModel' => $searchModel, 'dataProvider'=> $dataProvider]);
 
+    }
+
+    public function actionRecupera() {
+
+        $caregiver = new Caregiver();
+        if($caregiver->load(Yii::$app->request->post())) {
+
+            try{
+                $caregiver = $this->findModel(['username' => $caregiver->username]);
+                Yii::$app->mailer->compose()
+                ->setTo($caregiver->username)
+                ->setFrom('clgtpronuntia@gmail.com')
+                ->setSubject('Password Dimenticata')
+                ->setTextBody("Questo è il tuo codice $caregiver->password")
+                ->send();
+                return $this->redirect(['cambiopassword', 'email' => $caregiver->username]);
+
+            } catch(Exception $e) {
+                Yii::$app->session->setFlash('error', "Impossibile inviare il codice di cambio password");
+            }
+        }
+        return $this->render('../site/recoverpassword', ['model' => $caregiver]);
+    }
+
+    public function actionCambiopassword($email) {
+
+        $caregiver = $this->findModel(['username' =>$email]);
+        $oldPassword = $caregiver->password;
+        $codice = new CodiceRecupera();
+
+        try {
+            if($caregiver->load(Yii::$app->request->post()) && $codice->load(Yii::$app->request->post())) {
+    
+                if( $codice->codice == $oldPassword ) {
+                    $caregiver->save();
+                    return $this->redirect(['index']);
+                } else {
+                    Yii::$app->session->setFlash('error', "Codice non valido");
+                }
+            }
+
+        } catch (Exception $e) {
+            Yii::$app->session->setFlash('error', "Impossibile cambiare password");
+        }
+
+
+        return $this->render('../site/cambiapassword', ['model' => $caregiver, 'codice' => $codice ]);
     }
 }

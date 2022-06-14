@@ -55,7 +55,7 @@ class Diagnosi extends \yii\db\ActiveRecord
             'id' => 'ID',
             'idUtente' => 'Id Utente',
             'idLogopedista' => 'Id Logopedista',
-            'dataDiagnosi' => 'Data Diagnosi',
+            'dataDiagnosi' => 'Data Pubblicazione',
             'descrizioneDiagnosi' => 'Descrizione Diagnosi',
         ];
     }

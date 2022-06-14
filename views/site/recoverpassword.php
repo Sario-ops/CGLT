@@ -7,12 +7,11 @@
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
-$this->title = 'Login Caregiver';
+$this->title = 'Richiedi codice';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
-    <p>Perfavore, compila i seguenti campi per il login:</p>
 
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
@@ -26,24 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
         <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-        <?= $form->field($model, 'password')->passwordInput(['value' => '']) ?>
-
-        <?= $form->field($model, 'rememberMe')->checkbox([
-            'template' => "<div class=\"offset-lg-1 col-lg-3 custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-        ]) ?>
-
-        <p>
-            Non sei ancora registrato? <?= Html::a('Registrati', ['create']) ?>
-        </p>
-        <p>
-            <?= Html::a('Password dimenticata?', ['recupera']) ?>
-        </p>
+        
 
         <div class="form-group">
             <div class="offset-lg-1 col-lg-11">
-                <button class="btn btn-primary" id="buttonPassword" onclick="hidePassword()">Login</button>
-                <?= Html::submitButton('', ['class' => 'disabled', 'id' => 'submitPassw']) ?>
+                <?= Html::submitButton('Richiedi Password', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
         </div>
 

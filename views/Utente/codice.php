@@ -6,8 +6,11 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Codice */
 /* @var $form ActiveForm */
+$this->title = 'Inserisci il codice Iscrizione dato dal tuo Logopedista';
 ?>
 <div class="Utente-codice">
+
+    <h2><?= Html::encode($this->title) ?></h2>
 
     <?php $form = ActiveForm::begin(); ?>
 

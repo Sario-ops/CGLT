@@ -35,7 +35,8 @@ class Logopedista extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
             [['username'], 'required'],
             [['nome', 'cognome'], 'string', 'max' => 15],
             [['cf'], 'string', 'max' => 16],
-            [['username', 'password','authkey'], 'string', 'max' => 30],
+            [['password'], 'string', 'max' => 255],
+            [['username','authkey'], 'string', 'max' => 30],
             [['username', 'authkey'], 'unique'],
             ['username', 'email'],
         ];

@@ -22,13 +22,17 @@ iframe {
 #logopedista-activity td {
     margin: 3%;
     width: 20%;
-    padding-right: 5%;
-    padding-bottom: 5%;
+    padding-right: 2%;
+    padding-bottom: 2%;
 }
 
 #logopedista-activity td a {
     width: 100%;
     padding: 30%;
+}
+
+#logopedista-activity h3 {
+    font-size: inherit;
 }
 
 a:not([href]):not([class]) {

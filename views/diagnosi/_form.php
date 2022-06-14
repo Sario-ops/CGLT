@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$request = Yii::$app->request;
-$username = $request->get('username');
+// $request = Yii::$app->request;
+// $username = $request->get('username');
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Diagnosi */
@@ -17,9 +17,9 @@ $username = $request->get('username');
 
     <?= $form->field($model, 'idUtente')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'idLogopedista')->textInput(['value' => $username, 'readonly'=> true]) ?>
+    <?= $form->field($model, 'idLogopedista')->textInput(['value' => Yii::$app->logopedista->identity->username, 'readonly'=> true]) ?>
 
-    <?= $form->field($model, 'dataDiagnosi')->textInput(['placeholder' => 'YYYY-MM-DD']) ?>
+    <?= $form->field($model, 'dataDiagnosi')->textInput(['value' => date("Y-m-d"), 'readonly'=> true]) ?>
 
     <?= $form->field($model, 'descrizioneDiagnosi')->textArea(['rows' => 5]) ?>
 

@@ -39,7 +39,8 @@ use yii\widgets\ActiveForm;
     <br>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <button class="btn btn-primary" id="buttonPassword" onclick="hidePassword()">Registrati</button>
+        <?= Html::submitButton('', ['class' => 'disabled', 'id' => 'submitPassw']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
