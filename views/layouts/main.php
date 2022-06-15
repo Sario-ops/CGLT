@@ -131,7 +131,7 @@ $homeUrl = null;
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav'],
             'items' => [
-                ['label' => 'Guest'],
+                ['label' => ''],
             ],
         ]);
         NavBar::end();
