@@ -24,7 +24,7 @@ class m220615_184646_assegnato extends Migration
             'idTerapia' => $this->char(5)->notNull(),
             'idEsercizio' => $this->integer()->notNull(),
             'risposta' => $this->string(255),
-            'stato' => $this->string(30)->notNull()->default('da eseguire'),
+            'stato' => $this->string(30)->notNull()->defaultValue('da eseguire'),
             'valutazione' => $this->integer(),
         ], $tableOptions);
 

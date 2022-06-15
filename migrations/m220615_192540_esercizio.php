@@ -24,9 +24,9 @@ class m220615_192540_esercizio extends Migration
             'nome' => $this->string(32)->notNull(),
             'descrizione' => $this->string(255)->notNull(),
             'categoria' => $this->string(255),
-            'conCaregiver' => $this->boolean()->notNull()->default(false),
-            'rating' => $this->float()->notNull()->default(0),
-            'votazioni' => $this->integer()->notNull()->default(0),
+            'conCaregiver' => $this->boolean()->notNull()->defaultValue(false),
+            'rating' => $this->float()->notNull()->defaultValue(0),
+            'votazioni' => $this->integer()->notNull()->defaultValue(0),
             'idLogopedista' => $this->string(30),
         ], $tableOptions);
     }
@@ -36,7 +36,7 @@ class m220615_192540_esercizio extends Migration
      */
     public function safeDown()
     {
-        echo "m220615_192540_esercizio cannot be reverted.\n";
+        $this->dropTable('{{%esercizio}}');
 
         return false;
     }

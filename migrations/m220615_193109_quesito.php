@@ -43,7 +43,7 @@ class m220615_193109_quesito extends Migration
      */
     public function safeDown()
     {
-        echo "m220615_193109_quesito cannot be reverted.\n";
+        $this->dropTable('{{%quesito}}');
 
         return false;
     }

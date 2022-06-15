@@ -25,7 +25,7 @@ class m220615_194230_visita extends Migration
             'dataPrenotazione' => $this->date(),
             'dataVisita' => $this->date(),
             'oraVisita' => $this->time(),
-            'stato' => $this->boolean()->notNull()->default(false),
+            'stato' => $this->boolean()->notNull()->defaultValue(false),
         ], $tableOptions);
 
         $this->addForeignKey(
