@@ -14,8 +14,8 @@ class m220615_194847_notifications extends Migration
     {
         $tableOptions = null;
 
-        if ($this->db->driverName === 'mysql') {
-            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        if ($this->db->driverName !== 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=mysql';
         }
 
         // notifications

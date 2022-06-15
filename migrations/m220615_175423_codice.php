@@ -30,8 +30,8 @@ class m220615_175423_codice extends Migration
     {
         $tableOptions = null;
 
-        if ($this->db->driverName === 'InnoDB') {
-            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=Mysql';
+        if ($this->db->driverName !== 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=mysql';
         }
 
 
