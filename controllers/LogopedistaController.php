@@ -301,6 +301,7 @@ class LogopedistaController extends Controller
                 'attributes' => [            
                 'ID',
                 'idUtente',
+                'scadenza',
                 'idLogopedista'],
             ]
         ]);
