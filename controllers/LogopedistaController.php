@@ -17,7 +17,6 @@ use app\models\DiagnosiSearch;
 use yii\filters\AccessControl;
 use yii\data\ArrayDataProvider;
 use app\models\LogopedistaSearch;
-use Exception;
 use yii\web\NotFoundHttpException;
 
 /**
