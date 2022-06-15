@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'dataVisita')->textInput(['placeholder' => 'YYYY-MM-DD']) ?>
 
-    <?= $form->field($model, 'oraVisita')->textInput(['placeholder' => 'ora-minuto']) ?>
+    <?= $form->field($model, 'oraVisita')->textInput(['placeholder' => 'hh:mm']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

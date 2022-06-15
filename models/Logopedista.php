@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use Exception;
 use yii\base\NotSupportedException;
 
 /**
@@ -65,6 +66,19 @@ class Logopedista extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
     public function getUtentes()
     {
         return $this->hasMany(Utente::class, ['idLogopedista' => 'username']);
+    }
+
+    public function checkUtente($username)
+    {
+
+        $utenti=$this->utentes;
+        foreach($utenti as $utente){
+            if($utente->username === $username)
+            {
+                return;
+            }
+        }
+        throw new Exception('Utente non trovato');
     }
 
     public static function findIdentity($id) {

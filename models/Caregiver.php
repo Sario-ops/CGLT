@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use Exception;
 use yii\base\NotSupportedException;
 
 /**
@@ -67,7 +68,20 @@ class Caregiver extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfa
      */
     public function getUtentis()
     {
-        return $this->hasMany(Utente::className(), ['idCaregiver' => 'username']);
+        return $this->hasMany(Utente::class, ['idCaregiver' => 'username']);
+    }
+
+    public function checkUtente($username)
+    {
+
+        $utenti=$this->utentis;
+        foreach($utenti as $utente){
+            if($utente->username === $username)
+            {
+                return;
+            }
+        }
+        throw new Exception('Utente non trovato');
     }
 
     public static function findIdentity($id) {

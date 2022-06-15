@@ -317,20 +317,30 @@ class CaregiverController extends Controller
 
     public function actionVisita()
     {
+        try
+        {
         $model = new Visita();
         $model->setData(date("Y-m-d"));
-        
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
+                $this->findModel(Yii::$app->caregiver->identity->username)->checkUtente($model->idUtente);
                 $model->stato=0;
                 $model->save();
                 AccountNotification::create(AccountNotification::CONFERMA_VISITA, ['user' => $model])->send(((Logopedista::findOne(['username'=>$model->idLogopedista]))->username));
                 return $this->redirect(['..\visita/view', 'id' => $model->id,  'tipo' =>'C']);
             }
         } else {
-            $model->loadDefaultValues();
+             $model->loadDefaultValues();
         }
-
+        }
+        catch(Exception $e)
+        {
+            if($e->getMessage() != 'Utente non trovato')
+              Yii::$app->session->setFlash('error', "Data o ora non validi");
+              else{
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
         return $this->render('..\visita/create', [
             'model' => $model,
             'username' => null,

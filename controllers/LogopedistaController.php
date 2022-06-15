@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\CodiceRecupera;
 use Yii;
+use Exception;
 use app\models\Visita;
 use yii\web\Controller;
 use app\models\LoginForm;
@@ -120,7 +121,6 @@ class LogopedistaController extends Controller
         } else {
             $model->loadDefaultValues();
         }
-
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -211,11 +211,13 @@ class LogopedistaController extends Controller
 
     public function actionCreatevisita()
     {
+        try
+        {
         $model = new Visita();
         $model->setData(date("Y-m-d"));
-        
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
+                $this->findModel(Yii::$app->logopedista->identity->username)->checkUtente($model->idUtente);
                 $model->stato=1;
                 $model->save();
                 return $this->redirect(['..\visita/view', 'id' => $model->id]);
@@ -223,7 +225,15 @@ class LogopedistaController extends Controller
         } else {
             $model->loadDefaultValues();
         }
-
+        }
+        catch(Exception $e)
+        {
+            if($e->getMessage() != 'Utente non trovato')
+              Yii::$app->session->setFlash('error', "Data o ora non validi");
+              else{
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
         return $this->render('..\visita/create', [
             'model' => $model,
             'username' => Yii::$app->logopedista->identity->username,

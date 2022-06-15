@@ -63,7 +63,7 @@ class Terapia extends \yii\db\ActiveRecord
      */
     public function getAssegnatos()
     {
-        return $this->hasMany(Assegnato::className(), ['idTerapia' => 'ID']);
+        return $this->hasMany(Assegnato::class, ['idTerapia' => 'ID']);
     }
 
     /**
@@ -73,7 +73,7 @@ class Terapia extends \yii\db\ActiveRecord
      */
     public function getIdLogopedista()
     {
-        return $this->hasOne(Logopedista::className(), ['username' => 'idLogopedista']);
+        return $this->hasOne(Logopedista::class, ['username' => 'idLogopedista']);
     }
 
     /**
@@ -83,7 +83,7 @@ class Terapia extends \yii\db\ActiveRecord
      */
     public function getIdUtente()
     {
-        return $this->hasOne(Utente::className(), ['username' => 'idUtente']);
+        return $this->hasOne(Utente::class, ['username' => 'idUtente']);
     }
 
     public function setIdLogopedista()
