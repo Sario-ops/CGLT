@@ -25,7 +25,7 @@ class m220615_193109_quesito extends Migration
             'domanda' => $this->string(255)->notNull(),
             'opzioni_risposta' => $this->string(128),
             'risposta_corretta' => $this->string(24),
-            'domanda_immagina' => $this->string(255),
+            'domanda_immagine' => $this->string(255),
         ], $tableOptions);
 
         $this->addForeignKey(
