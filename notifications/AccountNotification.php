@@ -40,7 +40,7 @@ class AccountNotification extends Notification
             case self::ESERCIZIO_DA_VALUTARE:
                 return ['/caregiver/esercizi_da_validare', 'id' => $this->user->id];
             case self::ESERCIZIO_ESEGUITO:
-                return ['/caregiver/esercizi_da_validare', 'id' => $this->user->id];
+                return ['/terapia/view', 'ID' => $this->user->idTerapia];
             case self::CONFERMA_VISITA:
                 return ['/visita/view', 'id'=> $this->user->id];
         }   

@@ -18,13 +18,12 @@ class m220615_184646_assegnato extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=mysql';
         }
 
-
         $this->createTable('{{%assegnato}}', [
             'id' => $this->primaryKey(),
             'idTerapia' => $this->char(5)->notNull(),
             'idEsercizio' => $this->integer()->notNull(),
             'risposta' => $this->string(255),
-            'stato' => $this->string(30)->notNull()->defaultValue('da eseguire'),
+            'stato' => $this->string()->notNull()->defaultValue('da eseguire'),
             'valutazione' => $this->integer(),
         ], $tableOptions);
 

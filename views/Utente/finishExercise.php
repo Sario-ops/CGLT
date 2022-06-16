@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div>
             <h4><i class="fa fa-gift"></i> ecco la tua ricompensa</h4>
         </div>
-        <iframe width="825" height="400" src="https://www.youtube.com/embed/sDvXhZtcp0w?autoplay=1" title="YouTube video player" frameborder="0" allow="autoplay;" allowfullscreen></iframe>
+        <iframe width="825" height="400" src="https://www.youtube.com/embed/Ysiz0zfsd40?autoplay=1" title="YouTube video player" frameborder="0" allow="autoplay;" allowfullscreen></iframe>
 
 </div>  
 

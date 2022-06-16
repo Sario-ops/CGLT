@@ -38,8 +38,8 @@ class Caregiver extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfa
             [['username'], 'required'],
             [['nome', 'cognome'], 'string', 'max' => 15],
             [['cf'], 'string', 'max' => 16],
-            [['password'], 'string', 'max' => 255],
-            [['username','authkey', 'assistenzaPassword'], 'string', 'max' => 30],
+            [['password', 'assistenzaPassword'], 'string', 'max' => 255],
+            [['username','authkey'], 'string', 'max' => 30],
             [['username'], 'unique'],
             ['username', 'email'],
         ];
@@ -132,7 +132,7 @@ class Caregiver extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfa
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return $this->password == $password;
     }
 
     /**
